@@ -342,6 +342,7 @@ class StegoGAN(nn.Module):
                 clamp=self.config.coupling_clamp,
                 latent_noise_std=self.config.latent_noise_std,
                 latent_seed=self.config.latent_seed,
+                orthogonal_router=self.config.orthogonal_router,
             )
             self.decoder: nn.Module = nn.Identity()
         else:

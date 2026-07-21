@@ -1,0 +1,3389 @@
+{
+  "schema_version": 1,
+  "comparison_direction": "candidate minus baseline; positive is better",
+  "manifest": {
+    "path": "results/eval_manifests/dev.json",
+    "file_sha256": "4052f44932a39b6ed624a0caa66ac3217fac4728ce9782bade07732c2e4952e8",
+    "declared_sha256": "1a8b76627d5859a2ccb7ccabd3b12320eca7c1820a187103e05529315e4b3131"
+  },
+  "pair_count": 100,
+  "image_size_px": [
+    256,
+    256
+  ],
+  "checkpoints": {
+    "baseline": {
+      "path": "runs/invertible_warmstart/latest.pt",
+      "sha256": "8dd45ddef55e757094f5668277956cf659ebc6dfb622913b6f3fce817f42d608"
+    },
+    "candidate": {
+      "path": "runs/invertible_gates_only/latest.pt",
+      "sha256": "3fe383ecbfda9e27998222028369bec21e05832ab2df1d0b6295c7d6e5010328"
+    }
+  },
+  "bootstrap": {
+    "unit": "manifest cover/secret pair",
+    "samples": 10000,
+    "seed": 2026
+  },
+  "evaluation_protocol": {
+    "precision": "float32 (autocast disabled, TF32 disabled)",
+    "batch_size": 1,
+    "resize": "EXIF transpose, RGB conversion, bicubic center fit",
+    "input_range": [
+      -1.0,
+      1.0
+    ],
+    "jpeg_attack": null
+  },
+  "aggregate_metrics": {
+    "baseline_mean": {
+      "cover_psnr_db": 38.81991458892822,
+      "cover_ssim": 0.964785128235817,
+      "cover_similarity_pct": 99.17120765686035,
+      "secret_psnr_db": 36.895287113189696,
+      "secret_ssim": 0.9620103502273559,
+      "secret_similarity_pct": 99.00681686401367
+    },
+    "candidate_mean": {
+      "cover_psnr_db": 38.83306625366211,
+      "cover_ssim": 0.9649599587917328,
+      "cover_similarity_pct": 99.17110832214355,
+      "secret_psnr_db": 37.20311971664429,
+      "secret_ssim": 0.9645915633440018,
+      "secret_similarity_pct": 99.05728897094727
+    },
+    "candidate_minus_baseline": {
+      "cover_psnr_db": {
+        "mean": 0.01315166473388672,
+        "median": 0.032039642333984375,
+        "sample_std": 0.06633838846416826,
+        "bootstrap_95_ci": {
+          "method": "paired percentile bootstrap",
+          "confidence_level": 0.95,
+          "samples": 10000,
+          "seed": 2026,
+          "lower": -0.0015495433807372972,
+          "upper": 0.024599230766296384
+        }
+      },
+      "cover_ssim": {
+        "mean": 0.00017483055591583252,
+        "median": 0.0002130568027496338,
+        "sample_std": 0.0004416441673711424,
+        "bootstrap_95_ci": {
+          "method": "paired percentile bootstrap",
+          "confidence_level": 0.95,
+          "samples": 10000,
+          "seed": 2026,
+          "lower": 8.077538013458254e-05,
+          "upper": 0.000254570335149765
+        }
+      },
+      "cover_similarity_pct": {
+        "mean": -9.9334716796875e-05,
+        "median": 0.001827239990234375,
+        "sample_std": 0.008566135162596916,
+        "bootstrap_95_ci": {
+          "method": "paired percentile bootstrap",
+          "confidence_level": 0.95,
+          "samples": 10000,
+          "seed": 2026,
+          "lower": -0.0019423217773437498,
+          "upper": 0.0013982105255126945
+        }
+      },
+      "secret_psnr_db": {
+        "mean": 0.30783260345458985,
+        "median": 0.08936119079589844,
+        "sample_std": 0.6250853922026339,
+        "bootstrap_95_ci": {
+          "method": "paired percentile bootstrap",
+          "confidence_level": 0.95,
+          "samples": 10000,
+          "seed": 2026,
+          "lower": 0.19616500091552733,
+          "upper": 0.4389779024124144
+        }
+      },
+      "secret_ssim": {
+        "mean": 0.002581213116645813,
+        "median": 7.936358451843262e-05,
+        "sample_std": 0.008210209262173883,
+        "bootstrap_95_ci": {
+          "method": "paired percentile bootstrap",
+          "confidence_level": 0.95,
+          "samples": 10000,
+          "seed": 2026,
+          "lower": 0.0012288998216390614,
+          "upper": 0.0044301034361124035
+        }
+      },
+      "secret_similarity_pct": {
+        "mean": 0.05047210693359375,
+        "median": 0.000392913818359375,
+        "sample_std": 0.15444192251829106,
+        "bootstrap_95_ci": {
+          "method": "paired percentile bootstrap",
+          "confidence_level": 0.95,
+          "samples": 10000,
+          "seed": 2026,
+          "lower": 0.02394503402709961,
+          "upper": 0.08474827003479003
+        }
+      }
+    }
+  },
+  "improvement_by_metric": {
+    "cover_psnr_db": {
+      "improved_pairs": 84,
+      "tied_pairs": 0,
+      "regressed_pairs": 16,
+      "percentage_improved": 84.0
+    },
+    "cover_ssim": {
+      "improved_pairs": 85,
+      "tied_pairs": 0,
+      "regressed_pairs": 15,
+      "percentage_improved": 85.0
+    },
+    "cover_similarity_pct": {
+      "improved_pairs": 77,
+      "tied_pairs": 0,
+      "regressed_pairs": 23,
+      "percentage_improved": 77.0
+    },
+    "secret_psnr_db": {
+      "improved_pairs": 70,
+      "tied_pairs": 0,
+      "regressed_pairs": 30,
+      "percentage_improved": 70.0
+    },
+    "secret_ssim": {
+      "improved_pairs": 55,
+      "tied_pairs": 0,
+      "regressed_pairs": 45,
+      "percentage_improved": 55.0
+    },
+    "secret_similarity_pct": {
+      "improved_pairs": 51,
+      "tied_pairs": 0,
+      "regressed_pairs": 49,
+      "percentage_improved": 51.0
+    }
+  },
+  "secret_psnr_delta_db": {
+    "mean": 0.30783260345458985,
+    "percentage_improved": 70.0,
+    "bootstrap_95_ci": {
+      "method": "paired percentile bootstrap",
+      "confidence_level": 0.95,
+      "samples": 10000,
+      "seed": 2026,
+      "lower": 0.19616500091552733,
+      "upper": 0.4389779024124144
+    }
+  },
+  "pairs": [
+    {
+      "index": 0,
+      "id": "dev-0000",
+      "cover": "val2017/000000028993.jpg",
+      "secret": "val2017/000000144114.jpg",
+      "cover_sha256": "9d582d15dc1a53b419f8c32253d4eb1bbe0fa20ada973e4d24e72af55b880a83",
+      "secret_sha256": "34496ddf1489c1b376a46ddb93f09ced0e61c779ff98b111535a04ef4507aea5",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.3620719909668,
+        "cover_ssim": 0.9860979318618774,
+        "cover_similarity_pct": 99.25096893310547,
+        "secret_psnr_db": 33.18303680419922,
+        "secret_ssim": 0.9471960067749023,
+        "secret_similarity_pct": 99.04180908203125
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.4051399230957,
+        "cover_ssim": 0.9863318204879761,
+        "cover_similarity_pct": 99.25537872314453,
+        "secret_psnr_db": 33.922523498535156,
+        "secret_ssim": 0.9501168131828308,
+        "secret_similarity_pct": 99.10749053955078
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.04306793212890625,
+        "cover_ssim": 0.0002338886260986328,
+        "cover_similarity_pct": 0.0044097900390625,
+        "secret_psnr_db": 0.7394866943359375,
+        "secret_ssim": 0.002920806407928467,
+        "secret_similarity_pct": 0.06568145751953125
+      }
+    },
+    {
+      "index": 1,
+      "id": "dev-0001",
+      "cover": "val2017/000000188906.jpg",
+      "secret": "val2017/000000419408.jpg",
+      "cover_sha256": "1c6858f084758d4be308a95511c230afc166ed0dbbd704b60525d86e6a2a4d90",
+      "secret_sha256": "d859acb75d4a212c584025cacd0bd220348e43e153b4d98a2fceab7471aeb19b",
+      "baseline_metrics": {
+        "cover_psnr_db": 36.4359245300293,
+        "cover_ssim": 0.9218213558197021,
+        "cover_similarity_pct": 98.89865112304688,
+        "secret_psnr_db": 34.73292541503906,
+        "secret_ssim": 0.9584100246429443,
+        "secret_similarity_pct": 98.70549011230469
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 36.482723236083984,
+        "cover_ssim": 0.9225937724113464,
+        "cover_similarity_pct": 98.90447998046875,
+        "secret_psnr_db": 34.729209899902344,
+        "secret_ssim": 0.9582592844963074,
+        "secret_similarity_pct": 98.70379638671875
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0467987060546875,
+        "cover_ssim": 0.0007724165916442871,
+        "cover_similarity_pct": 0.005828857421875,
+        "secret_psnr_db": -0.00371551513671875,
+        "secret_ssim": -0.0001507401466369629,
+        "secret_similarity_pct": -0.0016937255859375
+      }
+    },
+    {
+      "index": 2,
+      "id": "dev-0002",
+      "cover": "val2017/000000412286.jpg",
+      "secret": "val2017/000000573094.jpg",
+      "cover_sha256": "2c482d365623b18f877b90eea879331d4d11f8c9f8b13f058aa8cb1ef31cb58d",
+      "secret_sha256": "6e3a624152c5a6d36e0c585f379b540e2b942e159f0073c56e1ed526a4bddf4c",
+      "baseline_metrics": {
+        "cover_psnr_db": 43.026123046875,
+        "cover_ssim": 0.9766671061515808,
+        "cover_similarity_pct": 99.50114440917969,
+        "secret_psnr_db": 43.00861358642578,
+        "secret_ssim": 0.9875984191894531,
+        "secret_similarity_pct": 99.54353332519531
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 43.05176544189453,
+        "cover_ssim": 0.9768406748771667,
+        "cover_similarity_pct": 99.50247955322266,
+        "secret_psnr_db": 43.109962463378906,
+        "secret_ssim": 0.9877757430076599,
+        "secret_similarity_pct": 99.5425033569336
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.02564239501953125,
+        "cover_ssim": 0.0001735687255859375,
+        "cover_similarity_pct": 0.00133514404296875,
+        "secret_psnr_db": 0.101348876953125,
+        "secret_ssim": 0.0001773238182067871,
+        "secret_similarity_pct": -0.00102996826171875
+      }
+    },
+    {
+      "index": 3,
+      "id": "dev-0003",
+      "cover": "val2017/000000312586.jpg",
+      "secret": "val2017/000000224675.jpg",
+      "cover_sha256": "1aaea56776b53e55899b583ff6f5d716280a2cc1e9e5d9280d6c2899a6fddaea",
+      "secret_sha256": "45ab6d1c49e081bede2f1e84365bb756c1f165c022b3b24f0338e0eaf971ee66",
+      "baseline_metrics": {
+        "cover_psnr_db": 34.48508071899414,
+        "cover_ssim": 0.9693727493286133,
+        "cover_similarity_pct": 98.65785217285156,
+        "secret_psnr_db": 37.872833251953125,
+        "secret_ssim": 0.9610943794250488,
+        "secret_similarity_pct": 99.13043212890625
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 34.534156799316406,
+        "cover_ssim": 0.9694781303405762,
+        "cover_similarity_pct": 98.6648941040039,
+        "secret_psnr_db": 37.77104568481445,
+        "secret_ssim": 0.9598467350006104,
+        "secret_similarity_pct": 99.11762237548828
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.049076080322265625,
+        "cover_ssim": 0.00010538101196289062,
+        "cover_similarity_pct": 0.00704193115234375,
+        "secret_psnr_db": -0.10178756713867188,
+        "secret_ssim": -0.0012476444244384766,
+        "secret_similarity_pct": -0.01280975341796875
+      }
+    },
+    {
+      "index": 4,
+      "id": "dev-0004",
+      "cover": "val2017/000000078266.jpg",
+      "secret": "val2017/000000304291.jpg",
+      "cover_sha256": "01297ee066ac26e787c2f112d73e24085b9b9b94100e4bb6b13b5758c77ab2e5",
+      "secret_sha256": "059e4ae569ffb5dc2cf55bdd435b4dd7b80ed5b8a079f573066a5a189183650c",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.2502555847168,
+        "cover_ssim": 0.9553057551383972,
+        "cover_similarity_pct": 98.9852294921875,
+        "secret_psnr_db": 30.62921142578125,
+        "secret_ssim": 0.943792998790741,
+        "secret_similarity_pct": 98.35482788085938
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.28302764892578,
+        "cover_ssim": 0.955595850944519,
+        "cover_similarity_pct": 98.98790740966797,
+        "secret_psnr_db": 31.01654815673828,
+        "secret_ssim": 0.946675717830658,
+        "secret_similarity_pct": 98.41154479980469
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.032772064208984375,
+        "cover_ssim": 0.00029009580612182617,
+        "cover_similarity_pct": 0.00267791748046875,
+        "secret_psnr_db": 0.38733673095703125,
+        "secret_ssim": 0.002882719039916992,
+        "secret_similarity_pct": 0.0567169189453125
+      }
+    },
+    {
+      "index": 5,
+      "id": "dev-0005",
+      "cover": "val2017/000000074058.jpg",
+      "secret": "val2017/000000570539.jpg",
+      "cover_sha256": "a619c4064a1a9af3f0d3c20abee5dc8bb05edda1ec0b240e28fb823b4fd9d204",
+      "secret_sha256": "adebfe6c709de875533fe7e9c8b94eb0b71b62f7cc2216e1aef5d21287dcab6f",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.876197814941406,
+        "cover_ssim": 0.9847390055656433,
+        "cover_similarity_pct": 99.36493682861328,
+        "secret_psnr_db": 24.558910369873047,
+        "secret_ssim": 0.9373053312301636,
+        "secret_similarity_pct": 97.50316619873047
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.80297088623047,
+        "cover_ssim": 0.9841906428337097,
+        "cover_similarity_pct": 99.35279083251953,
+        "secret_psnr_db": 26.355859756469727,
+        "secret_ssim": 0.9500774145126343,
+        "secret_similarity_pct": 97.90775299072266
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.0732269287109375,
+        "cover_ssim": -0.0005483627319335938,
+        "cover_similarity_pct": -0.01214599609375,
+        "secret_psnr_db": 1.7969493865966797,
+        "secret_ssim": 0.012772083282470703,
+        "secret_similarity_pct": 0.4045867919921875
+      }
+    },
+    {
+      "index": 6,
+      "id": "dev-0006",
+      "cover": "val2017/000000344268.jpg",
+      "secret": "val2017/000000248284.jpg",
+      "cover_sha256": "35f8ceeb90aa95f77693872f0cb1b27eef2583d157c2669fd83e2c72396f1ed3",
+      "secret_sha256": "9f3308ac7ee40f7e983b1f36adb8a65244063a1cebcd609407951d5457bd260a",
+      "baseline_metrics": {
+        "cover_psnr_db": 41.08631134033203,
+        "cover_ssim": 0.971211314201355,
+        "cover_similarity_pct": 99.4161148071289,
+        "secret_psnr_db": 27.828170776367188,
+        "secret_ssim": 0.8667377829551697,
+        "secret_similarity_pct": 97.5744857788086
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 41.05732345581055,
+        "cover_ssim": 0.9711839556694031,
+        "cover_similarity_pct": 99.40980529785156,
+        "secret_psnr_db": 28.264921188354492,
+        "secret_ssim": 0.8747406005859375,
+        "secret_similarity_pct": 97.68238067626953
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.028987884521484375,
+        "cover_ssim": -2.7358531951904297e-05,
+        "cover_similarity_pct": -0.00630950927734375,
+        "secret_psnr_db": 0.4367504119873047,
+        "secret_ssim": 0.008002817630767822,
+        "secret_similarity_pct": 0.1078948974609375
+      }
+    },
+    {
+      "index": 7,
+      "id": "dev-0007",
+      "cover": "val2017/000000404678.jpg",
+      "secret": "val2017/000000479248.jpg",
+      "cover_sha256": "69222a4d5fa8683df106b54073c9897b0b4994e4bda56442886816bc08528d9b",
+      "secret_sha256": "7568f9ca909b10cb1ff733e79ed2661e310d8018261e5d8b4f4e6621e404508b",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.038536071777344,
+        "cover_ssim": 0.9742056727409363,
+        "cover_similarity_pct": 99.10823059082031,
+        "secret_psnr_db": 38.52633285522461,
+        "secret_ssim": 0.9776816368103027,
+        "secret_similarity_pct": 99.2629165649414
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.0762939453125,
+        "cover_ssim": 0.9744044542312622,
+        "cover_similarity_pct": 99.11170959472656,
+        "secret_psnr_db": 38.54216003417969,
+        "secret_ssim": 0.9775092005729675,
+        "secret_similarity_pct": 99.2603530883789
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.03775787353515625,
+        "cover_ssim": 0.00019878149032592773,
+        "cover_similarity_pct": 0.00347900390625,
+        "secret_psnr_db": 0.015827178955078125,
+        "secret_ssim": -0.00017243623733520508,
+        "secret_similarity_pct": -0.0025634765625
+      }
+    },
+    {
+      "index": 8,
+      "id": "dev-0008",
+      "cover": "val2017/000000519569.jpg",
+      "secret": "val2017/000000476787.jpg",
+      "cover_sha256": "eb819611fa1c5aa9b823a6b9d44308b37d41dc62b8a33fb2e6c7f5b0216a6e33",
+      "secret_sha256": "e349a7e122f8e2804bdcb3b959edc9acdc0a915949a7e4e986096d4d2398d195",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.6274299621582,
+        "cover_ssim": 0.950575053691864,
+        "cover_similarity_pct": 99.17863464355469,
+        "secret_psnr_db": 38.239322662353516,
+        "secret_ssim": 0.985376238822937,
+        "secret_similarity_pct": 99.31124877929688
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.65787124633789,
+        "cover_ssim": 0.9509176015853882,
+        "cover_similarity_pct": 99.17993927001953,
+        "secret_psnr_db": 38.278175354003906,
+        "secret_ssim": 0.9854419231414795,
+        "secret_similarity_pct": 99.31009674072266
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0304412841796875,
+        "cover_ssim": 0.0003425478935241699,
+        "cover_similarity_pct": 0.00130462646484375,
+        "secret_psnr_db": 0.038852691650390625,
+        "secret_ssim": 6.568431854248047e-05,
+        "secret_similarity_pct": -0.00115203857421875
+      }
+    },
+    {
+      "index": 9,
+      "id": "dev-0009",
+      "cover": "val2017/000000419653.jpg",
+      "secret": "val2017/000000065288.jpg",
+      "cover_sha256": "d1294e4e41779f47ea47168538cc5f961b0499c71a0ff6923d77e11909ee9bf6",
+      "secret_sha256": "ac018fd2b55bb4c0dddd083f374e5e58231ea41279eaba20c2da464b56fa8760",
+      "baseline_metrics": {
+        "cover_psnr_db": 34.875125885009766,
+        "cover_ssim": 0.9251823425292969,
+        "cover_similarity_pct": 98.7432861328125,
+        "secret_psnr_db": 33.052032470703125,
+        "secret_ssim": 0.9574910998344421,
+        "secret_similarity_pct": 98.71300506591797
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 34.91997146606445,
+        "cover_ssim": 0.9257363080978394,
+        "cover_similarity_pct": 98.7480697631836,
+        "secret_psnr_db": 33.46531295776367,
+        "secret_ssim": 0.9593257904052734,
+        "secret_similarity_pct": 98.73490142822266
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0448455810546875,
+        "cover_ssim": 0.0005539655685424805,
+        "cover_similarity_pct": 0.00478363037109375,
+        "secret_psnr_db": 0.4132804870605469,
+        "secret_ssim": 0.0018346905708312988,
+        "secret_similarity_pct": 0.0218963623046875
+      }
+    },
+    {
+      "index": 10,
+      "id": "dev-0010",
+      "cover": "val2017/000000552842.jpg",
+      "secret": "val2017/000000224807.jpg",
+      "cover_sha256": "5c54b158f361a854da3855830074cb79f190470605bcf8d12be4ffa39994470f",
+      "secret_sha256": "469e5374fcf43466d3ba8167126cdfa2833f1b8c8ed1e2248b29dd9feec20733",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.92920684814453,
+        "cover_ssim": 0.9311717748641968,
+        "cover_similarity_pct": 99.15748596191406,
+        "secret_psnr_db": 32.92779541015625,
+        "secret_ssim": 0.9710134267807007,
+        "secret_similarity_pct": 99.02299499511719
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.9652099609375,
+        "cover_ssim": 0.9315683245658875,
+        "cover_similarity_pct": 99.15889739990234,
+        "secret_psnr_db": 33.273414611816406,
+        "secret_ssim": 0.971821665763855,
+        "secret_similarity_pct": 99.03655242919922
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.03600311279296875,
+        "cover_ssim": 0.00039654970169067383,
+        "cover_similarity_pct": 0.00141143798828125,
+        "secret_psnr_db": 0.34561920166015625,
+        "secret_ssim": 0.0008082389831542969,
+        "secret_similarity_pct": 0.01355743408203125
+      }
+    },
+    {
+      "index": 11,
+      "id": "dev-0011",
+      "cover": "DIV2K_valid_HR/0865.png",
+      "secret": "val2017/000000293625.jpg",
+      "cover_sha256": "46ced1e049fce5a0381c3dc7d7276d058f78a7a7dab5cd88ef7a224cbf51fdb1",
+      "secret_sha256": "2bd0e6559c45d48952e5fda4a2e69d5ecc25ed3d95bfc2c0343fc6b0452b7ca2",
+      "baseline_metrics": {
+        "cover_psnr_db": 42.84773254394531,
+        "cover_ssim": 0.9872855544090271,
+        "cover_similarity_pct": 99.47931671142578,
+        "secret_psnr_db": 41.78047180175781,
+        "secret_ssim": 0.9758756160736084,
+        "secret_similarity_pct": 99.4124984741211
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 42.87437057495117,
+        "cover_ssim": 0.9873670339584351,
+        "cover_similarity_pct": 99.48033142089844,
+        "secret_psnr_db": 41.74638366699219,
+        "secret_ssim": 0.9755176305770874,
+        "secret_similarity_pct": 99.4092788696289
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.026638031005859375,
+        "cover_ssim": 8.147954940795898e-05,
+        "cover_similarity_pct": 0.00101470947265625,
+        "secret_psnr_db": -0.034088134765625,
+        "secret_ssim": -0.0003579854965209961,
+        "secret_similarity_pct": -0.0032196044921875
+      }
+    },
+    {
+      "index": 12,
+      "id": "dev-0012",
+      "cover": "val2017/000000149406.jpg",
+      "secret": "val2017/000000494869.jpg",
+      "cover_sha256": "bb5adc5c3916aec1e6024432e428c6f6b216ab97c02c58590bbf80a5f6fe24bb",
+      "secret_sha256": "0beffebf8bf7e3d5561249474de3e457cae990b1ffd56165a19380d4cfc0c00a",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.29624557495117,
+        "cover_ssim": 0.9747490286827087,
+        "cover_similarity_pct": 99.12467193603516,
+        "secret_psnr_db": 39.99769973754883,
+        "secret_ssim": 0.974135160446167,
+        "secret_similarity_pct": 99.27793884277344
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.32040786743164,
+        "cover_ssim": 0.9748498201370239,
+        "cover_similarity_pct": 99.12654876708984,
+        "secret_psnr_db": 39.95125198364258,
+        "secret_ssim": 0.9737836718559265,
+        "secret_similarity_pct": 99.27351379394531
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.02416229248046875,
+        "cover_ssim": 0.00010079145431518555,
+        "cover_similarity_pct": 0.0018768310546875,
+        "secret_psnr_db": -0.04644775390625,
+        "secret_ssim": -0.0003514885902404785,
+        "secret_similarity_pct": -0.004425048828125
+      }
+    },
+    {
+      "index": 13,
+      "id": "dev-0013",
+      "cover": "val2017/000000179392.jpg",
+      "secret": "val2017/000000044068.jpg",
+      "cover_sha256": "aee6cea5432994df19687acca9a15157a02200658e62bed5dc641564b54ef422",
+      "secret_sha256": "f87295880cbe28c49af27753a63cf939b78192da5dfed7d01d9a8087b8976af3",
+      "baseline_metrics": {
+        "cover_psnr_db": 44.4755744934082,
+        "cover_ssim": 0.9829351305961609,
+        "cover_similarity_pct": 99.57093048095703,
+        "secret_psnr_db": 32.04790496826172,
+        "secret_ssim": 0.9535133242607117,
+        "secret_similarity_pct": 98.91832733154297
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 44.336669921875,
+        "cover_ssim": 0.9826087951660156,
+        "cover_similarity_pct": 99.56145477294922,
+        "secret_psnr_db": 35.10947799682617,
+        "secret_ssim": 0.9649009704589844,
+        "secret_similarity_pct": 99.15180969238281
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.13890457153320312,
+        "cover_ssim": -0.00032633543014526367,
+        "cover_similarity_pct": -0.0094757080078125,
+        "secret_psnr_db": 3.061573028564453,
+        "secret_ssim": 0.011387646198272705,
+        "secret_similarity_pct": 0.23348236083984375
+      }
+    },
+    {
+      "index": 14,
+      "id": "dev-0014",
+      "cover": "val2017/000000088970.jpg",
+      "secret": "val2017/000000503841.jpg",
+      "cover_sha256": "f38921965c07c50416a7f3056e15bd93f41304a2373c5ab1969965923936347a",
+      "secret_sha256": "60806be017b08f1f691ecb116db30fe320da97e3be0dbf6f69d9fdd4fae65573",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.168087005615234,
+        "cover_ssim": 0.960953950881958,
+        "cover_similarity_pct": 99.2242660522461,
+        "secret_psnr_db": 38.65660095214844,
+        "secret_ssim": 0.9802645444869995,
+        "secret_similarity_pct": 99.33551788330078
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.19956970214844,
+        "cover_ssim": 0.9612647891044617,
+        "cover_similarity_pct": 99.22631072998047,
+        "secret_psnr_db": 38.75059127807617,
+        "secret_ssim": 0.9805666208267212,
+        "secret_similarity_pct": 99.33761596679688
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.031482696533203125,
+        "cover_ssim": 0.0003108382225036621,
+        "cover_similarity_pct": 0.002044677734375,
+        "secret_psnr_db": 0.09399032592773438,
+        "secret_ssim": 0.0003020763397216797,
+        "secret_similarity_pct": 0.00209808349609375
+      }
+    },
+    {
+      "index": 15,
+      "id": "dev-0015",
+      "cover": "val2017/000000465718.jpg",
+      "secret": "val2017/000000534601.jpg",
+      "cover_sha256": "23e5ecf15fc6651e6ec95dbc096565ad3e0acaa6434b9bca8d7c6e832c1041b9",
+      "secret_sha256": "a61dcd41da39c0c794937470219d9955d51046aa492ab780450cd984df259c30",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.40766143798828,
+        "cover_ssim": 0.984663724899292,
+        "cover_similarity_pct": 99.30276489257812,
+        "secret_psnr_db": 43.83741760253906,
+        "secret_ssim": 0.9854841232299805,
+        "secret_similarity_pct": 99.5824203491211
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.43085479736328,
+        "cover_ssim": 0.9847829341888428,
+        "cover_similarity_pct": 99.30348205566406,
+        "secret_psnr_db": 43.80048370361328,
+        "secret_ssim": 0.9850438833236694,
+        "secret_similarity_pct": 99.57665252685547
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.023193359375,
+        "cover_ssim": 0.00011920928955078125,
+        "cover_similarity_pct": 0.0007171630859375,
+        "secret_psnr_db": -0.03693389892578125,
+        "secret_ssim": -0.00044023990631103516,
+        "secret_similarity_pct": -0.005767822265625
+      }
+    },
+    {
+      "index": 16,
+      "id": "dev-0016",
+      "cover": "val2017/000000309938.jpg",
+      "secret": "val2017/000000332351.jpg",
+      "cover_sha256": "8956749b98223cb888cb948f97d64cbc7330d7a8c285da0921a8630cc2f6f4a8",
+      "secret_sha256": "843e968f9f8a27ed566ae907cae8d0604a4c9e6d174bc31543eb1714fab145a6",
+      "baseline_metrics": {
+        "cover_psnr_db": 41.49470901489258,
+        "cover_ssim": 0.9819415807723999,
+        "cover_similarity_pct": 99.42522430419922,
+        "secret_psnr_db": 45.29092788696289,
+        "secret_ssim": 0.9884387254714966,
+        "secret_similarity_pct": 99.64154052734375
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 41.520973205566406,
+        "cover_ssim": 0.9821531176567078,
+        "cover_similarity_pct": 99.42620086669922,
+        "secret_psnr_db": 45.154842376708984,
+        "secret_ssim": 0.9881038665771484,
+        "secret_similarity_pct": 99.63311767578125
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.026264190673828125,
+        "cover_ssim": 0.00021153688430786133,
+        "cover_similarity_pct": 0.0009765625,
+        "secret_psnr_db": -0.13608551025390625,
+        "secret_ssim": -0.00033485889434814453,
+        "secret_similarity_pct": -0.0084228515625
+      }
+    },
+    {
+      "index": 17,
+      "id": "dev-0017",
+      "cover": "val2017/000000058636.jpg",
+      "secret": "val2017/000000321887.jpg",
+      "cover_sha256": "9c62cafaa78da7f5c47881c90188f91375b6658042e30714e59979d1a1a3bb04",
+      "secret_sha256": "24031c7909ea69b2238ffff64653ee40a19f05e72e4eaf7235481be9c92f92d9",
+      "baseline_metrics": {
+        "cover_psnr_db": 41.87604904174805,
+        "cover_ssim": 0.9789586067199707,
+        "cover_similarity_pct": 99.44684600830078,
+        "secret_psnr_db": 43.18941116333008,
+        "secret_ssim": 0.9866110682487488,
+        "secret_similarity_pct": 99.60025024414062
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 41.65177917480469,
+        "cover_ssim": 0.978480339050293,
+        "cover_similarity_pct": 99.41875457763672,
+        "secret_psnr_db": 43.097816467285156,
+        "secret_ssim": 0.9861444234848022,
+        "secret_similarity_pct": 99.58856964111328
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.22426986694335938,
+        "cover_ssim": -0.0004782676696777344,
+        "cover_similarity_pct": -0.0280914306640625,
+        "secret_psnr_db": -0.09159469604492188,
+        "secret_ssim": -0.0004666447639465332,
+        "secret_similarity_pct": -0.01168060302734375
+      }
+    },
+    {
+      "index": 18,
+      "id": "dev-0018",
+      "cover": "val2017/000000206271.jpg",
+      "secret": "val2017/000000108253.jpg",
+      "cover_sha256": "715a4e7172e849888d18f748dd7c4217aa2543912a705cb73045707eb9e51b41",
+      "secret_sha256": "dbeb3abe982e31109d09f96e782ef1a14462eef85da9ed94032fdc85b4874b03",
+      "baseline_metrics": {
+        "cover_psnr_db": 36.0643196105957,
+        "cover_ssim": 0.9372907876968384,
+        "cover_similarity_pct": 98.92428588867188,
+        "secret_psnr_db": 27.790252685546875,
+        "secret_ssim": 0.8967608213424683,
+        "secret_similarity_pct": 97.74386596679688
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 36.047855377197266,
+        "cover_ssim": 0.9370598793029785,
+        "cover_similarity_pct": 98.91390991210938,
+        "secret_psnr_db": 29.102638244628906,
+        "secret_ssim": 0.9065707921981812,
+        "secret_similarity_pct": 98.05931091308594
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.0164642333984375,
+        "cover_ssim": -0.00023090839385986328,
+        "cover_similarity_pct": -0.0103759765625,
+        "secret_psnr_db": 1.3123855590820312,
+        "secret_ssim": 0.00980997085571289,
+        "secret_similarity_pct": 0.3154449462890625
+      }
+    },
+    {
+      "index": 19,
+      "id": "dev-0019",
+      "cover": "val2017/000000423506.jpg",
+      "secret": "val2017/000000255536.jpg",
+      "cover_sha256": "cf770793ec543c39c2c6331e6658a08738d0a576cc9f1fe8995d711eae97ce71",
+      "secret_sha256": "8d34300522af3e1c5da698671662bd4656d6bd3439815dbcbb2f0b7827bee052",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.52602005004883,
+        "cover_ssim": 0.949144721031189,
+        "cover_similarity_pct": 99.0342025756836,
+        "secret_psnr_db": 37.33485412597656,
+        "secret_ssim": 0.9807040095329285,
+        "secret_similarity_pct": 99.1827621459961
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.564857482910156,
+        "cover_ssim": 0.9494974613189697,
+        "cover_similarity_pct": 99.0376205444336,
+        "secret_psnr_db": 37.415992736816406,
+        "secret_ssim": 0.9810038805007935,
+        "secret_similarity_pct": 99.18504333496094
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.038837432861328125,
+        "cover_ssim": 0.0003527402877807617,
+        "cover_similarity_pct": 0.00341796875,
+        "secret_psnr_db": 0.08113861083984375,
+        "secret_ssim": 0.00029987096786499023,
+        "secret_similarity_pct": 0.00228118896484375
+      }
+    },
+    {
+      "index": 20,
+      "id": "dev-0020",
+      "cover": "val2017/000000449909.jpg",
+      "secret": "val2017/000000581100.jpg",
+      "cover_sha256": "a79689a7913c06a5b25a4da0fb2c453dc02f84aa889c5487942a821916a345e7",
+      "secret_sha256": "4c98bc5e3b2445d90a11471c7694812ec9b5d05351e5993dea2f217f70eca2bd",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.720123291015625,
+        "cover_ssim": 0.9721755981445312,
+        "cover_similarity_pct": 99.33561706542969,
+        "secret_psnr_db": 38.529083251953125,
+        "secret_ssim": 0.9852449297904968,
+        "secret_similarity_pct": 99.30494689941406
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.749183654785156,
+        "cover_ssim": 0.9724149703979492,
+        "cover_similarity_pct": 99.33726501464844,
+        "secret_psnr_db": 39.022422790527344,
+        "secret_ssim": 0.9860040545463562,
+        "secret_similarity_pct": 99.32606506347656
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.02906036376953125,
+        "cover_ssim": 0.00023937225341796875,
+        "cover_similarity_pct": 0.00164794921875,
+        "secret_psnr_db": 0.49333953857421875,
+        "secret_ssim": 0.000759124755859375,
+        "secret_similarity_pct": 0.0211181640625
+      }
+    },
+    {
+      "index": 21,
+      "id": "dev-0021",
+      "cover": "val2017/000000293245.jpg",
+      "secret": "val2017/000000353518.jpg",
+      "cover_sha256": "faea4409b1d598acc6038fbdc712595c44798f5d778cd063bfc67f7b68a158ab",
+      "secret_sha256": "21061522030b6c364311f8ce410c13e5c37e1b62d33ff240c7417edb9754d423",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.263824462890625,
+        "cover_ssim": 0.9777437448501587,
+        "cover_similarity_pct": 99.14688110351562,
+        "secret_psnr_db": 37.02255630493164,
+        "secret_ssim": 0.9830788373947144,
+        "secret_similarity_pct": 99.20799255371094
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.31022644042969,
+        "cover_ssim": 0.9780625700950623,
+        "cover_similarity_pct": 99.15110778808594,
+        "secret_psnr_db": 37.25514221191406,
+        "secret_ssim": 0.9838417768478394,
+        "secret_similarity_pct": 99.2210693359375
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0464019775390625,
+        "cover_ssim": 0.00031882524490356445,
+        "cover_similarity_pct": 0.0042266845703125,
+        "secret_psnr_db": 0.23258590698242188,
+        "secret_ssim": 0.000762939453125,
+        "secret_similarity_pct": 0.0130767822265625
+      }
+    },
+    {
+      "index": 22,
+      "id": "dev-0022",
+      "cover": "val2017/000000419201.jpg",
+      "secret": "val2017/000000308394.jpg",
+      "cover_sha256": "939f41978292a9237b7bdec68d84b392094e0b93dd5a8addf06ec9950525b54d",
+      "secret_sha256": "f95ec5582f5310a2dd6effb247286f48ce479b5c44d94690faf586ab2e435215",
+      "baseline_metrics": {
+        "cover_psnr_db": 43.60916519165039,
+        "cover_ssim": 0.9824115633964539,
+        "cover_similarity_pct": 99.5230712890625,
+        "secret_psnr_db": 47.666229248046875,
+        "secret_ssim": 0.9960720539093018,
+        "secret_similarity_pct": 99.71778869628906
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 43.61057662963867,
+        "cover_ssim": 0.982364296913147,
+        "cover_similarity_pct": 99.52127075195312,
+        "secret_psnr_db": 47.57328414916992,
+        "secret_ssim": 0.9959734678268433,
+        "secret_similarity_pct": 99.71261596679688
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.00141143798828125,
+        "cover_ssim": -4.7266483306884766e-05,
+        "cover_similarity_pct": -0.001800537109375,
+        "secret_psnr_db": -0.09294509887695312,
+        "secret_ssim": -9.85860824584961e-05,
+        "secret_similarity_pct": -0.0051727294921875
+      }
+    },
+    {
+      "index": 23,
+      "id": "dev-0023",
+      "cover": "val2017/000000110449.jpg",
+      "secret": "val2017/000000128372.jpg",
+      "cover_sha256": "b4f1012183b47482a31955ac38bbad9b7711b018ff20e2cb60b355033f323dc6",
+      "secret_sha256": "6076863986b65a05fc9fd1edd1558cacee52db9b1e0c263ae3a02b1047f2617f",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.3848991394043,
+        "cover_ssim": 0.9506872892379761,
+        "cover_similarity_pct": 99.2484359741211,
+        "secret_psnr_db": 26.5584659576416,
+        "secret_ssim": 0.9292271137237549,
+        "secret_similarity_pct": 97.8951644897461
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.41674041748047,
+        "cover_ssim": 0.9510116577148438,
+        "cover_similarity_pct": 99.24848175048828,
+        "secret_psnr_db": 27.768709182739258,
+        "secret_ssim": 0.9367963075637817,
+        "secret_similarity_pct": 98.11133575439453
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.031841278076171875,
+        "cover_ssim": 0.0003243684768676758,
+        "cover_similarity_pct": 4.57763671875e-05,
+        "secret_psnr_db": 1.2102432250976562,
+        "secret_ssim": 0.0075691938400268555,
+        "secret_similarity_pct": 0.2161712646484375
+      }
+    },
+    {
+      "index": 24,
+      "id": "dev-0024",
+      "cover": "val2017/000000136715.jpg",
+      "secret": "val2017/000000439593.jpg",
+      "cover_sha256": "cde59a511126e505df5b80635e71768e26874382a1bad191f5e26ad820597701",
+      "secret_sha256": "e104e95526e6ac6f41f1d83019b7d6319d5b017e780244ba5cd9e93001737087",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.12645721435547,
+        "cover_ssim": 0.9807209372520447,
+        "cover_similarity_pct": 99.0693359375,
+        "secret_psnr_db": 33.691036224365234,
+        "secret_ssim": 0.9422568082809448,
+        "secret_similarity_pct": 98.943359375
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.158695220947266,
+        "cover_ssim": 0.9808094501495361,
+        "cover_similarity_pct": 99.0710678100586,
+        "secret_psnr_db": 33.79405975341797,
+        "secret_ssim": 0.9431969523429871,
+        "secret_similarity_pct": 98.95149993896484
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.032238006591796875,
+        "cover_ssim": 8.851289749145508e-05,
+        "cover_similarity_pct": 0.00173187255859375,
+        "secret_psnr_db": 0.10302352905273438,
+        "secret_ssim": 0.0009401440620422363,
+        "secret_similarity_pct": 0.00814056396484375
+      }
+    },
+    {
+      "index": 25,
+      "id": "dev-0025",
+      "cover": "val2017/000000032038.jpg",
+      "secret": "val2017/000000088269.jpg",
+      "cover_sha256": "5afb15a7ca2105d97e1f3a095dcbb1bdbe92232b1aaad9b7ab3bca63ee8adc3d",
+      "secret_sha256": "72aa4d9bb5c19bdaa96ebec98fa875c330eec634aacbe53e44f113b903db36c7",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.1817626953125,
+        "cover_ssim": 0.9741654396057129,
+        "cover_similarity_pct": 99.30156707763672,
+        "secret_psnr_db": 25.511802673339844,
+        "secret_ssim": 0.8544162511825562,
+        "secret_similarity_pct": 97.07008361816406
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.17783737182617,
+        "cover_ssim": 0.973991334438324,
+        "cover_similarity_pct": 99.2984619140625,
+        "secret_psnr_db": 25.880290985107422,
+        "secret_ssim": 0.8622309565544128,
+        "secret_similarity_pct": 97.18375396728516
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.003925323486328125,
+        "cover_ssim": -0.00017410516738891602,
+        "cover_similarity_pct": -0.00310516357421875,
+        "secret_psnr_db": 0.3684883117675781,
+        "secret_ssim": 0.00781470537185669,
+        "secret_similarity_pct": 0.11367034912109375
+      }
+    },
+    {
+      "index": 26,
+      "id": "dev-0026",
+      "cover": "val2017/000000098716.jpg",
+      "secret": "val2017/000000526103.jpg",
+      "cover_sha256": "1e03cdb25ac2a62149d36463c0b69276ddbb4ebfd4c110e84e100347914fe873",
+      "secret_sha256": "aa71fa226702833f76094ef8a732b7592c3227ce008f5647d3ede1bed3bb516e",
+      "baseline_metrics": {
+        "cover_psnr_db": 42.10920333862305,
+        "cover_ssim": 0.9872913360595703,
+        "cover_similarity_pct": 99.45568084716797,
+        "secret_psnr_db": 42.43959426879883,
+        "secret_ssim": 0.9918806552886963,
+        "secret_similarity_pct": 99.52323150634766
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 42.1376838684082,
+        "cover_ssim": 0.9874057769775391,
+        "cover_similarity_pct": 99.45602416992188,
+        "secret_psnr_db": 42.42927169799805,
+        "secret_ssim": 0.9916900396347046,
+        "secret_similarity_pct": 99.52049255371094
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.02848052978515625,
+        "cover_ssim": 0.00011444091796875,
+        "cover_similarity_pct": 0.00034332275390625,
+        "secret_psnr_db": -0.01032257080078125,
+        "secret_ssim": -0.00019061565399169922,
+        "secret_similarity_pct": -0.00273895263671875
+      }
+    },
+    {
+      "index": 27,
+      "id": "dev-0027",
+      "cover": "val2017/000000397279.jpg",
+      "secret": "val2017/000000165257.jpg",
+      "cover_sha256": "69c92ac515b372adeecba63f4cd49b12c9bc6f1a1c357f776c7d2985ea179445",
+      "secret_sha256": "20e0722f9e1ea372a1f039722b2eafb053ff416f1c3f7e4d1de8ac88ed81dcea",
+      "baseline_metrics": {
+        "cover_psnr_db": 42.30986022949219,
+        "cover_ssim": 0.9673363566398621,
+        "cover_similarity_pct": 99.47283935546875,
+        "secret_psnr_db": 43.795623779296875,
+        "secret_ssim": 0.9906861186027527,
+        "secret_similarity_pct": 99.58338928222656
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 42.3475456237793,
+        "cover_ssim": 0.9675880670547485,
+        "cover_similarity_pct": 99.47496032714844,
+        "secret_psnr_db": 43.86964416503906,
+        "secret_ssim": 0.9907546043395996,
+        "secret_similarity_pct": 99.58279418945312
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.037685394287109375,
+        "cover_ssim": 0.0002517104148864746,
+        "cover_similarity_pct": 0.0021209716796875,
+        "secret_psnr_db": 0.0740203857421875,
+        "secret_ssim": 6.848573684692383e-05,
+        "secret_similarity_pct": -0.0005950927734375
+      }
+    },
+    {
+      "index": 28,
+      "id": "dev-0028",
+      "cover": "val2017/000000573391.jpg",
+      "secret": "val2017/000000521509.jpg",
+      "cover_sha256": "37d17c01486562f58831ba1e0357f3ac79d37ebb34ae93882ab99662f7793ca0",
+      "secret_sha256": "32e087992c2613f404b90f768c5035999b53e19d26dec4e6018303b3dcb03672",
+      "baseline_metrics": {
+        "cover_psnr_db": 33.51549530029297,
+        "cover_ssim": 0.9502023458480835,
+        "cover_similarity_pct": 98.49903869628906,
+        "secret_psnr_db": 35.690391540527344,
+        "secret_ssim": 0.9050556421279907,
+        "secret_similarity_pct": 98.92848205566406
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 33.548465728759766,
+        "cover_ssim": 0.9505525827407837,
+        "cover_similarity_pct": 98.5014877319336,
+        "secret_psnr_db": 35.68499755859375,
+        "secret_ssim": 0.9030327796936035,
+        "secret_similarity_pct": 98.92716979980469
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.032970428466796875,
+        "cover_ssim": 0.0003502368927001953,
+        "cover_similarity_pct": 0.00244903564453125,
+        "secret_psnr_db": -0.00539398193359375,
+        "secret_ssim": -0.002022862434387207,
+        "secret_similarity_pct": -0.001312255859375
+      }
+    },
+    {
+      "index": 29,
+      "id": "dev-0029",
+      "cover": "val2017/000000350405.jpg",
+      "secret": "val2017/000000319721.jpg",
+      "cover_sha256": "ea113f2a601d32d5032df428be396854d97bc3f0b35520280ba860a9d29d9c05",
+      "secret_sha256": "2dda1cbe26cd36d3c701cc98d9df614f5a72cfd14b35124b08f461ccf42720e9",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.44762420654297,
+        "cover_ssim": 0.9578810930252075,
+        "cover_similarity_pct": 99.37553405761719,
+        "secret_psnr_db": 27.941574096679688,
+        "secret_ssim": 0.9212607145309448,
+        "secret_similarity_pct": 97.74547576904297
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.264556884765625,
+        "cover_ssim": 0.9571877717971802,
+        "cover_similarity_pct": 99.34523010253906,
+        "secret_psnr_db": 30.783802032470703,
+        "secret_ssim": 0.9456905722618103,
+        "secret_similarity_pct": 98.37445831298828
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.18306732177734375,
+        "cover_ssim": -0.0006933212280273438,
+        "cover_similarity_pct": -0.030303955078125,
+        "secret_psnr_db": 2.8422279357910156,
+        "secret_ssim": 0.02442985773086548,
+        "secret_similarity_pct": 0.6289825439453125
+      }
+    },
+    {
+      "index": 30,
+      "id": "dev-0030",
+      "cover": "val2017/000000423798.jpg",
+      "secret": "val2017/000000177213.jpg",
+      "cover_sha256": "b56d20c765424ac5d6a21f9896b796d30c97e747fee50ed4b01bcd105732f911",
+      "secret_sha256": "cb11cc3ce7c8c7944cc8063a5ca110b7a68bd1702714bef24918d7ce80a89ff8",
+      "baseline_metrics": {
+        "cover_psnr_db": 36.28907775878906,
+        "cover_ssim": 0.9230412244796753,
+        "cover_similarity_pct": 98.9425277709961,
+        "secret_psnr_db": 30.785043716430664,
+        "secret_ssim": 0.9225077629089355,
+        "secret_similarity_pct": 98.38213348388672
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 36.32355499267578,
+        "cover_ssim": 0.9235711097717285,
+        "cover_similarity_pct": 98.94694519042969,
+        "secret_psnr_db": 30.945024490356445,
+        "secret_ssim": 0.9236122369766235,
+        "secret_similarity_pct": 98.41255950927734
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.03447723388671875,
+        "cover_ssim": 0.0005298852920532227,
+        "cover_similarity_pct": 0.00441741943359375,
+        "secret_psnr_db": 0.15998077392578125,
+        "secret_ssim": 0.0011044740676879883,
+        "secret_similarity_pct": 0.030426025390625
+      }
+    },
+    {
+      "index": 31,
+      "id": "dev-0031",
+      "cover": "val2017/000000245102.jpg",
+      "secret": "val2017/000000441586.jpg",
+      "cover_sha256": "0a80f5f2ab54c11477641ffa731a8afdcb5309d70bf2eb18c4c834b2bca90971",
+      "secret_sha256": "c440bd5d515fd7029461c718796ba133bfbffd3bbf267b0d02ec499378ca3d76",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.49020004272461,
+        "cover_ssim": 0.9507090449333191,
+        "cover_similarity_pct": 99.20641326904297,
+        "secret_psnr_db": 34.63028335571289,
+        "secret_ssim": 0.9753178358078003,
+        "secret_similarity_pct": 99.09776306152344
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.5318603515625,
+        "cover_ssim": 0.9511852264404297,
+        "cover_similarity_pct": 99.21041107177734,
+        "secret_psnr_db": 34.923728942871094,
+        "secret_ssim": 0.9762840270996094,
+        "secret_similarity_pct": 99.12006378173828
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.041660308837890625,
+        "cover_ssim": 0.0004761815071105957,
+        "cover_similarity_pct": 0.003997802734375,
+        "secret_psnr_db": 0.2934455871582031,
+        "secret_ssim": 0.000966191291809082,
+        "secret_similarity_pct": 0.02230072021484375
+      }
+    },
+    {
+      "index": 32,
+      "id": "dev-0032",
+      "cover": "val2017/000000355325.jpg",
+      "secret": "val2017/000000272049.jpg",
+      "cover_sha256": "2a8356486557241592dd40f38db50394624b48ed6e0218b7138350ce0c44b1e3",
+      "secret_sha256": "edcce591803494f25d75b861d799a3df9b664069773fcab5bbfbd7937058d417",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.95358657836914,
+        "cover_ssim": 0.9744910001754761,
+        "cover_similarity_pct": 99.18914794921875,
+        "secret_psnr_db": 38.119117736816406,
+        "secret_ssim": 0.9805554151535034,
+        "secret_similarity_pct": 99.25712585449219
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.001407623291016,
+        "cover_ssim": 0.9747717380523682,
+        "cover_similarity_pct": 99.19361877441406,
+        "secret_psnr_db": 38.326141357421875,
+        "secret_ssim": 0.9809732437133789,
+        "secret_similarity_pct": 99.26701354980469
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.047821044921875,
+        "cover_ssim": 0.00028073787689208984,
+        "cover_similarity_pct": 0.0044708251953125,
+        "secret_psnr_db": 0.20702362060546875,
+        "secret_ssim": 0.0004178285598754883,
+        "secret_similarity_pct": 0.0098876953125
+      }
+    },
+    {
+      "index": 33,
+      "id": "dev-0033",
+      "cover": "val2017/000000123213.jpg",
+      "secret": "val2017/000000104119.jpg",
+      "cover_sha256": "7fa7873fb045bb420548bc180bf7e3b723cc31869df7b7c9deb31f200b22b0f3",
+      "secret_sha256": "28208fdbff62ff77747019db73994925143bd58eab804d710a90a2f4ccc049b1",
+      "baseline_metrics": {
+        "cover_psnr_db": 36.664737701416016,
+        "cover_ssim": 0.9512271881103516,
+        "cover_similarity_pct": 98.9227523803711,
+        "secret_psnr_db": 38.23760986328125,
+        "secret_ssim": 0.9873661398887634,
+        "secret_similarity_pct": 99.14154052734375
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 36.710845947265625,
+        "cover_ssim": 0.9516911506652832,
+        "cover_similarity_pct": 98.92816925048828,
+        "secret_psnr_db": 38.23081588745117,
+        "secret_ssim": 0.9871948957443237,
+        "secret_similarity_pct": 99.13841247558594
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.046108245849609375,
+        "cover_ssim": 0.0004639625549316406,
+        "cover_similarity_pct": 0.0054168701171875,
+        "secret_psnr_db": -0.006793975830078125,
+        "secret_ssim": -0.00017124414443969727,
+        "secret_similarity_pct": -0.0031280517578125
+      }
+    },
+    {
+      "index": 34,
+      "id": "dev-0034",
+      "cover": "val2017/000000292005.jpg",
+      "secret": "val2017/000000423104.jpg",
+      "cover_sha256": "eb999ee83cd9d5a9bdc0f3ded8e37ddf18d4b00525cd70c7a471dd5c79a5c432",
+      "secret_sha256": "53312199b647a90c1c649e1af408826f95e7742dd1d4b1947b3b975e8b4f082b",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.96029281616211,
+        "cover_ssim": 0.9436845779418945,
+        "cover_similarity_pct": 99.24243927001953,
+        "secret_psnr_db": 42.62788772583008,
+        "secret_ssim": 0.9815772771835327,
+        "secret_similarity_pct": 99.45350646972656
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.00910186767578,
+        "cover_ssim": 0.944348931312561,
+        "cover_similarity_pct": 99.24662017822266,
+        "secret_psnr_db": 42.55657196044922,
+        "secret_ssim": 0.9811710119247437,
+        "secret_similarity_pct": 99.44762420654297
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.048809051513671875,
+        "cover_ssim": 0.0006643533706665039,
+        "cover_similarity_pct": 0.004180908203125,
+        "secret_psnr_db": -0.07131576538085938,
+        "secret_ssim": -0.0004062652587890625,
+        "secret_similarity_pct": -0.00588226318359375
+      }
+    },
+    {
+      "index": 35,
+      "id": "dev-0035",
+      "cover": "val2017/000000429598.jpg",
+      "secret": "val2017/000000409630.jpg",
+      "cover_sha256": "cf692837b22f590cc75ed7eb9bcabd26772c71e924a35506df081b0956755bb2",
+      "secret_sha256": "520fc714c72300233fbeef5ef510d533db8fcdcb4c092c51e4464a399c168520",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.42410659790039,
+        "cover_ssim": 0.9667646884918213,
+        "cover_similarity_pct": 99.2376480102539,
+        "secret_psnr_db": 42.20941162109375,
+        "secret_ssim": 0.9834027290344238,
+        "secret_similarity_pct": 99.46586608886719
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.45840835571289,
+        "cover_ssim": 0.9670474529266357,
+        "cover_similarity_pct": 99.23995208740234,
+        "secret_psnr_db": 42.12888717651367,
+        "secret_ssim": 0.9827529788017273,
+        "secret_similarity_pct": 99.45862579345703
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0343017578125,
+        "cover_ssim": 0.0002827644348144531,
+        "cover_similarity_pct": 0.0023040771484375,
+        "secret_psnr_db": -0.08052444458007812,
+        "secret_ssim": -0.0006497502326965332,
+        "secret_similarity_pct": -0.00724029541015625
+      }
+    },
+    {
+      "index": 36,
+      "id": "dev-0036",
+      "cover": "val2017/000000468577.jpg",
+      "secret": "val2017/000000194832.jpg",
+      "cover_sha256": "bab9b53906323b08abb82f92484fdbedc70fb08dc0dcb40d937a8284b0eb64f6",
+      "secret_sha256": "339961edac5c4d86f7f97c12f18e2a43e7ac26c609a2bb870c61a2679adda2be",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.986324310302734,
+        "cover_ssim": 0.9710553884506226,
+        "cover_similarity_pct": 99.2305908203125,
+        "secret_psnr_db": 36.80470275878906,
+        "secret_ssim": 0.9947289228439331,
+        "secret_similarity_pct": 99.37113189697266
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.012779235839844,
+        "cover_ssim": 0.9711074233055115,
+        "cover_similarity_pct": 99.22967529296875,
+        "secret_psnr_db": 36.9835205078125,
+        "secret_ssim": 0.994819164276123,
+        "secret_similarity_pct": 99.37156677246094
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.026454925537109375,
+        "cover_ssim": 5.2034854888916016e-05,
+        "cover_similarity_pct": -0.00091552734375,
+        "secret_psnr_db": 0.1788177490234375,
+        "secret_ssim": 9.02414321899414e-05,
+        "secret_similarity_pct": 0.00043487548828125
+      }
+    },
+    {
+      "index": 37,
+      "id": "dev-0037",
+      "cover": "val2017/000000159684.jpg",
+      "secret": "val2017/000000397354.jpg",
+      "cover_sha256": "f5f26f6704e4727abde068b5722899cb8e3753112664dfbbcbbe7a81337e06f4",
+      "secret_sha256": "067fb73c369a8433d1f9d97c2c36f51f487cf3a6d37c1f2fe0368a39f3dc38db",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.215911865234375,
+        "cover_ssim": 0.9835116267204285,
+        "cover_similarity_pct": 99.23261260986328,
+        "secret_psnr_db": 38.1737174987793,
+        "secret_ssim": 0.9791786670684814,
+        "secret_similarity_pct": 99.34590148925781
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.25299835205078,
+        "cover_ssim": 0.9836456179618835,
+        "cover_similarity_pct": 99.23544311523438,
+        "secret_psnr_db": 38.34317398071289,
+        "secret_ssim": 0.9792046546936035,
+        "secret_similarity_pct": 99.3475341796875
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.03708648681640625,
+        "cover_ssim": 0.00013399124145507812,
+        "cover_similarity_pct": 0.00283050537109375,
+        "secret_psnr_db": 0.16945648193359375,
+        "secret_ssim": 2.5987625122070312e-05,
+        "secret_similarity_pct": 0.0016326904296875
+      }
+    },
+    {
+      "index": 38,
+      "id": "dev-0038",
+      "cover": "val2017/000000499622.jpg",
+      "secret": "val2017/000000029393.jpg",
+      "cover_sha256": "b863e07e2ae99859bd5d3713fa30cbd580a24fa6f01e8e6a65394e9967819ee8",
+      "secret_sha256": "378763dec71a25c7cb44ff9e345c84ca0fe2d8bf993b88775c360549edf3b733",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.92444610595703,
+        "cover_ssim": 0.9701553583145142,
+        "cover_similarity_pct": 99.0743637084961,
+        "secret_psnr_db": 32.17666244506836,
+        "secret_ssim": 0.9704758524894714,
+        "secret_similarity_pct": 98.7174301147461
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.91805648803711,
+        "cover_ssim": 0.9702013731002808,
+        "cover_similarity_pct": 99.07192993164062,
+        "secret_psnr_db": 33.09089279174805,
+        "secret_ssim": 0.9740093946456909,
+        "secret_similarity_pct": 98.81016540527344
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.006389617919921875,
+        "cover_ssim": 4.601478576660156e-05,
+        "cover_similarity_pct": -0.00243377685546875,
+        "secret_psnr_db": 0.9142303466796875,
+        "secret_ssim": 0.0035335421562194824,
+        "secret_similarity_pct": 0.09273529052734375
+      }
+    },
+    {
+      "index": 39,
+      "id": "dev-0039",
+      "cover": "val2017/000000022935.jpg",
+      "secret": "DIV2K_valid_HR/0806.png",
+      "cover_sha256": "90fad7bfc9fab88492d9722ea1aa14ee77514d8c10dbda86086bd37d8a05acf0",
+      "secret_sha256": "36720ddd59f8b3eed28f8981e12e6e2d680bfa78b9d25f33ec4152013652c713",
+      "baseline_metrics": {
+        "cover_psnr_db": 36.81704330444336,
+        "cover_ssim": 0.9574488401412964,
+        "cover_similarity_pct": 99.12303161621094,
+        "secret_psnr_db": 31.266658782958984,
+        "secret_ssim": 0.9256364107131958,
+        "secret_similarity_pct": 98.67633819580078
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 36.85941696166992,
+        "cover_ssim": 0.9577295780181885,
+        "cover_similarity_pct": 99.12549591064453,
+        "secret_psnr_db": 31.4803524017334,
+        "secret_ssim": 0.9279732704162598,
+        "secret_similarity_pct": 98.72093200683594
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0423736572265625,
+        "cover_ssim": 0.00028073787689208984,
+        "cover_similarity_pct": 0.00246429443359375,
+        "secret_psnr_db": 0.21369361877441406,
+        "secret_ssim": 0.002336859703063965,
+        "secret_similarity_pct": 0.04459381103515625
+      }
+    },
+    {
+      "index": 40,
+      "id": "dev-0040",
+      "cover": "val2017/000000081394.jpg",
+      "secret": "val2017/000000509260.jpg",
+      "cover_sha256": "0ece3434b584ed5deb58f902633b449bd79bf464ce5fd9859d74dbe908e78325",
+      "secret_sha256": "5a983eb03202b7c437f2951809dc619b4bb400ae049445f8ae18b604cafba335",
+      "baseline_metrics": {
+        "cover_psnr_db": 34.505126953125,
+        "cover_ssim": 0.9583892822265625,
+        "cover_similarity_pct": 98.81029510498047,
+        "secret_psnr_db": 35.45150375366211,
+        "secret_ssim": 0.9755889773368835,
+        "secret_similarity_pct": 99.14606475830078
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 34.54642868041992,
+        "cover_ssim": 0.958648681640625,
+        "cover_similarity_pct": 98.8152847290039,
+        "secret_psnr_db": 35.48019790649414,
+        "secret_ssim": 0.9755209684371948,
+        "secret_similarity_pct": 99.14319610595703
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.041301727294921875,
+        "cover_ssim": 0.0002593994140625,
+        "cover_similarity_pct": 0.0049896240234375,
+        "secret_psnr_db": 0.02869415283203125,
+        "secret_ssim": -6.80088996887207e-05,
+        "secret_similarity_pct": -0.00286865234375
+      }
+    },
+    {
+      "index": 41,
+      "id": "dev-0041",
+      "cover": "val2017/000000185409.jpg",
+      "secret": "val2017/000000545594.jpg",
+      "cover_sha256": "9675e520965a741d41778599430395ad68c2446d597e80235961e042730639f8",
+      "secret_sha256": "e1fb3683859a5026970906fbb490ee7476c00c385256cf12193f6e8ddda23578",
+      "baseline_metrics": {
+        "cover_psnr_db": 35.83572006225586,
+        "cover_ssim": 0.9678573608398438,
+        "cover_similarity_pct": 98.83660125732422,
+        "secret_psnr_db": 35.26042938232422,
+        "secret_ssim": 0.964826762676239,
+        "secret_similarity_pct": 98.92436981201172
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 35.88344192504883,
+        "cover_ssim": 0.9682430028915405,
+        "cover_similarity_pct": 98.84280395507812,
+        "secret_psnr_db": 35.273948669433594,
+        "secret_ssim": 0.9647516012191772,
+        "secret_similarity_pct": 98.9231185913086
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.04772186279296875,
+        "cover_ssim": 0.00038564205169677734,
+        "cover_similarity_pct": 0.00620269775390625,
+        "secret_psnr_db": 0.013519287109375,
+        "secret_ssim": -7.516145706176758e-05,
+        "secret_similarity_pct": -0.001251220703125
+      }
+    },
+    {
+      "index": 42,
+      "id": "dev-0042",
+      "cover": "val2017/000000205105.jpg",
+      "secret": "val2017/000000420916.jpg",
+      "cover_sha256": "63126096550f5f9d35c81261d7f8ba341896a1ec8f958200c4fe20c6417462bc",
+      "secret_sha256": "49a25255378293de63164929a056228e03feee7c68931c186c9b6ea913742003",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.459041595458984,
+        "cover_ssim": 0.9546882510185242,
+        "cover_similarity_pct": 99.27967071533203,
+        "secret_psnr_db": 30.872257232666016,
+        "secret_ssim": 0.9580900073051453,
+        "secret_similarity_pct": 98.5818099975586
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.48019027709961,
+        "cover_ssim": 0.9548746347427368,
+        "cover_similarity_pct": 99.2802963256836,
+        "secret_psnr_db": 31.500951766967773,
+        "secret_ssim": 0.9605817794799805,
+        "secret_similarity_pct": 98.65975189208984
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.021148681640625,
+        "cover_ssim": 0.00018638372421264648,
+        "cover_similarity_pct": 0.0006256103515625,
+        "secret_psnr_db": 0.6286945343017578,
+        "secret_ssim": 0.002491772174835205,
+        "secret_similarity_pct": 0.07794189453125
+      }
+    },
+    {
+      "index": 43,
+      "id": "dev-0043",
+      "cover": "val2017/000000554838.jpg",
+      "secret": "val2017/000000135604.jpg",
+      "cover_sha256": "12f576eed10d3ee8885c075bbac45e654ab2511a2042898413f7928acf52b378",
+      "secret_sha256": "57dbdf8200612aa0667176be3249ed7e4401f8871a3ce5f31a4f60328fc182c3",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.267398834228516,
+        "cover_ssim": 0.950955867767334,
+        "cover_similarity_pct": 99.14254760742188,
+        "secret_psnr_db": 40.03700256347656,
+        "secret_ssim": 0.9857114553451538,
+        "secret_similarity_pct": 99.2948226928711
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.304466247558594,
+        "cover_ssim": 0.9513956904411316,
+        "cover_similarity_pct": 99.14566802978516,
+        "secret_psnr_db": 39.99021911621094,
+        "secret_ssim": 0.9855054616928101,
+        "secret_similarity_pct": 99.29119873046875
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.037067413330078125,
+        "cover_ssim": 0.0004398226737976074,
+        "cover_similarity_pct": 0.00312042236328125,
+        "secret_psnr_db": -0.046783447265625,
+        "secret_ssim": -0.00020599365234375,
+        "secret_similarity_pct": -0.00362396240234375
+      }
+    },
+    {
+      "index": 44,
+      "id": "dev-0044",
+      "cover": "val2017/000000489091.jpg",
+      "secret": "val2017/000000363666.jpg",
+      "cover_sha256": "74870ec1c2ba8124710e44b09c02149a7bbbc00ece9231c66d1c450dd427c79b",
+      "secret_sha256": "a9fddd22efc52bc382cfb88adc507134ce80d1ba09bff7d24debbaa1b26e6d78",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.33525085449219,
+        "cover_ssim": 0.9205669164657593,
+        "cover_similarity_pct": 99.15425872802734,
+        "secret_psnr_db": 38.295204162597656,
+        "secret_ssim": 0.9878109693527222,
+        "secret_similarity_pct": 99.24884796142578
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.38759231567383,
+        "cover_ssim": 0.9213210940361023,
+        "cover_similarity_pct": 99.15877532958984,
+        "secret_psnr_db": 38.28404998779297,
+        "secret_ssim": 0.9877442121505737,
+        "secret_similarity_pct": 99.24671936035156
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.052341461181640625,
+        "cover_ssim": 0.0007541775703430176,
+        "cover_similarity_pct": 0.0045166015625,
+        "secret_psnr_db": -0.0111541748046875,
+        "secret_ssim": -6.67572021484375e-05,
+        "secret_similarity_pct": -0.00212860107421875
+      }
+    },
+    {
+      "index": 45,
+      "id": "dev-0045",
+      "cover": "val2017/000000474170.jpg",
+      "secret": "val2017/000000002587.jpg",
+      "cover_sha256": "e7966d109d600e9d4a30c54135aa5f92179e55d1a40bb395ea714bd9c675ff08",
+      "secret_sha256": "bc37072a4f32bc99d6b02a684dd9bc69bd63567382315e5f497c9bb4a44c7208",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.85484313964844,
+        "cover_ssim": 0.9614865183830261,
+        "cover_similarity_pct": 99.31066131591797,
+        "secret_psnr_db": 43.7747917175293,
+        "secret_ssim": 0.9826737642288208,
+        "secret_similarity_pct": 99.50408935546875
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.88261413574219,
+        "cover_ssim": 0.9617452025413513,
+        "cover_similarity_pct": 99.31295776367188,
+        "secret_psnr_db": 43.681148529052734,
+        "secret_ssim": 0.9823812246322632,
+        "secret_similarity_pct": 99.49801635742188
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.02777099609375,
+        "cover_ssim": 0.0002586841583251953,
+        "cover_similarity_pct": 0.00229644775390625,
+        "secret_psnr_db": -0.0936431884765625,
+        "secret_ssim": -0.0002925395965576172,
+        "secret_similarity_pct": -0.006072998046875
+      }
+    },
+    {
+      "index": 46,
+      "id": "dev-0046",
+      "cover": "val2017/000000212559.jpg",
+      "secret": "val2017/000000297396.jpg",
+      "cover_sha256": "7f39a23bb285305c59adb1b03b913dfd69f6e86a95e518cbecc950c901332d7f",
+      "secret_sha256": "f1809b639f23421ad6d40a3c16a2fb0a71184f8c4e1bda72bc1bf53eadeff387",
+      "baseline_metrics": {
+        "cover_psnr_db": 36.98624801635742,
+        "cover_ssim": 0.9692764282226562,
+        "cover_similarity_pct": 98.95445251464844,
+        "secret_psnr_db": 30.196678161621094,
+        "secret_ssim": 0.9428166151046753,
+        "secret_similarity_pct": 98.4230728149414
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.00705337524414,
+        "cover_ssim": 0.9693436622619629,
+        "cover_similarity_pct": 98.9556884765625,
+        "secret_psnr_db": 30.76605796813965,
+        "secret_ssim": 0.9453493356704712,
+        "secret_similarity_pct": 98.4953384399414
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.02080535888671875,
+        "cover_ssim": 6.723403930664062e-05,
+        "cover_similarity_pct": 0.0012359619140625,
+        "secret_psnr_db": 0.5693798065185547,
+        "secret_ssim": 0.0025327205657958984,
+        "secret_similarity_pct": 0.072265625
+      }
+    },
+    {
+      "index": 47,
+      "id": "dev-0047",
+      "cover": "val2017/000000230450.jpg",
+      "secret": "val2017/000000442993.jpg",
+      "cover_sha256": "7249268a3bf15548057b51f1901762705017beddeceb909902f08c4f28c89074",
+      "secret_sha256": "9b79ea8a810fc2cf09b0d60c9975de3fad09ff1325dc8a59abb167e5afd7b4fc",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.775760650634766,
+        "cover_ssim": 0.9768480062484741,
+        "cover_similarity_pct": 99.18347930908203,
+        "secret_psnr_db": 37.88668441772461,
+        "secret_ssim": 0.9637494087219238,
+        "secret_similarity_pct": 99.23236846923828
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.80076599121094,
+        "cover_ssim": 0.9769732356071472,
+        "cover_similarity_pct": 99.18437194824219,
+        "secret_psnr_db": 37.94315719604492,
+        "secret_ssim": 0.9637104272842407,
+        "secret_similarity_pct": 99.23271942138672
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.025005340576171875,
+        "cover_ssim": 0.0001252293586730957,
+        "cover_similarity_pct": 0.00089263916015625,
+        "secret_psnr_db": 0.0564727783203125,
+        "secret_ssim": -3.898143768310547e-05,
+        "secret_similarity_pct": 0.0003509521484375
+      }
+    },
+    {
+      "index": 48,
+      "id": "dev-0048",
+      "cover": "val2017/000000551215.jpg",
+      "secret": "val2017/000000173830.jpg",
+      "cover_sha256": "e41b973323287a1781814b3a8356b7b971a89b031191932d26d74d6123696877",
+      "secret_sha256": "46580410572c0e00f7810b350f1a6c7e75fe70203af2a4deef352b2ab3f441aa",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.72975540161133,
+        "cover_ssim": 0.9752448797225952,
+        "cover_similarity_pct": 99.29361724853516,
+        "secret_psnr_db": 44.69478225708008,
+        "secret_ssim": 0.9851957559585571,
+        "secret_similarity_pct": 99.56398010253906
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.769447326660156,
+        "cover_ssim": 0.9754955172538757,
+        "cover_similarity_pct": 99.29684448242188,
+        "secret_psnr_db": 44.6757926940918,
+        "secret_ssim": 0.9847630262374878,
+        "secret_similarity_pct": 99.55867767333984
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.039691925048828125,
+        "cover_ssim": 0.0002506375312805176,
+        "cover_similarity_pct": 0.00322723388671875,
+        "secret_psnr_db": -0.01898956298828125,
+        "secret_ssim": -0.00043272972106933594,
+        "secret_similarity_pct": -0.00530242919921875
+      }
+    },
+    {
+      "index": 49,
+      "id": "dev-0049",
+      "cover": "val2017/000000089648.jpg",
+      "secret": "val2017/000000407960.jpg",
+      "cover_sha256": "4fca67aaad67e1d0edbe7ccf837c019c774c7bf43204d7fe54abc1c28af4b953",
+      "secret_sha256": "51f7127dae6728b6f2ea96b02c8cdefc21fb03cff7a4f459af32debf6215790c",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.37065505981445,
+        "cover_ssim": 0.978600025177002,
+        "cover_similarity_pct": 99.32984161376953,
+        "secret_psnr_db": 39.067996978759766,
+        "secret_ssim": 0.9859015941619873,
+        "secret_similarity_pct": 99.45132446289062
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.401729583740234,
+        "cover_ssim": 0.9786583781242371,
+        "cover_similarity_pct": 99.33055114746094,
+        "secret_psnr_db": 39.10862731933594,
+        "secret_ssim": 0.9858190417289734,
+        "secret_similarity_pct": 99.44833374023438
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.03107452392578125,
+        "cover_ssim": 5.835294723510742e-05,
+        "cover_similarity_pct": 0.00070953369140625,
+        "secret_psnr_db": 0.040630340576171875,
+        "secret_ssim": -8.255243301391602e-05,
+        "secret_similarity_pct": -0.00299072265625
+      }
+    },
+    {
+      "index": 50,
+      "id": "dev-0050",
+      "cover": "val2017/000000046252.jpg",
+      "secret": "val2017/000000061333.jpg",
+      "cover_sha256": "2ee9e8fa409776fed080bb30f32f51d7d459b2edb606d88dbe86b98a69a4d5ed",
+      "secret_sha256": "d3c51525ef4df7b192081a4f71725a7e2b9bc09ade3eae9d1978b7768e2932a8",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.02748107910156,
+        "cover_ssim": 0.97765052318573,
+        "cover_similarity_pct": 98.95439147949219,
+        "secret_psnr_db": 38.53224563598633,
+        "secret_ssim": 0.9667498469352722,
+        "secret_similarity_pct": 99.20600891113281
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.07163619995117,
+        "cover_ssim": 0.9778650999069214,
+        "cover_similarity_pct": 98.95972442626953,
+        "secret_psnr_db": 38.51709747314453,
+        "secret_ssim": 0.9662894606590271,
+        "secret_similarity_pct": 99.2020263671875
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.044155120849609375,
+        "cover_ssim": 0.00021457672119140625,
+        "cover_similarity_pct": 0.00533294677734375,
+        "secret_psnr_db": -0.015148162841796875,
+        "secret_ssim": -0.0004603862762451172,
+        "secret_similarity_pct": -0.0039825439453125
+      }
+    },
+    {
+      "index": 51,
+      "id": "dev-0051",
+      "cover": "val2017/000000394206.jpg",
+      "secret": "val2017/000000379842.jpg",
+      "cover_sha256": "cb60fc19f46338204ec9fdbf45bf9b0da41bb6b406e77a29a42d46cbc92c8fae",
+      "secret_sha256": "86e4469de096bf1e6860f7ad17bc7c25570b4c97161cb0112621b96fdbfbf468",
+      "baseline_metrics": {
+        "cover_psnr_db": 36.91652297973633,
+        "cover_ssim": 0.9773515462875366,
+        "cover_similarity_pct": 98.98949432373047,
+        "secret_psnr_db": 32.60708236694336,
+        "secret_ssim": 0.907199501991272,
+        "secret_similarity_pct": 98.6684341430664
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 36.94648361206055,
+        "cover_ssim": 0.9774693250656128,
+        "cover_similarity_pct": 98.99244689941406,
+        "secret_psnr_db": 32.763301849365234,
+        "secret_ssim": 0.9082087874412537,
+        "secret_similarity_pct": 98.68647003173828
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.02996063232421875,
+        "cover_ssim": 0.00011777877807617188,
+        "cover_similarity_pct": 0.00295257568359375,
+        "secret_psnr_db": 0.156219482421875,
+        "secret_ssim": 0.0010092854499816895,
+        "secret_similarity_pct": 0.018035888671875
+      }
+    },
+    {
+      "index": 52,
+      "id": "dev-0052",
+      "cover": "val2017/000000500478.jpg",
+      "secret": "val2017/000000032735.jpg",
+      "cover_sha256": "1025c8bbb6466db353361663ab8af7d0328a32996cc96549deb53773349923de",
+      "secret_sha256": "309105454f28c30038cce8c44d48300b626548477957b3d056bfacf9da3127e4",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.93294143676758,
+        "cover_ssim": 0.9831360578536987,
+        "cover_similarity_pct": 99.44717407226562,
+        "secret_psnr_db": 40.74620819091797,
+        "secret_ssim": 0.9805735349655151,
+        "secret_similarity_pct": 99.56522369384766
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.96746063232422,
+        "cover_ssim": 0.9832832217216492,
+        "cover_similarity_pct": 99.4489517211914,
+        "secret_psnr_db": 40.78990936279297,
+        "secret_ssim": 0.9802874326705933,
+        "secret_similarity_pct": 99.56104278564453
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.034519195556640625,
+        "cover_ssim": 0.00014716386795043945,
+        "cover_similarity_pct": 0.00177764892578125,
+        "secret_psnr_db": 0.043701171875,
+        "secret_ssim": -0.000286102294921875,
+        "secret_similarity_pct": -0.004180908203125
+      }
+    },
+    {
+      "index": 53,
+      "id": "dev-0053",
+      "cover": "val2017/000000210230.jpg",
+      "secret": "val2017/000000248631.jpg",
+      "cover_sha256": "33e35d38f41dd9c94ee87616903b722a0148860613ea02572ce7e481542e8935",
+      "secret_sha256": "45ea37728704ce7d5a62ff39c68ab4a1d149cdd743414c0a5455524ea337150a",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.2873420715332,
+        "cover_ssim": 0.9889521598815918,
+        "cover_similarity_pct": 99.36221313476562,
+        "secret_psnr_db": 28.998937606811523,
+        "secret_ssim": 0.899917721748352,
+        "secret_similarity_pct": 98.42794799804688
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.279544830322266,
+        "cover_ssim": 0.9889383316040039,
+        "cover_similarity_pct": 99.35873413085938,
+        "secret_psnr_db": 29.4899845123291,
+        "secret_ssim": 0.9089980125427246,
+        "secret_similarity_pct": 98.54580688476562
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.0077972412109375,
+        "cover_ssim": -1.3828277587890625e-05,
+        "cover_similarity_pct": -0.00347900390625,
+        "secret_psnr_db": 0.4910469055175781,
+        "secret_ssim": 0.009080290794372559,
+        "secret_similarity_pct": 0.11785888671875
+      }
+    },
+    {
+      "index": 54,
+      "id": "dev-0054",
+      "cover": "val2017/000000436551.jpg",
+      "secret": "val2017/000000063047.jpg",
+      "cover_sha256": "0cd062d9f782ade95dd02090099b38938bd78471f0abfcb7927adc62197aa97a",
+      "secret_sha256": "a22d4aa86990d164396b37a5e95eba6e82ff36cddcfca557fc8501136591133e",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.21091079711914,
+        "cover_ssim": 0.9246196746826172,
+        "cover_similarity_pct": 99.1263656616211,
+        "secret_psnr_db": 36.94055938720703,
+        "secret_ssim": 0.9807326793670654,
+        "secret_similarity_pct": 99.14442443847656
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.24644470214844,
+        "cover_ssim": 0.9252347350120544,
+        "cover_similarity_pct": 99.12873840332031,
+        "secret_psnr_db": 37.00397491455078,
+        "secret_ssim": 0.9807633757591248,
+        "secret_similarity_pct": 99.14384460449219
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.035533905029296875,
+        "cover_ssim": 0.0006150603294372559,
+        "cover_similarity_pct": 0.00237274169921875,
+        "secret_psnr_db": 0.06341552734375,
+        "secret_ssim": 3.069639205932617e-05,
+        "secret_similarity_pct": -0.000579833984375
+      }
+    },
+    {
+      "index": 55,
+      "id": "dev-0055",
+      "cover": "val2017/000000289417.jpg",
+      "secret": "val2017/000000261318.jpg",
+      "cover_sha256": "a098e0cfd6702bf227c3b5d9e98d4321bc803c3cf8ffab4d867e86c9b5d7e13d",
+      "secret_sha256": "ffd34ec019d2fc9f168d03da88c9fd48230d266afaa79cce9222b33e55aa7116",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.18929672241211,
+        "cover_ssim": 0.8899626731872559,
+        "cover_similarity_pct": 99.07160949707031,
+        "secret_psnr_db": 36.598567962646484,
+        "secret_ssim": 0.9867017269134521,
+        "secret_similarity_pct": 99.12980651855469
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.23472213745117,
+        "cover_ssim": 0.8907570242881775,
+        "cover_similarity_pct": 99.0732650756836,
+        "secret_psnr_db": 36.59619140625,
+        "secret_ssim": 0.9866694808006287,
+        "secret_similarity_pct": 99.12713623046875
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0454254150390625,
+        "cover_ssim": 0.0007943511009216309,
+        "cover_similarity_pct": 0.00165557861328125,
+        "secret_psnr_db": -0.002376556396484375,
+        "secret_ssim": -3.224611282348633e-05,
+        "secret_similarity_pct": -0.0026702880859375
+      }
+    },
+    {
+      "index": 56,
+      "id": "dev-0056",
+      "cover": "val2017/000000435299.jpg",
+      "secret": "val2017/000000570688.jpg",
+      "cover_sha256": "a6e060e6e23667a937f1130eed8616b97166e546e148cc62c1f82037b4c3738d",
+      "secret_sha256": "baa5a96ec8a613dd8571a1e2bc6dcc1d8841418f8a19a6e521ca0d60ca3dd09d",
+      "baseline_metrics": {
+        "cover_psnr_db": 36.67353820800781,
+        "cover_ssim": 0.9122893214225769,
+        "cover_similarity_pct": 99.07231140136719,
+        "secret_psnr_db": 33.835445404052734,
+        "secret_ssim": 0.974729061126709,
+        "secret_similarity_pct": 99.019287109375
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 36.721797943115234,
+        "cover_ssim": 0.9130187034606934,
+        "cover_similarity_pct": 99.07833862304688,
+        "secret_psnr_db": 33.92057418823242,
+        "secret_ssim": 0.9749264717102051,
+        "secret_similarity_pct": 99.02066040039062
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.048259735107421875,
+        "cover_ssim": 0.0007293820381164551,
+        "cover_similarity_pct": 0.0060272216796875,
+        "secret_psnr_db": 0.0851287841796875,
+        "secret_ssim": 0.00019741058349609375,
+        "secret_similarity_pct": 0.001373291015625
+      }
+    },
+    {
+      "index": 57,
+      "id": "dev-0057",
+      "cover": "val2017/000000169356.jpg",
+      "secret": "val2017/000000302536.jpg",
+      "cover_sha256": "acd7784c7a33da47014e5c55118789be664617e8028a8d89ada6b59b9212db25",
+      "secret_sha256": "8bc7c92a03a7cb6a77a3ebde15ada830637e4b2b05d468b267e7fa4417aefa31",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.13016128540039,
+        "cover_ssim": 0.9855920672416687,
+        "cover_similarity_pct": 99.32781982421875,
+        "secret_psnr_db": 44.40500259399414,
+        "secret_ssim": 0.9844126105308533,
+        "secret_similarity_pct": 99.58641815185547
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.15593719482422,
+        "cover_ssim": 0.9855923652648926,
+        "cover_similarity_pct": 99.32814025878906,
+        "secret_psnr_db": 44.33224105834961,
+        "secret_ssim": 0.9839341044425964,
+        "secret_similarity_pct": 99.5794448852539
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.025775909423828125,
+        "cover_ssim": 2.980232238769531e-07,
+        "cover_similarity_pct": 0.0003204345703125,
+        "secret_psnr_db": -0.07276153564453125,
+        "secret_ssim": -0.00047850608825683594,
+        "secret_similarity_pct": -0.0069732666015625
+      }
+    },
+    {
+      "index": 58,
+      "id": "dev-0058",
+      "cover": "val2017/000000455872.jpg",
+      "secret": "val2017/000000229111.jpg",
+      "cover_sha256": "60efd3a4e06cb59a020b266620cd68c78b20a3196062efb21072e05bbbfd9629",
+      "secret_sha256": "6cf7af80f210bcf25ff57bad62f814f4cd6d4e419a564fc1659ef2a479d5e7d3",
+      "baseline_metrics": {
+        "cover_psnr_db": 43.05186462402344,
+        "cover_ssim": 0.9898909330368042,
+        "cover_similarity_pct": 99.52349853515625,
+        "secret_psnr_db": 25.004653930664062,
+        "secret_ssim": 0.8379935622215271,
+        "secret_similarity_pct": 96.3954086303711
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 42.613887786865234,
+        "cover_ssim": 0.9878357648849487,
+        "cover_similarity_pct": 99.46829223632812,
+        "secret_psnr_db": 27.89910316467285,
+        "secret_ssim": 0.9041340351104736,
+        "secret_similarity_pct": 97.40095520019531
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.4379768371582031,
+        "cover_ssim": -0.0020551681518554688,
+        "cover_similarity_pct": -0.055206298828125,
+        "secret_psnr_db": 2.894449234008789,
+        "secret_ssim": 0.06614047288894653,
+        "secret_similarity_pct": 1.0055465698242188
+      }
+    },
+    {
+      "index": 59,
+      "id": "dev-0059",
+      "cover": "val2017/000000045090.jpg",
+      "secret": "val2017/000000196843.jpg",
+      "cover_sha256": "131ff9a0a419179b934091c97a57ea257b02b8ed80762bc59d639d980a9707e5",
+      "secret_sha256": "7bafbbaa286e2fcb78d30b5192d09a82a05d231778a5d1b84929c1de64b566ae",
+      "baseline_metrics": {
+        "cover_psnr_db": 35.1389274597168,
+        "cover_ssim": 0.9569756984710693,
+        "cover_similarity_pct": 98.81262969970703,
+        "secret_psnr_db": 31.057334899902344,
+        "secret_ssim": 0.9550113677978516,
+        "secret_similarity_pct": 98.35088348388672
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 35.19390106201172,
+        "cover_ssim": 0.9574294090270996,
+        "cover_similarity_pct": 98.81916046142578,
+        "secret_psnr_db": 31.42745590209961,
+        "secret_ssim": 0.9576661586761475,
+        "secret_similarity_pct": 98.40223693847656
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.054973602294921875,
+        "cover_ssim": 0.00045371055603027344,
+        "cover_similarity_pct": 0.00653076171875,
+        "secret_psnr_db": 0.3701210021972656,
+        "secret_ssim": 0.0026547908782958984,
+        "secret_similarity_pct": 0.05135345458984375
+      }
+    },
+    {
+      "index": 60,
+      "id": "dev-0060",
+      "cover": "val2017/000000296224.jpg",
+      "secret": "val2017/000000398742.jpg",
+      "cover_sha256": "bfdfaa35d64439d19781ad60ff92fa5b3d7b90a7293f1603574951871d2238b9",
+      "secret_sha256": "6af6678e8c5b9454647a9c1d206acf82b146bebc56463db796efd18037d30c3e",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.233951568603516,
+        "cover_ssim": 0.9708822965621948,
+        "cover_similarity_pct": 99.14707946777344,
+        "secret_psnr_db": 30.858610153198242,
+        "secret_ssim": 0.9508509635925293,
+        "secret_similarity_pct": 98.6679916381836
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.27347183227539,
+        "cover_ssim": 0.9712094068527222,
+        "cover_similarity_pct": 99.1495590209961,
+        "secret_psnr_db": 31.143108367919922,
+        "secret_ssim": 0.9526134729385376,
+        "secret_similarity_pct": 98.71339416503906
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.039520263671875,
+        "cover_ssim": 0.00032711029052734375,
+        "cover_similarity_pct": 0.00247955322265625,
+        "secret_psnr_db": 0.2844982147216797,
+        "secret_ssim": 0.0017625093460083008,
+        "secret_similarity_pct": 0.04540252685546875
+      }
+    },
+    {
+      "index": 61,
+      "id": "dev-0061",
+      "cover": "val2017/000000001425.jpg",
+      "secret": "val2017/000000084362.jpg",
+      "cover_sha256": "71a37c25cdf944cf0a88b66d00a66cf899a88bd55c7ac80fcf1c76329d617e6c",
+      "secret_sha256": "078d217235bc234a17e34325cd551fa0944ea693a7e51c5647d0df7702bc840e",
+      "baseline_metrics": {
+        "cover_psnr_db": 44.56421661376953,
+        "cover_ssim": 0.9839624166488647,
+        "cover_similarity_pct": 99.55378723144531,
+        "secret_psnr_db": 41.599063873291016,
+        "secret_ssim": 0.9916781187057495,
+        "secret_similarity_pct": 99.5895767211914
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 44.4212646484375,
+        "cover_ssim": 0.9839816093444824,
+        "cover_similarity_pct": 99.54410552978516,
+        "secret_psnr_db": 42.142642974853516,
+        "secret_ssim": 0.9921171069145203,
+        "secret_similarity_pct": 99.59501647949219
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.14295196533203125,
+        "cover_ssim": 1.919269561767578e-05,
+        "cover_similarity_pct": -0.00968170166015625,
+        "secret_psnr_db": 0.5435791015625,
+        "secret_ssim": 0.00043898820877075195,
+        "secret_similarity_pct": 0.00543975830078125
+      }
+    },
+    {
+      "index": 62,
+      "id": "dev-0062",
+      "cover": "val2017/000000535156.jpg",
+      "secret": "val2017/000000033104.jpg",
+      "cover_sha256": "24ff901415cee970585ccd0da5c13bbe2646d3a675dcbfe9e22daa281f439ee0",
+      "secret_sha256": "24d3088e3db4b4a04c83f0c1cf3dddbc33c02389eb2591d9d03c4a3cf73796ed",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.311790466308594,
+        "cover_ssim": 0.9408644437789917,
+        "cover_similarity_pct": 99.0083236694336,
+        "secret_psnr_db": 38.31895446777344,
+        "secret_ssim": 0.9883148074150085,
+        "secret_similarity_pct": 99.30718231201172
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.35218811035156,
+        "cover_ssim": 0.9413429498672485,
+        "cover_similarity_pct": 99.01258087158203,
+        "secret_psnr_db": 38.42643356323242,
+        "secret_ssim": 0.9882688522338867,
+        "secret_similarity_pct": 99.30541229248047
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.04039764404296875,
+        "cover_ssim": 0.00047850608825683594,
+        "cover_similarity_pct": 0.0042572021484375,
+        "secret_psnr_db": 0.10747909545898438,
+        "secret_ssim": -4.595518112182617e-05,
+        "secret_similarity_pct": -0.00177001953125
+      }
+    },
+    {
+      "index": 63,
+      "id": "dev-0063",
+      "cover": "val2017/000000206135.jpg",
+      "secret": "val2017/000000248980.jpg",
+      "cover_sha256": "57dc88c8bde40cba9d18d27c4beaa5654023e48e42d3d0d946faabc259db8238",
+      "secret_sha256": "f0021606b0a2bdee66f892c4c5c72746c8dffc5855bf04f2ce18061d8f001b87",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.90178680419922,
+        "cover_ssim": 0.9554106593132019,
+        "cover_similarity_pct": 99.14236450195312,
+        "secret_psnr_db": 22.481952667236328,
+        "secret_ssim": 0.8608680963516235,
+        "secret_similarity_pct": 95.6884765625
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.749393463134766,
+        "cover_ssim": 0.9530860781669617,
+        "cover_similarity_pct": 99.11237335205078,
+        "secret_psnr_db": 24.4884090423584,
+        "secret_ssim": 0.8930485248565674,
+        "secret_similarity_pct": 96.52745819091797
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.15239334106445312,
+        "cover_ssim": -0.0023245811462402344,
+        "cover_similarity_pct": -0.02999114990234375,
+        "secret_psnr_db": 2.0064563751220703,
+        "secret_ssim": 0.03218042850494385,
+        "secret_similarity_pct": 0.8389816284179688
+      }
+    },
+    {
+      "index": 64,
+      "id": "dev-0064",
+      "cover": "val2017/000000114770.jpg",
+      "secret": "val2017/000000580410.jpg",
+      "cover_sha256": "6c03190b20a3245cf365ba0ebf5703da632fe95a91dc8fbeed157cd59a74ee67",
+      "secret_sha256": "4ffc41086afb69af8014c73fc564aa8e8145f13aaa98d20ed10501f765724d20",
+      "baseline_metrics": {
+        "cover_psnr_db": 41.84013748168945,
+        "cover_ssim": 0.9825899600982666,
+        "cover_similarity_pct": 99.42023468017578,
+        "secret_psnr_db": 43.114315032958984,
+        "secret_ssim": 0.9919890761375427,
+        "secret_similarity_pct": 99.58094024658203
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 41.8621826171875,
+        "cover_ssim": 0.9826939105987549,
+        "cover_similarity_pct": 99.42105102539062,
+        "secret_psnr_db": 43.208431243896484,
+        "secret_ssim": 0.991952121257782,
+        "secret_similarity_pct": 99.57839965820312
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.022045135498046875,
+        "cover_ssim": 0.00010395050048828125,
+        "cover_similarity_pct": 0.00081634521484375,
+        "secret_psnr_db": 0.0941162109375,
+        "secret_ssim": -3.695487976074219e-05,
+        "secret_similarity_pct": -0.00254058837890625
+      }
+    },
+    {
+      "index": 65,
+      "id": "dev-0065",
+      "cover": "val2017/000000442161.jpg",
+      "secret": "val2017/000000093154.jpg",
+      "cover_sha256": "11f1288b87273244cbaad21c72e190dbf14484541a89556b9d0b616080aefef8",
+      "secret_sha256": "2b3a21fc80e5544c4d2206b84e9dfcbd5dbd3605e7937ebfbbade72c3f116351",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.61233901977539,
+        "cover_ssim": 0.9512609243392944,
+        "cover_similarity_pct": 99.13712310791016,
+        "secret_psnr_db": 34.99635314941406,
+        "secret_ssim": 0.9674596190452576,
+        "secret_similarity_pct": 99.09363555908203
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.647239685058594,
+        "cover_ssim": 0.9516557455062866,
+        "cover_similarity_pct": 99.13951873779297,
+        "secret_psnr_db": 35.090145111083984,
+        "secret_ssim": 0.967751681804657,
+        "secret_similarity_pct": 99.0969009399414
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.034900665283203125,
+        "cover_ssim": 0.0003948211669921875,
+        "cover_similarity_pct": 0.0023956298828125,
+        "secret_psnr_db": 0.09379196166992188,
+        "secret_ssim": 0.00029206275939941406,
+        "secret_similarity_pct": 0.003265380859375
+      }
+    },
+    {
+      "index": 66,
+      "id": "dev-0066",
+      "cover": "val2017/000000259097.jpg",
+      "secret": "DIV2K_valid_HR/0834.png",
+      "cover_sha256": "23acc13dba72469607a7e61b6c2fd6e0e2c73dfa33fff340424bd6c805ac8cfc",
+      "secret_sha256": "4d2621a246e4a771754aa0052b91d79dbebfe866d9dbd8200e3c68e038a3de88",
+      "baseline_metrics": {
+        "cover_psnr_db": 35.092864990234375,
+        "cover_ssim": 0.9469369649887085,
+        "cover_similarity_pct": 98.88463592529297,
+        "secret_psnr_db": 37.85366439819336,
+        "secret_ssim": 0.9808977842330933,
+        "secret_similarity_pct": 99.3262710571289
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 35.12068176269531,
+        "cover_ssim": 0.9479295611381531,
+        "cover_similarity_pct": 98.88543701171875,
+        "secret_psnr_db": 37.80955123901367,
+        "secret_ssim": 0.9805766940116882,
+        "secret_similarity_pct": 99.31590270996094
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0278167724609375,
+        "cover_ssim": 0.00099259614944458,
+        "cover_similarity_pct": 0.00080108642578125,
+        "secret_psnr_db": -0.0441131591796875,
+        "secret_ssim": -0.0003210902214050293,
+        "secret_similarity_pct": -0.01036834716796875
+      }
+    },
+    {
+      "index": 67,
+      "id": "dev-0067",
+      "cover": "val2017/000000474095.jpg",
+      "secret": "val2017/000000359677.jpg",
+      "cover_sha256": "6e216fd96173658eb945140933ef0c9ae23217a733f02765fe59f57f9db0ae6e",
+      "secret_sha256": "b9767ebb38fe98ed310fc064966b07d8530ea471f3057026f1b319a4c46292a9",
+      "baseline_metrics": {
+        "cover_psnr_db": 47.78707504272461,
+        "cover_ssim": 0.9937936663627625,
+        "cover_similarity_pct": 99.69794464111328,
+        "secret_psnr_db": 50.722930908203125,
+        "secret_ssim": 0.9970601797103882,
+        "secret_similarity_pct": 99.81192016601562
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 47.74427032470703,
+        "cover_ssim": 0.9938985705375671,
+        "cover_similarity_pct": 99.69739532470703,
+        "secret_psnr_db": 50.57884979248047,
+        "secret_ssim": 0.9969483613967896,
+        "secret_similarity_pct": 99.8043441772461
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.042804718017578125,
+        "cover_ssim": 0.0001049041748046875,
+        "cover_similarity_pct": -0.00054931640625,
+        "secret_psnr_db": -0.14408111572265625,
+        "secret_ssim": -0.00011181831359863281,
+        "secret_similarity_pct": -0.00757598876953125
+      }
+    },
+    {
+      "index": 68,
+      "id": "dev-0068",
+      "cover": "val2017/000000091406.jpg",
+      "secret": "val2017/000000236784.jpg",
+      "cover_sha256": "a6019381432c4b2517a5d1fecb8c9b2bf59a50c431d69fd3078ff82fe26ca1e9",
+      "secret_sha256": "cdd94432188f912462ec36a51f6e17efe537e472ef427654d37f26cf76bea4e7",
+      "baseline_metrics": {
+        "cover_psnr_db": 34.85789489746094,
+        "cover_ssim": 0.9209729433059692,
+        "cover_similarity_pct": 98.64288330078125,
+        "secret_psnr_db": 31.326126098632812,
+        "secret_ssim": 0.8754156827926636,
+        "secret_similarity_pct": 98.18274688720703
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 34.905399322509766,
+        "cover_ssim": 0.921827495098114,
+        "cover_similarity_pct": 98.65065002441406,
+        "secret_psnr_db": 31.462196350097656,
+        "secret_ssim": 0.8762412071228027,
+        "secret_similarity_pct": 98.19696044921875
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.047504425048828125,
+        "cover_ssim": 0.0008545517921447754,
+        "cover_similarity_pct": 0.0077667236328125,
+        "secret_psnr_db": 0.13607025146484375,
+        "secret_ssim": 0.0008255243301391602,
+        "secret_similarity_pct": 0.01421356201171875
+      }
+    },
+    {
+      "index": 69,
+      "id": "dev-0069",
+      "cover": "val2017/000000222825.jpg",
+      "secret": "val2017/000000511076.jpg",
+      "cover_sha256": "d1ed4e1103c8f8fe1f2a90cb1deb4ff73c2aabc14ca73a035cfb8b130e0cdd74",
+      "secret_sha256": "9a159bde5fa9b68ab5f5ed7818091f0bbfc1402d328cf49ee845911cb85ad247",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.290733337402344,
+        "cover_ssim": 0.9560456275939941,
+        "cover_similarity_pct": 99.33414459228516,
+        "secret_psnr_db": 40.65587615966797,
+        "secret_ssim": 0.9883294105529785,
+        "secret_similarity_pct": 99.45506286621094
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.339324951171875,
+        "cover_ssim": 0.9565192461013794,
+        "cover_similarity_pct": 99.33753204345703,
+        "secret_psnr_db": 40.82676315307617,
+        "secret_ssim": 0.9885730147361755,
+        "secret_similarity_pct": 99.46005249023438
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.04859161376953125,
+        "cover_ssim": 0.0004736185073852539,
+        "cover_similarity_pct": 0.003387451171875,
+        "secret_psnr_db": 0.17088699340820312,
+        "secret_ssim": 0.00024360418319702148,
+        "secret_similarity_pct": 0.0049896240234375
+      }
+    },
+    {
+      "index": 70,
+      "id": "dev-0070",
+      "cover": "val2017/000000194216.jpg",
+      "secret": "val2017/000000416991.jpg",
+      "cover_sha256": "d86034f9e0f48b0eca16f00dbba82263e37d81231a94cc3fea5310c3f45add95",
+      "secret_sha256": "939f11f245c93ee8d06b8f09c5d5029b076b81147e03e062f9982ac6ed57dc44",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.22002410888672,
+        "cover_ssim": 0.9812072515487671,
+        "cover_similarity_pct": 99.20391082763672,
+        "secret_psnr_db": 43.59587860107422,
+        "secret_ssim": 0.9961943626403809,
+        "secret_similarity_pct": 99.58941650390625
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.253421783447266,
+        "cover_ssim": 0.9813432693481445,
+        "cover_similarity_pct": 99.20650482177734,
+        "secret_psnr_db": 43.5806884765625,
+        "secret_ssim": 0.996135413646698,
+        "secret_similarity_pct": 99.58585357666016
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.033397674560546875,
+        "cover_ssim": 0.0001360177993774414,
+        "cover_similarity_pct": 0.002593994140625,
+        "secret_psnr_db": -0.01519012451171875,
+        "secret_ssim": -5.894899368286133e-05,
+        "secret_similarity_pct": -0.00356292724609375
+      }
+    },
+    {
+      "index": 71,
+      "id": "dev-0071",
+      "cover": "val2017/000000158548.jpg",
+      "secret": "val2017/000000107226.jpg",
+      "cover_sha256": "8b8662687f8a639949f622da9ccec56bff0e0569b4eb498aa77f0520a19605b1",
+      "secret_sha256": "285a3dfd666d35fb60eb63b9dd46b7b49aae4fcafe194f51d7e4b446abdab725",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.2139778137207,
+        "cover_ssim": 0.9671899080276489,
+        "cover_similarity_pct": 99.07320404052734,
+        "secret_psnr_db": 42.314090728759766,
+        "secret_ssim": 0.9824583530426025,
+        "secret_similarity_pct": 99.42965698242188
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.24089431762695,
+        "cover_ssim": 0.9674077033996582,
+        "cover_similarity_pct": 99.07433319091797,
+        "secret_psnr_db": 42.193851470947266,
+        "secret_ssim": 0.9818460941314697,
+        "secret_similarity_pct": 99.41938781738281
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.02691650390625,
+        "cover_ssim": 0.00021779537200927734,
+        "cover_similarity_pct": 0.001129150390625,
+        "secret_psnr_db": -0.1202392578125,
+        "secret_ssim": -0.0006122589111328125,
+        "secret_similarity_pct": -0.0102691650390625
+      }
+    },
+    {
+      "index": 72,
+      "id": "dev-0072",
+      "cover": "val2017/000000524280.jpg",
+      "secret": "val2017/000000302990.jpg",
+      "cover_sha256": "3b83ffd2d2ce4c28a05b1dcd486edf8a06542584a05c9a66cf208df9ed6e2c7d",
+      "secret_sha256": "e3e8e66877afbc25b616626b58f0824ec984fe79a0ffedaec7843d063bbb49dd",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.243812561035156,
+        "cover_ssim": 0.9709916114807129,
+        "cover_similarity_pct": 99.28799438476562,
+        "secret_psnr_db": 41.82815170288086,
+        "secret_ssim": 0.9924728870391846,
+        "secret_similarity_pct": 99.50117492675781
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.276485443115234,
+        "cover_ssim": 0.9712666273117065,
+        "cover_similarity_pct": 99.2896499633789,
+        "secret_psnr_db": 41.85115432739258,
+        "secret_ssim": 0.9923392534255981,
+        "secret_similarity_pct": 99.49837493896484
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.032672882080078125,
+        "cover_ssim": 0.00027501583099365234,
+        "cover_similarity_pct": 0.00165557861328125,
+        "secret_psnr_db": 0.02300262451171875,
+        "secret_ssim": -0.00013363361358642578,
+        "secret_similarity_pct": -0.00279998779296875
+      }
+    },
+    {
+      "index": 73,
+      "id": "dev-0073",
+      "cover": "val2017/000000208208.jpg",
+      "secret": "val2017/000000367569.jpg",
+      "cover_sha256": "1df85ecd80d70c0e82089f2b9badcf4d8cfde414c5d005bcc6d3ef05d5fc44cc",
+      "secret_sha256": "0bf18d631eee0bb297484c5ced6deeeced2d886461e37334cf297fe238202497",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.59838104248047,
+        "cover_ssim": 0.9769098162651062,
+        "cover_similarity_pct": 99.21572875976562,
+        "secret_psnr_db": 43.597084045410156,
+        "secret_ssim": 0.9774727821350098,
+        "secret_similarity_pct": 99.50262451171875
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.633724212646484,
+        "cover_ssim": 0.9771206378936768,
+        "cover_similarity_pct": 99.21822357177734,
+        "secret_psnr_db": 43.46234130859375,
+        "secret_ssim": 0.976813793182373,
+        "secret_similarity_pct": 99.49412536621094
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.035343170166015625,
+        "cover_ssim": 0.00021082162857055664,
+        "cover_similarity_pct": 0.00249481201171875,
+        "secret_psnr_db": -0.13474273681640625,
+        "secret_ssim": -0.0006589889526367188,
+        "secret_similarity_pct": -0.0084991455078125
+      }
+    },
+    {
+      "index": 74,
+      "id": "dev-0074",
+      "cover": "val2017/000000382088.jpg",
+      "secret": "val2017/000000010583.jpg",
+      "cover_sha256": "2e496756dde5e2eb6f589ae423903bbef08e9f9a60d5b739daeabf452645cf47",
+      "secret_sha256": "f163a37f278b6edd09952332066e01a00cf80e3137b427dd49732b91edc3fa9b",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.46173858642578,
+        "cover_ssim": 0.9693918228149414,
+        "cover_similarity_pct": 99.16007232666016,
+        "secret_psnr_db": 41.35150909423828,
+        "secret_ssim": 0.9941362142562866,
+        "secret_similarity_pct": 99.45130920410156
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.504337310791016,
+        "cover_ssim": 0.969683051109314,
+        "cover_similarity_pct": 99.16412353515625,
+        "secret_psnr_db": 41.35737991333008,
+        "secret_ssim": 0.9940509796142578,
+        "secret_similarity_pct": 99.44769287109375
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.042598724365234375,
+        "cover_ssim": 0.0002912282943725586,
+        "cover_similarity_pct": 0.00405120849609375,
+        "secret_psnr_db": 0.005870819091796875,
+        "secret_ssim": -8.52346420288086e-05,
+        "secret_similarity_pct": -0.0036163330078125
+      }
+    },
+    {
+      "index": 75,
+      "id": "dev-0075",
+      "cover": "val2017/000000196009.jpg",
+      "secret": "val2017/000000256407.jpg",
+      "cover_sha256": "1ce40717e790580b664ceb944b9739502d1f6b36173f2ca7372df35d1030104a",
+      "secret_sha256": "e9b63060910cbd8ff9d9f420204ec691d7e46d2034ea24857f6e4dbf1966f535",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.081932067871094,
+        "cover_ssim": 0.9581658244132996,
+        "cover_similarity_pct": 99.207763671875,
+        "secret_psnr_db": 42.405296325683594,
+        "secret_ssim": 0.9782909154891968,
+        "secret_similarity_pct": 99.51497650146484
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.11119842529297,
+        "cover_ssim": 0.9584788084030151,
+        "cover_similarity_pct": 99.20793151855469,
+        "secret_psnr_db": 42.74259567260742,
+        "secret_ssim": 0.9784852862358093,
+        "secret_similarity_pct": 99.51973724365234
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.029266357421875,
+        "cover_ssim": 0.00031298398971557617,
+        "cover_similarity_pct": 0.0001678466796875,
+        "secret_psnr_db": 0.3372993469238281,
+        "secret_ssim": 0.00019437074661254883,
+        "secret_similarity_pct": 0.0047607421875
+      }
+    },
+    {
+      "index": 76,
+      "id": "dev-0076",
+      "cover": "val2017/000000331280.jpg",
+      "secret": "val2017/000000025424.jpg",
+      "cover_sha256": "5bbb9c83942e1af35dc3a56483c226885fb93571acebae6d7428ff42c6c9473e",
+      "secret_sha256": "89e8025ecb6f48125ac826dd5fe51409deae64e98133472adbe6ae62b6a61705",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.02720260620117,
+        "cover_ssim": 0.9731020927429199,
+        "cover_similarity_pct": 99.2774429321289,
+        "secret_psnr_db": 35.751651763916016,
+        "secret_ssim": 0.9568950533866882,
+        "secret_similarity_pct": 99.24668884277344
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.0289306640625,
+        "cover_ssim": 0.97324538230896,
+        "cover_similarity_pct": 99.27921295166016,
+        "secret_psnr_db": 36.23334884643555,
+        "secret_ssim": 0.9601297378540039,
+        "secret_similarity_pct": 99.27528381347656
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.001728057861328125,
+        "cover_ssim": 0.00014328956604003906,
+        "cover_similarity_pct": 0.00177001953125,
+        "secret_psnr_db": 0.48169708251953125,
+        "secret_ssim": 0.003234684467315674,
+        "secret_similarity_pct": 0.028594970703125
+      }
+    },
+    {
+      "index": 77,
+      "id": "dev-0077",
+      "cover": "val2017/000000088040.jpg",
+      "secret": "val2017/000000369751.jpg",
+      "cover_sha256": "8b46197eff2bc39805e73ee3dadd8c48b81e42e645e2f733acb94c814fe9199e",
+      "secret_sha256": "57d5d8701f72bcd01989b9252ed1f2d92a54bda330be182e838071c70f7f06ba",
+      "baseline_metrics": {
+        "cover_psnr_db": 33.9656982421875,
+        "cover_ssim": 0.9523649215698242,
+        "cover_similarity_pct": 98.6500473022461,
+        "secret_psnr_db": 30.92372703552246,
+        "secret_ssim": 0.9275625944137573,
+        "secret_similarity_pct": 98.39192962646484
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 34.0085563659668,
+        "cover_ssim": 0.9526769518852234,
+        "cover_similarity_pct": 98.65538024902344,
+        "secret_psnr_db": 30.945329666137695,
+        "secret_ssim": 0.9279346466064453,
+        "secret_similarity_pct": 98.3961181640625
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.042858123779296875,
+        "cover_ssim": 0.0003120303153991699,
+        "cover_similarity_pct": 0.00533294677734375,
+        "secret_psnr_db": 0.021602630615234375,
+        "secret_ssim": 0.0003720521926879883,
+        "secret_similarity_pct": 0.00418853759765625
+      }
+    },
+    {
+      "index": 78,
+      "id": "dev-0078",
+      "cover": "val2017/000000358923.jpg",
+      "secret": "val2017/000000299887.jpg",
+      "cover_sha256": "b39cab93ed8551306cb0aafc455d289ca5360cd5346ae37bb915fe650390f6ee",
+      "secret_sha256": "7e6ec14aa7087b90379cb009ea2d203d523b5ca70ab567b6196e6d26a76c1945",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.061187744140625,
+        "cover_ssim": 0.9639639258384705,
+        "cover_similarity_pct": 99.11219787597656,
+        "secret_psnr_db": 27.75925636291504,
+        "secret_ssim": 0.8622912764549255,
+        "secret_similarity_pct": 97.46111297607422
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.05112075805664,
+        "cover_ssim": 0.9636356830596924,
+        "cover_similarity_pct": 99.10521697998047,
+        "secret_psnr_db": 28.334123611450195,
+        "secret_ssim": 0.8738889098167419,
+        "secret_similarity_pct": 97.59306335449219
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.010066986083984375,
+        "cover_ssim": -0.00032824277877807617,
+        "cover_similarity_pct": -0.00698089599609375,
+        "secret_psnr_db": 0.5748672485351562,
+        "secret_ssim": 0.011597633361816406,
+        "secret_similarity_pct": 0.13195037841796875
+      }
+    },
+    {
+      "index": 79,
+      "id": "dev-0079",
+      "cover": "val2017/000000001584.jpg",
+      "secret": "val2017/000000431140.jpg",
+      "cover_sha256": "77131e2f74aa7e374f951a69157cf7f51e00201f81bacfa8a9ab7309b245553f",
+      "secret_sha256": "8d4e1693223bb312e0404e9f28caf74cdf08e4a993540eb25348d7f999c1def3",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.460906982421875,
+        "cover_ssim": 0.9857659339904785,
+        "cover_similarity_pct": 99.40142822265625,
+        "secret_psnr_db": 43.00178527832031,
+        "secret_ssim": 0.9830450415611267,
+        "secret_similarity_pct": 99.56988525390625
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.48890686035156,
+        "cover_ssim": 0.9858520030975342,
+        "cover_similarity_pct": 99.40226745605469,
+        "secret_psnr_db": 42.97539138793945,
+        "secret_ssim": 0.9826556444168091,
+        "secret_similarity_pct": 99.5649642944336
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0279998779296875,
+        "cover_ssim": 8.606910705566406e-05,
+        "cover_similarity_pct": 0.0008392333984375,
+        "secret_psnr_db": -0.026393890380859375,
+        "secret_ssim": -0.00038939714431762695,
+        "secret_similarity_pct": -0.00492095947265625
+      }
+    },
+    {
+      "index": 80,
+      "id": "dev-0080",
+      "cover": "val2017/000000054967.jpg",
+      "secret": "val2017/000000415748.jpg",
+      "cover_sha256": "d40210c4e2241a0ac4de79f4cdc7a6c859dafb1b2b18469146f992c714fe9b2d",
+      "secret_sha256": "6774fb650081bd03fedb03b1c26b85de477afa0086cbbf157b2fde2dc03d6628",
+      "baseline_metrics": {
+        "cover_psnr_db": 36.865447998046875,
+        "cover_ssim": 0.958046555519104,
+        "cover_similarity_pct": 99.00214385986328,
+        "secret_psnr_db": 36.139495849609375,
+        "secret_ssim": 0.9789867401123047,
+        "secret_similarity_pct": 99.05951690673828
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 36.9014892578125,
+        "cover_ssim": 0.9584188461303711,
+        "cover_similarity_pct": 99.00606536865234,
+        "secret_psnr_db": 36.385902404785156,
+        "secret_ssim": 0.9792923927307129,
+        "secret_similarity_pct": 99.07282257080078
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.036041259765625,
+        "cover_ssim": 0.00037229061126708984,
+        "cover_similarity_pct": 0.0039215087890625,
+        "secret_psnr_db": 0.24640655517578125,
+        "secret_ssim": 0.0003056526184082031,
+        "secret_similarity_pct": 0.0133056640625
+      }
+    },
+    {
+      "index": 81,
+      "id": "dev-0081",
+      "cover": "val2017/000000504074.jpg",
+      "secret": "val2017/000000042178.jpg",
+      "cover_sha256": "20b41a4613f4764272f97bd4522ffeefd52cd0e9a7cb604578e2644a7dce4c83",
+      "secret_sha256": "a93b3e69c542397170396ea0a1805ff740924aedee8deb336b82fa9277b82b48",
+      "baseline_metrics": {
+        "cover_psnr_db": 42.70128631591797,
+        "cover_ssim": 0.9858393669128418,
+        "cover_similarity_pct": 99.51168060302734,
+        "secret_psnr_db": 34.254051208496094,
+        "secret_ssim": 0.936290442943573,
+        "secret_similarity_pct": 98.83140563964844
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 42.674766540527344,
+        "cover_ssim": 0.985814094543457,
+        "cover_similarity_pct": 99.50196838378906,
+        "secret_psnr_db": 36.16839599609375,
+        "secret_ssim": 0.9546833038330078,
+        "secret_similarity_pct": 99.0115737915039
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.026519775390625,
+        "cover_ssim": -2.5272369384765625e-05,
+        "cover_similarity_pct": -0.00971221923828125,
+        "secret_psnr_db": 1.9143447875976562,
+        "secret_ssim": 0.018392860889434814,
+        "secret_similarity_pct": 0.18016815185546875
+      }
+    },
+    {
+      "index": 82,
+      "id": "dev-0082",
+      "cover": "val2017/000000283268.jpg",
+      "secret": "val2017/000000446117.jpg",
+      "cover_sha256": "3c768b369099245029d32363adfdb3f7c9f7ad4790d1d691a2d69ce494062a1e",
+      "secret_sha256": "5b16b401560afe3a56ed9cfd321290282fd27ddcfb2f97d65b675a0b83307b32",
+      "baseline_metrics": {
+        "cover_psnr_db": 39.981773376464844,
+        "cover_ssim": 0.9739679098129272,
+        "cover_similarity_pct": 99.36241149902344,
+        "secret_psnr_db": 41.143028259277344,
+        "secret_ssim": 0.9854738712310791,
+        "secret_similarity_pct": 99.50032043457031
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 39.99817657470703,
+        "cover_ssim": 0.9741973876953125,
+        "cover_similarity_pct": 99.35933685302734,
+        "secret_psnr_db": 41.213016510009766,
+        "secret_ssim": 0.985495924949646,
+        "secret_similarity_pct": 99.49966430664062
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0164031982421875,
+        "cover_ssim": 0.0002294778823852539,
+        "cover_similarity_pct": -0.00307464599609375,
+        "secret_psnr_db": 0.06998825073242188,
+        "secret_ssim": 2.205371856689453e-05,
+        "secret_similarity_pct": -0.0006561279296875
+      }
+    },
+    {
+      "index": 83,
+      "id": "dev-0083",
+      "cover": "val2017/000000179285.jpg",
+      "secret": "val2017/000000521282.jpg",
+      "cover_sha256": "8a073b6b3ff9aed193eb22d87c9bcb92faa6ab92c202136c0350db803ff3b2d9",
+      "secret_sha256": "fe479634b34b4c28fa13a52ba300e05e0ff22a4129edfb3b846d4226dd1f0ebb",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.695404052734375,
+        "cover_ssim": 0.972629964351654,
+        "cover_similarity_pct": 99.19795227050781,
+        "secret_psnr_db": 39.862525939941406,
+        "secret_ssim": 0.9649208784103394,
+        "secret_similarity_pct": 99.3865966796875
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.72320556640625,
+        "cover_ssim": 0.9727829694747925,
+        "cover_similarity_pct": 99.1998291015625,
+        "secret_psnr_db": 39.911521911621094,
+        "secret_ssim": 0.9644151926040649,
+        "secret_similarity_pct": 99.38211059570312
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.027801513671875,
+        "cover_ssim": 0.00015300512313842773,
+        "cover_similarity_pct": 0.0018768310546875,
+        "secret_psnr_db": 0.0489959716796875,
+        "secret_ssim": -0.0005056858062744141,
+        "secret_similarity_pct": -0.004486083984375
+      }
+    },
+    {
+      "index": 84,
+      "id": "dev-0084",
+      "cover": "val2017/000000100723.jpg",
+      "secret": "val2017/000000157138.jpg",
+      "cover_sha256": "2d62e673b3735d226468d7d6b166acbc3da5e8d2a3bcdaebfad3cceb5e6ef92c",
+      "secret_sha256": "486a8680a7925dc622165b9b5769ba64a42450e5d54445911a0b6bdc8f7f6e26",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.15231704711914,
+        "cover_ssim": 0.9832934737205505,
+        "cover_similarity_pct": 99.08576965332031,
+        "secret_psnr_db": 37.38185119628906,
+        "secret_ssim": 0.9562050700187683,
+        "secret_similarity_pct": 99.26620483398438
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.187522888183594,
+        "cover_ssim": 0.9833976030349731,
+        "cover_similarity_pct": 99.08895874023438,
+        "secret_psnr_db": 37.42729187011719,
+        "secret_ssim": 0.9559768438339233,
+        "secret_similarity_pct": 99.26470184326172
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.035205841064453125,
+        "cover_ssim": 0.00010412931442260742,
+        "cover_similarity_pct": 0.0031890869140625,
+        "secret_psnr_db": 0.045440673828125,
+        "secret_ssim": -0.0002282261848449707,
+        "secret_similarity_pct": -0.00150299072265625
+      }
+    },
+    {
+      "index": 85,
+      "id": "dev-0085",
+      "cover": "val2017/000000304365.jpg",
+      "secret": "val2017/000000064359.jpg",
+      "cover_sha256": "4724eb96f5dc146879b69156b3d70ff7b1e0c656ecb4939652b0fea0462532b7",
+      "secret_sha256": "c28e9336f674dacb5d8412874153342ee66f8a5863bf1952ee476083147949c4",
+      "baseline_metrics": {
+        "cover_psnr_db": 38.247642517089844,
+        "cover_ssim": 0.9617862701416016,
+        "cover_similarity_pct": 99.17239379882812,
+        "secret_psnr_db": 41.372032165527344,
+        "secret_ssim": 0.9801346659660339,
+        "secret_similarity_pct": 99.43368530273438
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 38.2857551574707,
+        "cover_ssim": 0.9620876312255859,
+        "cover_similarity_pct": 99.17522430419922,
+        "secret_psnr_db": 41.32011032104492,
+        "secret_ssim": 0.9797660708427429,
+        "secret_similarity_pct": 99.42802429199219
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.038112640380859375,
+        "cover_ssim": 0.000301361083984375,
+        "cover_similarity_pct": 0.00283050537109375,
+        "secret_psnr_db": -0.051921844482421875,
+        "secret_ssim": -0.0003685951232910156,
+        "secret_similarity_pct": -0.0056610107421875
+      }
+    },
+    {
+      "index": 86,
+      "id": "dev-0086",
+      "cover": "val2017/000000194716.jpg",
+      "secret": "val2017/000000467176.jpg",
+      "cover_sha256": "ae46cdf8b90226a30b562bd2064cedfb429d33382432fb7ec70891ede720cb50",
+      "secret_sha256": "533fd5d3b52305fee0f1e96b258b41de137ec1de465ee5c0c3afaa599c6c8567",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.86742401123047,
+        "cover_ssim": 0.9857229590415955,
+        "cover_similarity_pct": 99.43282318115234,
+        "secret_psnr_db": 39.093475341796875,
+        "secret_ssim": 0.9839425086975098,
+        "secret_similarity_pct": 99.52347564697266
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.879024505615234,
+        "cover_ssim": 0.9857449531555176,
+        "cover_similarity_pct": 99.43179321289062,
+        "secret_psnr_db": 39.19868850708008,
+        "secret_ssim": 0.9839021563529968,
+        "secret_similarity_pct": 99.52165222167969
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.011600494384765625,
+        "cover_ssim": 2.199411392211914e-05,
+        "cover_similarity_pct": -0.00102996826171875,
+        "secret_psnr_db": 0.10521316528320312,
+        "secret_ssim": -4.035234451293945e-05,
+        "secret_similarity_pct": -0.00182342529296875
+      }
+    },
+    {
+      "index": 87,
+      "id": "dev-0087",
+      "cover": "val2017/000000383386.jpg",
+      "secret": "DIV2K_valid_HR/0838.png",
+      "cover_sha256": "71947182fcc14f49b6bbd46b1b40c69f9240479de53c02a0633d27ee4de4609d",
+      "secret_sha256": "01e42bb5efb35d97a9931fc421f793e3c12d0922a3df288bbfd148b6a82a145b",
+      "baseline_metrics": {
+        "cover_psnr_db": 41.734039306640625,
+        "cover_ssim": 0.9856470823287964,
+        "cover_similarity_pct": 99.4005126953125,
+        "secret_psnr_db": 45.59259796142578,
+        "secret_ssim": 0.99068284034729,
+        "secret_similarity_pct": 99.612060546875
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 41.7493782043457,
+        "cover_ssim": 0.9857058525085449,
+        "cover_similarity_pct": 99.40030670166016,
+        "secret_psnr_db": 45.539695739746094,
+        "secret_ssim": 0.9904918074607849,
+        "secret_similarity_pct": 99.60966491699219
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.015338897705078125,
+        "cover_ssim": 5.8770179748535156e-05,
+        "cover_similarity_pct": -0.00020599365234375,
+        "secret_psnr_db": -0.0529022216796875,
+        "secret_ssim": -0.00019103288650512695,
+        "secret_similarity_pct": -0.0023956298828125
+      }
+    },
+    {
+      "index": 88,
+      "id": "dev-0088",
+      "cover": "val2017/000000560011.jpg",
+      "secret": "val2017/000000203294.jpg",
+      "cover_sha256": "811b554184a3e1b1d2515f912c3dc972f81bdbcceb607629bef3a21fc5e8db38",
+      "secret_sha256": "c5d43fb94e11fae1e3bf97b08bebb4a96d7735bb92a6bab8bf8618000208ef9c",
+      "baseline_metrics": {
+        "cover_psnr_db": 41.232906341552734,
+        "cover_ssim": 0.94645094871521,
+        "cover_similarity_pct": 99.40150451660156,
+        "secret_psnr_db": 42.324684143066406,
+        "secret_ssim": 0.9907373785972595,
+        "secret_similarity_pct": 99.51895904541016
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 41.271705627441406,
+        "cover_ssim": 0.9468780755996704,
+        "cover_similarity_pct": 99.40382385253906,
+        "secret_psnr_db": 42.31801986694336,
+        "secret_ssim": 0.9905643463134766,
+        "secret_similarity_pct": 99.51475524902344
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.038799285888671875,
+        "cover_ssim": 0.0004271268844604492,
+        "cover_similarity_pct": 0.0023193359375,
+        "secret_psnr_db": -0.006664276123046875,
+        "secret_ssim": -0.00017303228378295898,
+        "secret_similarity_pct": -0.00420379638671875
+      }
+    },
+    {
+      "index": 89,
+      "id": "dev-0089",
+      "cover": "val2017/000000482970.jpg",
+      "secret": "val2017/000000148739.jpg",
+      "cover_sha256": "eda4bf21322341bf5baf6a603085deafd1f32d8aea4d844223cdaaaad18eb416",
+      "secret_sha256": "70adfe4defc746c3309c9ea076c65207924fc295b8cf4772b445d2ec96486a85",
+      "baseline_metrics": {
+        "cover_psnr_db": 35.451622009277344,
+        "cover_ssim": 0.955817699432373,
+        "cover_similarity_pct": 98.92662811279297,
+        "secret_psnr_db": 31.23659324645996,
+        "secret_ssim": 0.9267250299453735,
+        "secret_similarity_pct": 98.4865493774414
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 35.48621368408203,
+        "cover_ssim": 0.9562216997146606,
+        "cover_similarity_pct": 98.93006134033203,
+        "secret_psnr_db": 31.4345760345459,
+        "secret_ssim": 0.9286215305328369,
+        "secret_similarity_pct": 98.53914642333984
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0345916748046875,
+        "cover_ssim": 0.00040400028228759766,
+        "cover_similarity_pct": 0.0034332275390625,
+        "secret_psnr_db": 0.1979827880859375,
+        "secret_ssim": 0.001896500587463379,
+        "secret_similarity_pct": 0.0525970458984375
+      }
+    },
+    {
+      "index": 90,
+      "id": "dev-0090",
+      "cover": "val2017/000000484296.jpg",
+      "secret": "val2017/000000423617.jpg",
+      "cover_sha256": "e721612148abd0e23e645f818c987e020fa5c9be3ec4b07974d366eea463d9bd",
+      "secret_sha256": "ce5546bb400da57646e0de544763fc44c925fc5495e764083f2bcfebba5c76f0",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.36957931518555,
+        "cover_ssim": 0.9913111925125122,
+        "cover_similarity_pct": 99.0279541015625,
+        "secret_psnr_db": 36.45995330810547,
+        "secret_ssim": 0.971653163433075,
+        "secret_similarity_pct": 99.12237548828125
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.40621566772461,
+        "cover_ssim": 0.9913741946220398,
+        "cover_similarity_pct": 99.03135681152344,
+        "secret_psnr_db": 36.528099060058594,
+        "secret_ssim": 0.9718551635742188,
+        "secret_similarity_pct": 99.12307739257812
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0366363525390625,
+        "cover_ssim": 6.300210952758789e-05,
+        "cover_similarity_pct": 0.0034027099609375,
+        "secret_psnr_db": 0.068145751953125,
+        "secret_ssim": 0.00020200014114379883,
+        "secret_similarity_pct": 0.000701904296875
+      }
+    },
+    {
+      "index": 91,
+      "id": "dev-0091",
+      "cover": "val2017/000000310072.jpg",
+      "secret": "val2017/000000568147.jpg",
+      "cover_sha256": "0404d2aa95236840dcc75a43f8cad1f4b03d382c72e86aaff751cb142f18a8e7",
+      "secret_sha256": "a43a30c8c1fa592eb76b7205a2764642240f2b29c76d06543a9197bdc8b95a8a",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.800296783447266,
+        "cover_ssim": 0.9738759398460388,
+        "cover_similarity_pct": 99.09618377685547,
+        "secret_psnr_db": 35.514549255371094,
+        "secret_ssim": 0.955438494682312,
+        "secret_similarity_pct": 99.08648681640625
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.81748962402344,
+        "cover_ssim": 0.9739787578582764,
+        "cover_similarity_pct": 99.09347534179688,
+        "secret_psnr_db": 37.055747985839844,
+        "secret_ssim": 0.9658862948417664,
+        "secret_similarity_pct": 99.18226623535156
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.017192840576171875,
+        "cover_ssim": 0.00010281801223754883,
+        "cover_similarity_pct": -0.00270843505859375,
+        "secret_psnr_db": 1.54119873046875,
+        "secret_ssim": 0.010447800159454346,
+        "secret_similarity_pct": 0.0957794189453125
+      }
+    },
+    {
+      "index": 92,
+      "id": "dev-0092",
+      "cover": "val2017/000000019742.jpg",
+      "secret": "val2017/000000402519.jpg",
+      "cover_sha256": "6ccc37eeba5118114222f8de61228e95cf6c28fb631c9e759fcdcd450061337a",
+      "secret_sha256": "67a26f7ec2001238cb1819aff95422ba7b57c6973cef05f60faab97d7c308e2e",
+      "baseline_metrics": {
+        "cover_psnr_db": 41.628334045410156,
+        "cover_ssim": 0.9737472534179688,
+        "cover_similarity_pct": 99.43919372558594,
+        "secret_psnr_db": 39.258270263671875,
+        "secret_ssim": 0.9835731387138367,
+        "secret_similarity_pct": 99.46813201904297
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 41.63243103027344,
+        "cover_ssim": 0.9737347364425659,
+        "cover_similarity_pct": 99.43705749511719,
+        "secret_psnr_db": 39.39994430541992,
+        "secret_ssim": 0.9838657379150391,
+        "secret_similarity_pct": 99.47095489501953
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.00409698486328125,
+        "cover_ssim": -1.2516975402832031e-05,
+        "cover_similarity_pct": -0.00213623046875,
+        "secret_psnr_db": 0.14167404174804688,
+        "secret_ssim": 0.0002925992012023926,
+        "secret_similarity_pct": 0.0028228759765625
+      }
+    },
+    {
+      "index": 93,
+      "id": "dev-0093",
+      "cover": "val2017/000000170670.jpg",
+      "secret": "val2017/000000340272.jpg",
+      "cover_sha256": "e4dd8fbb9f4387c124505a280afc9d67595185e527a8d55d2b7431ae0265888a",
+      "secret_sha256": "b651614593c6fc2e20d37d8854ff9f1ca58345de7be7189d1ce3bc359da9c18d",
+      "baseline_metrics": {
+        "cover_psnr_db": 34.007083892822266,
+        "cover_ssim": 0.9605637788772583,
+        "cover_similarity_pct": 98.58906555175781,
+        "secret_psnr_db": 33.337730407714844,
+        "secret_ssim": 0.9628304243087769,
+        "secret_similarity_pct": 98.63439178466797
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 34.05475997924805,
+        "cover_ssim": 0.9609548449516296,
+        "cover_similarity_pct": 98.59690856933594,
+        "secret_psnr_db": 33.368839263916016,
+        "secret_ssim": 0.9625908732414246,
+        "secret_similarity_pct": 98.63235473632812
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.04767608642578125,
+        "cover_ssim": 0.0003910660743713379,
+        "cover_similarity_pct": 0.007843017578125,
+        "secret_psnr_db": 0.031108856201171875,
+        "secret_ssim": -0.00023955106735229492,
+        "secret_similarity_pct": -0.00203704833984375
+      }
+    },
+    {
+      "index": 94,
+      "id": "dev-0094",
+      "cover": "val2017/000000026926.jpg",
+      "secret": "val2017/000000058350.jpg",
+      "cover_sha256": "7126855b6fe8548a6b9da18d8424f803c0eeb37deb3f5764f95f4d60d1915b37",
+      "secret_sha256": "60cc4d293f157edef6ea4d229cabdfe76785c0c1a54b063cbf0a633a1deda52d",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.83662414550781,
+        "cover_ssim": 0.9635813236236572,
+        "cover_similarity_pct": 99.18214416503906,
+        "secret_psnr_db": 36.09910202026367,
+        "secret_ssim": 0.9498774409294128,
+        "secret_similarity_pct": 99.261474609375
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.8663330078125,
+        "cover_ssim": 0.9638296961784363,
+        "cover_similarity_pct": 99.18336486816406,
+        "secret_psnr_db": 36.19269561767578,
+        "secret_ssim": 0.9509528875350952,
+        "secret_similarity_pct": 99.26670837402344
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.0297088623046875,
+        "cover_ssim": 0.00024837255477905273,
+        "cover_similarity_pct": 0.001220703125,
+        "secret_psnr_db": 0.09359359741210938,
+        "secret_ssim": 0.001075446605682373,
+        "secret_similarity_pct": 0.0052337646484375
+      }
+    },
+    {
+      "index": 95,
+      "id": "dev-0095",
+      "cover": "val2017/000000325838.jpg",
+      "secret": "val2017/000000363207.jpg",
+      "cover_sha256": "2753bdbf9c6240d1b6a640aa79276132fb3e52a20df86091813377df38cb788b",
+      "secret_sha256": "b07a2456f7eea2f05eb2276a00b174a4fe5863936774f501b2e76308b10bb16e",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.402217864990234,
+        "cover_ssim": 0.9645398855209351,
+        "cover_similarity_pct": 99.33404541015625,
+        "secret_psnr_db": 36.904808044433594,
+        "secret_ssim": 0.976377010345459,
+        "secret_similarity_pct": 99.26116943359375
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.424137115478516,
+        "cover_ssim": 0.964721143245697,
+        "cover_similarity_pct": 99.33418273925781,
+        "secret_psnr_db": 37.387298583984375,
+        "secret_ssim": 0.9773184657096863,
+        "secret_similarity_pct": 99.27871704101562
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.02191925048828125,
+        "cover_ssim": 0.0001812577247619629,
+        "cover_similarity_pct": 0.0001373291015625,
+        "secret_psnr_db": 0.48249053955078125,
+        "secret_ssim": 0.0009414553642272949,
+        "secret_similarity_pct": 0.017547607421875
+      }
+    },
+    {
+      "index": 96,
+      "id": "dev-0096",
+      "cover": "val2017/000000013177.jpg",
+      "secret": "val2017/000000187236.jpg",
+      "cover_sha256": "f93626195530f46ed849091160f8cccce1a255ca886fd5945f5719adc12dc789",
+      "secret_sha256": "543862a94b3b567ad38d1ee56271634e07849bb42609d7d5adfd4b3d23c9acb2",
+      "baseline_metrics": {
+        "cover_psnr_db": 40.220054626464844,
+        "cover_ssim": 0.9889413714408875,
+        "cover_similarity_pct": 99.33301544189453,
+        "secret_psnr_db": 38.063636779785156,
+        "secret_ssim": 0.9565896987915039,
+        "secret_similarity_pct": 99.3686294555664
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 40.20925521850586,
+        "cover_ssim": 0.988815188407898,
+        "cover_similarity_pct": 99.32984161376953,
+        "secret_psnr_db": 38.43388366699219,
+        "secret_ssim": 0.9575502276420593,
+        "secret_similarity_pct": 99.38614654541016
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": -0.010799407958984375,
+        "cover_ssim": -0.00012618303298950195,
+        "cover_similarity_pct": -0.003173828125,
+        "secret_psnr_db": 0.37024688720703125,
+        "secret_ssim": 0.0009605288505554199,
+        "secret_similarity_pct": 0.01751708984375
+      }
+    },
+    {
+      "index": 97,
+      "id": "dev-0097",
+      "cover": "val2017/000000253742.jpg",
+      "secret": "val2017/000000008021.jpg",
+      "cover_sha256": "71a335763bb3a4b2af2cd038897470ec08ebdba38745e725b5a4f3eeca009bd3",
+      "secret_sha256": "235537407867a7b894e78b3aecb55b33b14b64cbb23ca376a00d34c62a1a63a6",
+      "baseline_metrics": {
+        "cover_psnr_db": 37.65589904785156,
+        "cover_ssim": 0.9789687395095825,
+        "cover_similarity_pct": 99.09794616699219,
+        "secret_psnr_db": 35.65134048461914,
+        "secret_ssim": 0.9512616991996765,
+        "secret_similarity_pct": 99.1810073852539
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 37.67357635498047,
+        "cover_ssim": 0.9789740443229675,
+        "cover_similarity_pct": 99.09832000732422,
+        "secret_psnr_db": 36.048789978027344,
+        "secret_ssim": 0.9521201848983765,
+        "secret_similarity_pct": 99.1956558227539
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.01767730712890625,
+        "cover_ssim": 5.304813385009766e-06,
+        "cover_similarity_pct": 0.00037384033203125,
+        "secret_psnr_db": 0.3974494934082031,
+        "secret_ssim": 0.0008584856986999512,
+        "secret_similarity_pct": 0.0146484375
+      }
+    },
+    {
+      "index": 98,
+      "id": "dev-0098",
+      "cover": "val2017/000000509656.jpg",
+      "secret": "val2017/000000281032.jpg",
+      "cover_sha256": "35999246ea14f79b4f19825a38b428955f3456a389c3a0aa2301067cc9141d40",
+      "secret_sha256": "591e9a591856627d34bea359dc5f937dfbc572a803d90ff94ab383d8d0a59bb8",
+      "baseline_metrics": {
+        "cover_psnr_db": 35.71235656738281,
+        "cover_ssim": 0.9830942153930664,
+        "cover_similarity_pct": 98.77311706542969,
+        "secret_psnr_db": 39.63711166381836,
+        "secret_ssim": 0.9589921832084656,
+        "secret_similarity_pct": 99.24828338623047
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 35.748085021972656,
+        "cover_ssim": 0.9832247495651245,
+        "cover_similarity_pct": 98.7778091430664,
+        "secret_psnr_db": 39.62033462524414,
+        "secret_ssim": 0.9581601023674011,
+        "secret_similarity_pct": 99.24307250976562
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.03572845458984375,
+        "cover_ssim": 0.00013053417205810547,
+        "cover_similarity_pct": 0.00469207763671875,
+        "secret_psnr_db": -0.01677703857421875,
+        "secret_ssim": -0.0008320808410644531,
+        "secret_similarity_pct": -0.00521087646484375
+      }
+    },
+    {
+      "index": 99,
+      "id": "dev-0099",
+      "cover": "val2017/000000005529.jpg",
+      "secret": "val2017/000000176847.jpg",
+      "cover_sha256": "e06b55bf935e76ac31cd8b8a56a3978e2f552d7c967ff8a0b8d0ae3b3445db0e",
+      "secret_sha256": "513f5d2862f8ca1bfcf268a523e139d2bb1fb9ae6a4817671534f0666c464358",
+      "baseline_metrics": {
+        "cover_psnr_db": 34.379905700683594,
+        "cover_ssim": 0.9116019010543823,
+        "cover_similarity_pct": 98.58846282958984,
+        "secret_psnr_db": 33.12004852294922,
+        "secret_ssim": 0.9748613238334656,
+        "secret_similarity_pct": 98.51610565185547
+      },
+      "candidate_metrics": {
+        "cover_psnr_db": 34.42483139038086,
+        "cover_ssim": 0.9125678539276123,
+        "cover_similarity_pct": 98.594482421875,
+        "secret_psnr_db": 33.133052825927734,
+        "secret_ssim": 0.9748386144638062,
+        "secret_similarity_pct": 98.51502990722656
+      },
+      "delta_candidate_minus_baseline": {
+        "cover_psnr_db": 0.044925689697265625,
+        "cover_ssim": 0.0009659528732299805,
+        "cover_similarity_pct": 0.00601959228515625,
+        "secret_psnr_db": 0.013004302978515625,
+        "secret_ssim": -2.2709369659423828e-05,
+        "secret_similarity_pct": -0.00107574462890625
+      }
+    }
+  ]
+}

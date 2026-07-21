@@ -3,15 +3,25 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 from pathlib import Path
 
 import torch
 
 from stego.config import ExperimentConfig
 from stego.models import StegoGAN
-from stego.training import Trainer
+from stego.training import Trainer, seed_everything
 
 SUBNET_NAMES = {"r": "rho", "y": "eta", "f": "phi"}
+EXPECTED_SOURCE_SHA256 = "d89a83e0e549e9bddde301d631b8614cc724c8d9f11feaf2221791aa02c122a7"
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def main() -> int:
@@ -27,6 +37,14 @@ def main() -> int:
     if config.model.invertible_blocks != 16 or config.model.coupling_channels != 32:
         raise ValueError("official HiNet weights require 16 blocks and 32 growth channels")
 
+    source_sha256 = _sha256(args.source)
+    if source_sha256 != EXPECTED_SOURCE_SHA256:
+        raise ValueError(
+            "source checkpoint SHA-256 does not match the disclosed official HiNet file: "
+            f"{source_sha256}"
+        )
+
+    seed_everything(config.data.seed)
     payload = torch.load(args.source, map_location="cpu", weights_only=True)
     source = payload["net"]
     model = StegoGAN(config.model)

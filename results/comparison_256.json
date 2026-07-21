@@ -1,11 +1,22 @@
 {
-  "schema_version": 1,
-  "description": "Same-split 256x256 full-image steganography comparison",
+  "schema_version": 2,
+  "description": "Historical same-cohort 256x256 architecture and real-JPEG comparison (not fresh final evidence)",
+  "chart_title": "Historical architecture/JPEG comparison (not fresh)",
   "evaluation_images": 200,
+  "evaluation_precision": "float32 tensors (autocast disabled; legacy TF32 setting unrecorded)",
+  "cohort": {
+    "name": "seed-2026 historical validation split",
+    "fresh_holdout": false,
+    "purpose": "legacy architecture comparison and real-JPEG stress test",
+    "warning": "This cohort comes from the 2,000-image pool used during adaptation; use results/paired_final.json for fresh clean comparison."
+  },
+  "selected_model_name": "Wavelet-gated INN",
+  "upstream_model_name": "Untouched HiNet",
   "jpeg_codec": "Pillow/libjpeg, 4:2:0 subsampling",
   "models": [
     {
       "name": "CBAM U-Net",
+      "role": "legacy architecture baseline",
       "checkpoint_stage": "3,900 steps with real-QF-50 fine-tuning",
       "cover_psnr_db": 38.60335205078125,
       "cover_ssim": 0.9737041771411896,
@@ -15,14 +26,27 @@
       "secret_q50_ssim": 0.2668129652738571
     },
     {
+      "name": "Untouched HiNet",
+      "role": "upstream",
+      "checkpoint_stage": "disclosed upstream warm start; no local adaptation",
+      "cover_psnr_db": 38.58360950469971,
+      "cover_ssim": 0.9632034087181092,
+      "secret_clean_psnr_db": 36.582264003753664,
+      "secret_clean_ssim": 0.9638305777311325,
+      "secret_q50_psnr_db": 11.205367164611816,
+      "secret_q50_ssim": 0.009348870038520545
+    },
+    {
       "name": "Wavelet-gated INN",
-      "checkpoint_stage": "HiNet warm start plus 100 gates-only steps",
-      "cover_psnr_db": 38.55343322753906,
-      "cover_ssim": 0.9631423836946488,
-      "secret_clean_psnr_db": 36.34711683273316,
-      "secret_clean_ssim": 0.960159285068512,
-      "secret_q50_psnr_db": 11.226514530181884,
-      "secret_q50_ssim": 0.009285782638471574
+      "role": "selected",
+      "selected": true,
+      "checkpoint_stage": "HiNet warm start plus 100 gates-only steps (123,024 trainable adapter parameters)",
+      "cover_psnr_db": 38.60369117736816,
+      "cover_ssim": 0.9634666192531586,
+      "secret_clean_psnr_db": 36.95526380538941,
+      "secret_clean_ssim": 0.9657509595155715,
+      "secret_q50_psnr_db": 11.22684823989868,
+      "secret_q50_ssim": 0.009313680117484182
     }
   ]
 }

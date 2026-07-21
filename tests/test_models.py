@@ -4,7 +4,12 @@ import torch
 from torch import nn
 
 from stego.config import ModelConfig
-from stego.invertible import CouplingAttention, HaarWavelet, InvertibleFlow, WaveletBandGate
+from stego.invertible import (
+    CouplingAttention,
+    HaarWavelet,
+    InvertibleFlow,
+    WaveletBandGate,
+)
 from stego.models import CBAM, StegoGAN
 
 torch.set_num_threads(1)
@@ -97,6 +102,22 @@ class ModelTests(unittest.TestCase):
         outputs = model(cover, secret)
         self.assertEqual(outputs["stego"].shape, cover.shape)
         self.assertEqual(outputs["revealed_secret"].shape, secret.shape)
+
+    def test_deterministic_latent_is_batch_position_invariant(self) -> None:
+        config = ModelConfig(
+            architecture="invertible",
+            base_channels=8,
+            payload_bits=None,
+            secret_size=32,
+            invertible_blocks=1,
+            coupling_channels=8,
+        )
+        model = StegoGAN(config).eval()
+        image = torch.rand(1, 3, 32, 32) * 2 - 1
+        alone = model.reveal(image)
+        batch = model.reveal(image.expand(2, -1, -1, -1))
+        self.assertTrue(torch.equal(alone[0], batch[0]))
+        self.assertTrue(torch.equal(alone[0], batch[1]))
 
 
 if __name__ == "__main__":

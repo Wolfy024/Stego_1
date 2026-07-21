@@ -1,9 +1,14 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
+  "selected_model_name": "Wavelet-gated INN",
+  "upstream_model_name": "Untouched HiNet",
   "checkpoint": "runs/invertible_gates_only/latest.pt",
+  "evaluation_precision": "float32 tensors (autocast disabled; legacy TF32 setting unrecorded)",
   "model": {
+    "name": "Wavelet-gated INN",
     "architecture": "16-block wavelet-gated invertible network",
     "parameters": 4865232,
+    "inference_parameters": 4173264,
     "locally_trained_gate_parameters": 123024,
     "local_gate_steps": 100,
     "warm_start": {
@@ -16,15 +21,9 @@
     "data/coco/val2017",
     "data/div2k/DIV2K_valid_HR"
   ],
-  "payload_type": "RGB secret image",
-  "cover_size_px": [
-    256,
-    256
-  ],
-  "secret_size_px": [
-    256,
-    256
-  ],
+  "payload_type": "full 256x256 RGB secret image",
+  "cover_size_px": [256, 256],
+  "secret_size_px": [256, 256],
   "dataset_images_discovered": 5100,
   "dataset_images_sampled": 2000,
   "train_images": 1800,
@@ -39,29 +38,77 @@
   },
   "split_seed": 2026,
   "train_fraction": 0.9,
+  "historical_cohort": {
+    "pair_count": 200,
+    "fresh_holdout": false,
+    "purpose": "legacy architecture comparison and real-JPEG stress test",
+    "warning": "This cohort comes from the seeded 2,000-image pool used during adaptation; do not describe it as fresh final evidence."
+  },
   "jpeg_codec": "Pillow/libjpeg, 4:2:0 subsampling",
   "metrics": {
-    "cover_psnr_db": 38.55343322753906,
-    "cover_similarity_pct": 99.15146408081054,
-    "cover_ssim": 0.9631423836946488,
-    "jpeg_q50_psnr_db": 11.226514530181884,
-    "jpeg_q50_similarity_pct": 75.86823101043701,
-    "jpeg_q50_ssim": 0.009285782638471574,
-    "jpeg_q60_psnr_db": 11.225206155776977,
-    "jpeg_q60_similarity_pct": 75.8826985168457,
-    "jpeg_q60_ssim": 0.009497961786109954,
-    "jpeg_q70_psnr_db": 11.223971920013428,
-    "jpeg_q70_similarity_pct": 75.88198348999023,
-    "jpeg_q70_ssim": 0.009635806505102665,
-    "jpeg_q80_psnr_db": 11.22962191581726,
-    "jpeg_q80_similarity_pct": 75.90973262786865,
-    "jpeg_q80_ssim": 0.009809549670899287,
-    "jpeg_q90_psnr_db": 11.295432605743407,
-    "jpeg_q90_similarity_pct": 76.102816696167,
-    "jpeg_q90_ssim": 0.012273112459806725,
-    "secret_psnr_db": 36.34711683273316,
-    "secret_similarity_pct": 98.98303359985351,
-    "secret_ssim": 0.960159285068512,
+    "cover_psnr_db": 38.60369117736816,
+    "cover_similarity_pct": 99.1581435394287,
+    "cover_ssim": 0.9634666192531586,
+    "jpeg_q50_psnr_db": 11.22684823989868,
+    "jpeg_q50_similarity_pct": 75.86875587463379,
+    "jpeg_q50_ssim": 0.009313680117484182,
+    "jpeg_q60_psnr_db": 11.226712455749512,
+    "jpeg_q60_similarity_pct": 75.88642803192138,
+    "jpeg_q60_ssim": 0.009539959984831512,
+    "jpeg_q70_psnr_db": 11.226044692993163,
+    "jpeg_q70_similarity_pct": 75.8879148864746,
+    "jpeg_q70_ssim": 0.009793870884459465,
+    "jpeg_q80_psnr_db": 11.231195373535156,
+    "jpeg_q80_similarity_pct": 75.91467258453369,
+    "jpeg_q80_ssim": 0.009839105624705554,
+    "jpeg_q90_psnr_db": 11.296750965118408,
+    "jpeg_q90_similarity_pct": 76.10655754089356,
+    "jpeg_q90_ssim": 0.01230738363985438,
+    "secret_psnr_db": 36.95526380538941,
+    "secret_similarity_pct": 99.0926643371582,
+    "secret_ssim": 0.9657509595155715,
     "evaluated_images": 200.0
+  },
+  "fresh_final_paired_summary": {
+    "artifact": "results/paired_final.json",
+    "artifact_sha256": "c5c09b914452089607b005d50d043578e89664f5e72bab61b665c8ea80f56df0",
+    "manifest": "results/eval_manifests/final.json",
+    "manifest_file_sha256": "8bab00ddef49cde55a6366a9ebb13849a8e6d76e0d83ac6a85d65db380d97871",
+    "manifest_declared_sha256": "107196dba99028cb552fe89826292896e4327751c25b144e033b9909c5a4d0c3",
+    "frozen_before_final_evaluation": true,
+    "pair_count": 200,
+    "unique_image_count": 400,
+    "excluded_historical_pool_images": 2000,
+    "evaluation_precision": "float32 (autocast disabled, TF32 disabled)",
+    "bootstrap": {
+      "unit": "manifest cover/secret pair",
+      "samples": 10000,
+      "seed": 2026,
+      "method": "paired percentile bootstrap"
+    },
+    "upstream_mean": {
+      "cover_psnr_db": 38.74287191390991,
+      "cover_ssim": 0.9657064688205719,
+      "secret_psnr_db": 36.72578862190247,
+      "secret_ssim": 0.9645682895183563
+    },
+    "selected_mean": {
+      "cover_psnr_db": 38.761932907104494,
+      "cover_ssim": 0.9659366106987,
+      "secret_psnr_db": 37.115562524795536,
+      "secret_ssim": 0.9662463080883026
+    },
+    "selected_minus_upstream": {
+      "cover_psnr_db": {
+        "mean": 0.01906099319458008,
+        "bootstrap_95_ci": [0.014912936687469482, 0.023129054069519043]
+      },
+      "secret_psnr_db": {
+        "mean": 0.3897739028930664,
+        "bootstrap_95_ci": [0.2909911229610443, 0.49806701612472526],
+        "improved_pairs": 153,
+        "percentage_improved": 76.5
+      }
+    }
   }
 }

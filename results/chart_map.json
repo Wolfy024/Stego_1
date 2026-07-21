@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "charts": [
     {
       "artifact": "assets/jpeg_robustness.png",
@@ -7,21 +7,36 @@
       "fields": [
         "metrics.secret_psnr_db",
         "metrics.secret_ssim",
-        "metrics.jpeg_q*"
+        "metrics.jpeg_q{50,60,70,80,90}_{psnr_db,ssim}"
       ],
-      "transformation": "Direct ordered plot; clean is displayed as QF=100",
-      "grain": "Mean over 200 held-out cover/secret pairs"
+      "transformation": "Direct ordered plot; clean uses a separate final categorical position",
+      "grain": "One aggregate mean per codec condition over held-out cover/secret pairs"
     },
     {
       "artifact": "assets/architecture_comparison.png",
       "source": "results/comparison_256.json",
       "fields": [
-        "cover_psnr_db",
-        "secret_clean_psnr_db",
-        "secret_q50_psnr_db"
+        "models[].name",
+        "models[].cover_psnr_db",
+        "models[].secret_clean_psnr_db",
+        "models[].secret_q50_psnr_db",
+        "selected_model_name",
+        "upstream_model_name"
       ],
-      "transformation": "Grouped bars; no normalization",
-      "grain": "One bar per model and evaluation condition"
+      "transformation": "Grouped bars; title deltas are selected minus upstream/reference",
+      "grain": "One aggregate mean per model and evaluation condition"
+    },
+    {
+      "artifact": "assets/paired_secret_psnr_delta.png",
+      "source": "results/paired_final.json",
+      "fields": [
+        "pairs[].id",
+        "pairs[].delta_candidate_minus_baseline.secret_psnr_db",
+        "secret_psnr_delta_db.mean",
+        "secret_psnr_delta_db.bootstrap_95_ci.{lower,upper}"
+      ],
+      "transformation": "Manifest-order pair deltas with zero reference, observed mean, and seeded paired-bootstrap 95% confidence interval",
+      "grain": "One delta per explicit held-out cover/secret pair"
     }
   ]
 }

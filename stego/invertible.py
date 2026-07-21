@@ -11,6 +11,8 @@ import torch
 from torch import Tensor, nn
 from torch.nn import functional as F
 
+from stego.router import EnergyPreservingHaarBandRouter
+
 
 class HaarWavelet(nn.Module):
     """Exactly invertible 2D Haar transform implemented without parameters."""
@@ -106,7 +108,14 @@ class WaveletBandGate(nn.Module):
 class AttentiveDenseSubnet(nn.Module):
     """Dense coupling function with CBAM and explicit wavelet-band gating."""
 
-    def __init__(self, input_channels: int, output_channels: int, growth_channels: int) -> None:
+    def __init__(
+        self,
+        input_channels: int,
+        output_channels: int,
+        growth_channels: int,
+        *,
+        orthogonal_router: bool = False,
+    ) -> None:
         super().__init__()
         self.layers = nn.ModuleList()
         for index in range(4):
@@ -117,6 +126,9 @@ class AttentiveDenseSubnet(nn.Module):
         self.attention = CouplingAttention(dense_channels)
         self.output = nn.Conv2d(dense_channels, output_channels, 3, padding=1)
         self.band_gate = WaveletBandGate(output_channels)
+        self.router: nn.Module = (
+            EnergyPreservingHaarBandRouter() if orthogonal_router else nn.Identity()
+        )
         self.activation = nn.LeakyReLU(0.01, inplace=True)
         nn.init.zeros_(self.output.weight)
         nn.init.zeros_(self.output.bias)
@@ -126,19 +138,33 @@ class AttentiveDenseSubnet(nn.Module):
         for layer in self.layers:
             features.append(self.activation(layer(torch.cat(features, dim=1))))
         dense = self.attention(torch.cat(features, dim=1))
-        return self.band_gate(self.output(dense))
+        return self.router(self.band_gate(self.output(dense)))
 
 
 class InvertibleCouplingBlock(nn.Module):
     """Affine-additive coupling block with an analytic inverse."""
 
-    def __init__(self, channels: int = 12, growth_channels: int = 32, clamp: float = 2.0) -> None:
+    def __init__(
+        self,
+        channels: int = 12,
+        growth_channels: int = 32,
+        clamp: float = 2.0,
+        *,
+        orthogonal_router: bool = False,
+    ) -> None:
         super().__init__()
         self.channels = channels
         self.clamp = clamp
-        self.phi = AttentiveDenseSubnet(channels, channels, growth_channels)
-        self.rho = AttentiveDenseSubnet(channels, channels, growth_channels)
-        self.eta = AttentiveDenseSubnet(channels, channels, growth_channels)
+        subnet_options = {"orthogonal_router": orthogonal_router}
+        self.phi = AttentiveDenseSubnet(
+            channels, channels, growth_channels, **subnet_options
+        )
+        self.rho = AttentiveDenseSubnet(
+            channels, channels, growth_channels, **subnet_options
+        )
+        self.eta = AttentiveDenseSubnet(
+            channels, channels, growth_channels, **subnet_options
+        )
 
     def _scale(self, values: Tensor) -> Tensor:
         return torch.exp(self.clamp * 2.0 * (torch.sigmoid(values) - 0.5))
@@ -155,10 +181,23 @@ class InvertibleCouplingBlock(nn.Module):
 
 
 class InvertibleFlow(nn.Module):
-    def __init__(self, blocks: int, growth_channels: int, clamp: float) -> None:
+    def __init__(
+        self,
+        blocks: int,
+        growth_channels: int,
+        clamp: float,
+        *,
+        orthogonal_router: bool = False,
+    ) -> None:
         super().__init__()
         self.blocks = nn.ModuleList(
-            InvertibleCouplingBlock(12, growth_channels, clamp) for _ in range(blocks)
+            InvertibleCouplingBlock(
+                12,
+                growth_channels,
+                clamp,
+                orthogonal_router=orthogonal_router,
+            )
+            for _ in range(blocks)
         )
 
     def forward(self, inputs: Tensor, *, reverse: bool = False) -> Tensor:
@@ -179,10 +218,16 @@ class WaveletGatedInvertibleHider(nn.Module):
         clamp: float = 2.0,
         latent_noise_std: float = 1.0,
         latent_seed: int = 2026,
+        orthogonal_router: bool = False,
     ) -> None:
         super().__init__()
         self.wavelet = HaarWavelet()
-        self.flow = InvertibleFlow(blocks, growth_channels, clamp)
+        self.flow = InvertibleFlow(
+            blocks,
+            growth_channels,
+            clamp,
+            orthogonal_router=orthogonal_router,
+        )
         self.latent_noise_std = latent_noise_std
         self.latent_seed = latent_seed
 
@@ -207,20 +252,29 @@ class WaveletGatedInvertibleHider(nn.Module):
             "stego_low": stego_wavelet[:, :3],
         }
 
-    def reveal(self, stego: Tensor) -> Tensor:
-        stego_wavelet = self.wavelet((stego + 1.0) * 0.5)
+    def _fixed_latent(self, stego_wavelet: Tensor) -> Tensor:
         latent = torch.zeros_like(stego_wavelet)
-        if self.training and self.latent_noise_std > 0:
-            latent.normal_(std=self.latent_noise_std)
-        elif self.latent_noise_std > 0:
-            generator = torch.Generator(device=stego.device).manual_seed(self.latent_seed)
-            latent.normal_(std=self.latent_noise_std, generator=generator)
+        if self.latent_noise_std <= 0:
+            return latent
+        if self.training:
+            return latent.normal_(std=self.latent_noise_std)
+        generator = torch.Generator(device=stego_wavelet.device).manual_seed(self.latent_seed)
+        template = latent.new_empty(1, *latent.shape[1:])
+        template.normal_(std=self.latent_noise_std, generator=generator)
+        return template.expand_as(latent)
+
+    def _reveal(self, stego: Tensor) -> dict[str, Tensor]:
+        stego_wavelet = self.wavelet((stego + 1.0) * 0.5)
+        latent = self._fixed_latent(stego_wavelet)
         reconstructed = self.flow(torch.cat((stego_wavelet, latent), dim=1), reverse=True)
         secret_wavelet = reconstructed[:, 12:]
         secret_unit = self.wavelet(secret_wavelet, reverse=True).clamp(0.0, 1.0)
-        return secret_unit * 2.0 - 1.0
+        return {"revealed_secret": secret_unit * 2.0 - 1.0}
+
+    def reveal(self, stego: Tensor) -> Tensor:
+        return self._reveal(stego)["revealed_secret"]
 
     def forward(self, cover: Tensor, secret: Tensor) -> dict[str, Tensor]:
         outputs = self.conceal(cover, secret)
-        outputs["revealed_secret"] = self.reveal(outputs["stego"])
+        outputs.update(self._reveal(outputs["stego"]))
         return outputs

@@ -115,6 +115,9 @@ class Trainer:
         if config.train.gates_only:
             for name, parameter in model.encoder.named_parameters():
                 parameter.requires_grad_(".attention." in name or ".band_gate." in name)
+        elif config.train.router_only:
+            for name, parameter in model.encoder.named_parameters():
+                parameter.requires_grad_(".router." in name)
         generator_parameters = model.generator_parameters()
         self.generator_optimizer = Adam(
             generator_parameters,
@@ -306,8 +309,7 @@ class Trainer:
             cover = cover.to(self.device, non_blocking=True)
             secret = secret.to(self.device, non_blocking=True)
             evaluated_images += cover.shape[0]
-            with self._autocast():
-                outputs = self.model(cover, secret)
+            outputs = self.model(cover.float(), secret.float())
             stego = outputs["stego"].float()
             revealed = outputs["revealed_secret"].float()
             metrics.update(image_metrics(cover.float(), stego, "cover"))
@@ -353,14 +355,43 @@ class Trainer:
         os.replace(temporary, destination)
         return destination
 
-    def load_checkpoint(self, path: str | Path, resume_optimizers: bool = True) -> None:
+    def load_checkpoint(
+        self,
+        path: str | Path,
+        *,
+        resume_optimizers: bool = True,
+        resume_state: bool = True,
+        allow_new_adapters: bool = False,
+    ) -> None:
         payload = torch.load(path, map_location=self.device, weights_only=True)
-        self.model.load_state_dict(payload["model"])
+        if allow_new_adapters:
+            source_model = payload["config"].get("model", {})
+            allow_new_router = self.config.model.orthogonal_router and not source_model.get(
+                "orthogonal_router", False
+            )
+            incompatible = self.model.load_state_dict(payload["model"], strict=False)
+            invalid_missing = [
+                key
+                for key in incompatible.missing_keys
+                if not (
+                    allow_new_router
+                    and key.startswith("encoder.flow.blocks.")
+                    and ".router." in key
+                )
+            ]
+            if invalid_missing or incompatible.unexpected_keys:
+                raise RuntimeError(
+                    "incompatible warm start: "
+                    f"missing={invalid_missing}, unexpected={incompatible.unexpected_keys}"
+                )
+        else:
+            self.model.load_state_dict(payload["model"])
         if resume_optimizers:
             self.generator_optimizer.load_state_dict(payload["generator_optimizer"])
             self.discriminator_optimizer.load_state_dict(payload["discriminator_optimizer"])
             self.scaler.load_state_dict(payload["scaler"])
-        self.state = TrainingState(**payload["state"])
+        if resume_state:
+            self.state = TrainingState(**payload["state"])
 
     def _append_history(self, row: dict[str, float]) -> None:
         row = {"epoch": self.state.epoch + 1, "global_step": self.state.global_step, **row}

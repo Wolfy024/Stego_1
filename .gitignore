@@ -34,6 +34,12 @@ results/*
 !results/chart_map.json
 !results/validation_report.md
 !results/comparison_256.json
+!results/paired_dev.json
+!results/paired_final.json
+!results/router_ablation_dev.json
+!results/eval_manifests/
+!results/eval_manifests/*.json
+!results/eval_manifests/*.sha256
 assets/training_ablation.png
 
 # OS

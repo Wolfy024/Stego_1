@@ -7,6 +7,34 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
 
+_REMOVED_NOOP_FIELDS: dict[str, dict[str, object]] = {
+    "model": {
+        "latent_calibration": False,
+        "latent_predictor_channels": 0,
+        "latent_predictor_blocks": 3,
+    },
+    "loss": {"latent_consistency": 0.0},
+    "train": {"latent_only": False},
+}
+
+
+def _drop_removed_noops(section: str, values: object) -> dict[str, Any]:
+    """Accept old checkpoints only when removed experimental options were disabled."""
+
+    if not isinstance(values, dict):
+        raise ValueError(f"configuration section {section!r} must be an object")
+    cleaned = dict(values)
+    for name, disabled_value in _REMOVED_NOOP_FIELDS.get(section, {}).items():
+        if name not in cleaned:
+            continue
+        value = cleaned.pop(name)
+        if value != disabled_value:
+            raise ValueError(
+                f"removed experimental option {section}.{name} is unsupported "
+                f"unless it has its disabled value {disabled_value!r}"
+            )
+    return cleaned
+
 
 @dataclass(slots=True)
 class ModelConfig:
@@ -28,6 +56,7 @@ class ModelConfig:
     coupling_clamp: float = 2.0
     latent_noise_std: float = 1.0
     latent_seed: int = 2026
+    orthogonal_router: bool = False
 
     def validate(self) -> None:
         if self.architecture not in {"unet", "invertible"}:
@@ -50,6 +79,8 @@ class ModelConfig:
             raise ValueError("latent_noise_std cannot be negative")
         if self.latent_seed < 0:
             raise ValueError("latent_seed cannot be negative")
+        if self.architecture != "invertible" and self.orthogonal_router:
+            raise ValueError("orthogonal_router requires invertible architecture")
 
 
 @dataclass(slots=True)
@@ -102,6 +133,7 @@ class TrainConfig:
     max_train_steps: int | None = None
     amp: bool = True
     gates_only: bool = False
+    router_only: bool = False
 
     def validate(self) -> None:
         if self.epochs < 1 or self.batch_size < 1:
@@ -145,6 +177,16 @@ class ExperimentConfig:
                 )
             if self.train.gates_only and self.model.invertible_blocks != 16:
                 raise ValueError("gates-only warm-start adaptation requires 16 invertible blocks")
+            if self.train.router_only and not self.model.orthogonal_router:
+                raise ValueError("router-only adaptation requires orthogonal_router")
+            adaptation_modes = (
+                self.train.gates_only,
+                self.train.router_only,
+            )
+            if sum(adaptation_modes) > 1:
+                raise ValueError("gates_only and router_only are mutually exclusive")
+        elif self.train.gates_only or self.train.router_only:
+            raise ValueError("parameter-efficient adaptation modes require invertible architecture")
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -156,11 +198,13 @@ class ExperimentConfig:
 
     @classmethod
     def from_dict(cls, raw: dict[str, Any]) -> ExperimentConfig:
+        if not isinstance(raw, dict):
+            raise ValueError("experiment configuration must be an object")
         config = cls(
-            model=ModelConfig(**raw.get("model", {})),
-            data=DataConfig(**raw.get("data", {})),
-            loss=LossConfig(**raw.get("loss", {})),
-            train=TrainConfig(**raw.get("train", {})),
+            model=ModelConfig(**_drop_removed_noops("model", raw.get("model", {}))),
+            data=DataConfig(**_drop_removed_noops("data", raw.get("data", {}))),
+            loss=LossConfig(**_drop_removed_noops("loss", raw.get("loss", {}))),
+            train=TrainConfig(**_drop_removed_noops("train", raw.get("train", {}))),
         )
         config.validate()
         return config

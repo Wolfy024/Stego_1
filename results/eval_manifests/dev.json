@@ -1,0 +1,721 @@
+{
+  "schema_version": 1,
+  "cohort": "dev",
+  "data_roots": {
+    "val2017": "../../data/coco/val2017",
+    "DIV2K_valid_HR": "../../data/div2k/DIV2K_valid_HR"
+  },
+  "path_resolution": "<data-root label>/<path relative to that root>",
+  "sampling": {
+    "discovered_images": 5100,
+    "excluded_benchmark_images": 2000,
+    "benchmark_sample_seed": 2026,
+    "cohort_sample_seed": 2027,
+    "pair_count": 100,
+    "unique_image_count": 200,
+    "all_roles_and_cohorts_image_disjoint": true
+  },
+  "pairs": [
+    {
+      "pair_id": "dev-0000",
+      "cover_path": "val2017/000000028993.jpg",
+      "cover_sha256": "9d582d15dc1a53b419f8c32253d4eb1bbe0fa20ada973e4d24e72af55b880a83",
+      "secret_path": "val2017/000000144114.jpg",
+      "secret_sha256": "34496ddf1489c1b376a46ddb93f09ced0e61c779ff98b111535a04ef4507aea5"
+    },
+    {
+      "pair_id": "dev-0001",
+      "cover_path": "val2017/000000188906.jpg",
+      "cover_sha256": "1c6858f084758d4be308a95511c230afc166ed0dbbd704b60525d86e6a2a4d90",
+      "secret_path": "val2017/000000419408.jpg",
+      "secret_sha256": "d859acb75d4a212c584025cacd0bd220348e43e153b4d98a2fceab7471aeb19b"
+    },
+    {
+      "pair_id": "dev-0002",
+      "cover_path": "val2017/000000412286.jpg",
+      "cover_sha256": "2c482d365623b18f877b90eea879331d4d11f8c9f8b13f058aa8cb1ef31cb58d",
+      "secret_path": "val2017/000000573094.jpg",
+      "secret_sha256": "6e3a624152c5a6d36e0c585f379b540e2b942e159f0073c56e1ed526a4bddf4c"
+    },
+    {
+      "pair_id": "dev-0003",
+      "cover_path": "val2017/000000312586.jpg",
+      "cover_sha256": "1aaea56776b53e55899b583ff6f5d716280a2cc1e9e5d9280d6c2899a6fddaea",
+      "secret_path": "val2017/000000224675.jpg",
+      "secret_sha256": "45ab6d1c49e081bede2f1e84365bb756c1f165c022b3b24f0338e0eaf971ee66"
+    },
+    {
+      "pair_id": "dev-0004",
+      "cover_path": "val2017/000000078266.jpg",
+      "cover_sha256": "01297ee066ac26e787c2f112d73e24085b9b9b94100e4bb6b13b5758c77ab2e5",
+      "secret_path": "val2017/000000304291.jpg",
+      "secret_sha256": "059e4ae569ffb5dc2cf55bdd435b4dd7b80ed5b8a079f573066a5a189183650c"
+    },
+    {
+      "pair_id": "dev-0005",
+      "cover_path": "val2017/000000074058.jpg",
+      "cover_sha256": "a619c4064a1a9af3f0d3c20abee5dc8bb05edda1ec0b240e28fb823b4fd9d204",
+      "secret_path": "val2017/000000570539.jpg",
+      "secret_sha256": "adebfe6c709de875533fe7e9c8b94eb0b71b62f7cc2216e1aef5d21287dcab6f"
+    },
+    {
+      "pair_id": "dev-0006",
+      "cover_path": "val2017/000000344268.jpg",
+      "cover_sha256": "35f8ceeb90aa95f77693872f0cb1b27eef2583d157c2669fd83e2c72396f1ed3",
+      "secret_path": "val2017/000000248284.jpg",
+      "secret_sha256": "9f3308ac7ee40f7e983b1f36adb8a65244063a1cebcd609407951d5457bd260a"
+    },
+    {
+      "pair_id": "dev-0007",
+      "cover_path": "val2017/000000404678.jpg",
+      "cover_sha256": "69222a4d5fa8683df106b54073c9897b0b4994e4bda56442886816bc08528d9b",
+      "secret_path": "val2017/000000479248.jpg",
+      "secret_sha256": "7568f9ca909b10cb1ff733e79ed2661e310d8018261e5d8b4f4e6621e404508b"
+    },
+    {
+      "pair_id": "dev-0008",
+      "cover_path": "val2017/000000519569.jpg",
+      "cover_sha256": "eb819611fa1c5aa9b823a6b9d44308b37d41dc62b8a33fb2e6c7f5b0216a6e33",
+      "secret_path": "val2017/000000476787.jpg",
+      "secret_sha256": "e349a7e122f8e2804bdcb3b959edc9acdc0a915949a7e4e986096d4d2398d195"
+    },
+    {
+      "pair_id": "dev-0009",
+      "cover_path": "val2017/000000419653.jpg",
+      "cover_sha256": "d1294e4e41779f47ea47168538cc5f961b0499c71a0ff6923d77e11909ee9bf6",
+      "secret_path": "val2017/000000065288.jpg",
+      "secret_sha256": "ac018fd2b55bb4c0dddd083f374e5e58231ea41279eaba20c2da464b56fa8760"
+    },
+    {
+      "pair_id": "dev-0010",
+      "cover_path": "val2017/000000552842.jpg",
+      "cover_sha256": "5c54b158f361a854da3855830074cb79f190470605bcf8d12be4ffa39994470f",
+      "secret_path": "val2017/000000224807.jpg",
+      "secret_sha256": "469e5374fcf43466d3ba8167126cdfa2833f1b8c8ed1e2248b29dd9feec20733"
+    },
+    {
+      "pair_id": "dev-0011",
+      "cover_path": "DIV2K_valid_HR/0865.png",
+      "cover_sha256": "46ced1e049fce5a0381c3dc7d7276d058f78a7a7dab5cd88ef7a224cbf51fdb1",
+      "secret_path": "val2017/000000293625.jpg",
+      "secret_sha256": "2bd0e6559c45d48952e5fda4a2e69d5ecc25ed3d95bfc2c0343fc6b0452b7ca2"
+    },
+    {
+      "pair_id": "dev-0012",
+      "cover_path": "val2017/000000149406.jpg",
+      "cover_sha256": "bb5adc5c3916aec1e6024432e428c6f6b216ab97c02c58590bbf80a5f6fe24bb",
+      "secret_path": "val2017/000000494869.jpg",
+      "secret_sha256": "0beffebf8bf7e3d5561249474de3e457cae990b1ffd56165a19380d4cfc0c00a"
+    },
+    {
+      "pair_id": "dev-0013",
+      "cover_path": "val2017/000000179392.jpg",
+      "cover_sha256": "aee6cea5432994df19687acca9a15157a02200658e62bed5dc641564b54ef422",
+      "secret_path": "val2017/000000044068.jpg",
+      "secret_sha256": "f87295880cbe28c49af27753a63cf939b78192da5dfed7d01d9a8087b8976af3"
+    },
+    {
+      "pair_id": "dev-0014",
+      "cover_path": "val2017/000000088970.jpg",
+      "cover_sha256": "f38921965c07c50416a7f3056e15bd93f41304a2373c5ab1969965923936347a",
+      "secret_path": "val2017/000000503841.jpg",
+      "secret_sha256": "60806be017b08f1f691ecb116db30fe320da97e3be0dbf6f69d9fdd4fae65573"
+    },
+    {
+      "pair_id": "dev-0015",
+      "cover_path": "val2017/000000465718.jpg",
+      "cover_sha256": "23e5ecf15fc6651e6ec95dbc096565ad3e0acaa6434b9bca8d7c6e832c1041b9",
+      "secret_path": "val2017/000000534601.jpg",
+      "secret_sha256": "a61dcd41da39c0c794937470219d9955d51046aa492ab780450cd984df259c30"
+    },
+    {
+      "pair_id": "dev-0016",
+      "cover_path": "val2017/000000309938.jpg",
+      "cover_sha256": "8956749b98223cb888cb948f97d64cbc7330d7a8c285da0921a8630cc2f6f4a8",
+      "secret_path": "val2017/000000332351.jpg",
+      "secret_sha256": "843e968f9f8a27ed566ae907cae8d0604a4c9e6d174bc31543eb1714fab145a6"
+    },
+    {
+      "pair_id": "dev-0017",
+      "cover_path": "val2017/000000058636.jpg",
+      "cover_sha256": "9c62cafaa78da7f5c47881c90188f91375b6658042e30714e59979d1a1a3bb04",
+      "secret_path": "val2017/000000321887.jpg",
+      "secret_sha256": "24031c7909ea69b2238ffff64653ee40a19f05e72e4eaf7235481be9c92f92d9"
+    },
+    {
+      "pair_id": "dev-0018",
+      "cover_path": "val2017/000000206271.jpg",
+      "cover_sha256": "715a4e7172e849888d18f748dd7c4217aa2543912a705cb73045707eb9e51b41",
+      "secret_path": "val2017/000000108253.jpg",
+      "secret_sha256": "dbeb3abe982e31109d09f96e782ef1a14462eef85da9ed94032fdc85b4874b03"
+    },
+    {
+      "pair_id": "dev-0019",
+      "cover_path": "val2017/000000423506.jpg",
+      "cover_sha256": "cf770793ec543c39c2c6331e6658a08738d0a576cc9f1fe8995d711eae97ce71",
+      "secret_path": "val2017/000000255536.jpg",
+      "secret_sha256": "8d34300522af3e1c5da698671662bd4656d6bd3439815dbcbb2f0b7827bee052"
+    },
+    {
+      "pair_id": "dev-0020",
+      "cover_path": "val2017/000000449909.jpg",
+      "cover_sha256": "a79689a7913c06a5b25a4da0fb2c453dc02f84aa889c5487942a821916a345e7",
+      "secret_path": "val2017/000000581100.jpg",
+      "secret_sha256": "4c98bc5e3b2445d90a11471c7694812ec9b5d05351e5993dea2f217f70eca2bd"
+    },
+    {
+      "pair_id": "dev-0021",
+      "cover_path": "val2017/000000293245.jpg",
+      "cover_sha256": "faea4409b1d598acc6038fbdc712595c44798f5d778cd063bfc67f7b68a158ab",
+      "secret_path": "val2017/000000353518.jpg",
+      "secret_sha256": "21061522030b6c364311f8ce410c13e5c37e1b62d33ff240c7417edb9754d423"
+    },
+    {
+      "pair_id": "dev-0022",
+      "cover_path": "val2017/000000419201.jpg",
+      "cover_sha256": "939f41978292a9237b7bdec68d84b392094e0b93dd5a8addf06ec9950525b54d",
+      "secret_path": "val2017/000000308394.jpg",
+      "secret_sha256": "f95ec5582f5310a2dd6effb247286f48ce479b5c44d94690faf586ab2e435215"
+    },
+    {
+      "pair_id": "dev-0023",
+      "cover_path": "val2017/000000110449.jpg",
+      "cover_sha256": "b4f1012183b47482a31955ac38bbad9b7711b018ff20e2cb60b355033f323dc6",
+      "secret_path": "val2017/000000128372.jpg",
+      "secret_sha256": "6076863986b65a05fc9fd1edd1558cacee52db9b1e0c263ae3a02b1047f2617f"
+    },
+    {
+      "pair_id": "dev-0024",
+      "cover_path": "val2017/000000136715.jpg",
+      "cover_sha256": "cde59a511126e505df5b80635e71768e26874382a1bad191f5e26ad820597701",
+      "secret_path": "val2017/000000439593.jpg",
+      "secret_sha256": "e104e95526e6ac6f41f1d83019b7d6319d5b017e780244ba5cd9e93001737087"
+    },
+    {
+      "pair_id": "dev-0025",
+      "cover_path": "val2017/000000032038.jpg",
+      "cover_sha256": "5afb15a7ca2105d97e1f3a095dcbb1bdbe92232b1aaad9b7ab3bca63ee8adc3d",
+      "secret_path": "val2017/000000088269.jpg",
+      "secret_sha256": "72aa4d9bb5c19bdaa96ebec98fa875c330eec634aacbe53e44f113b903db36c7"
+    },
+    {
+      "pair_id": "dev-0026",
+      "cover_path": "val2017/000000098716.jpg",
+      "cover_sha256": "1e03cdb25ac2a62149d36463c0b69276ddbb4ebfd4c110e84e100347914fe873",
+      "secret_path": "val2017/000000526103.jpg",
+      "secret_sha256": "aa71fa226702833f76094ef8a732b7592c3227ce008f5647d3ede1bed3bb516e"
+    },
+    {
+      "pair_id": "dev-0027",
+      "cover_path": "val2017/000000397279.jpg",
+      "cover_sha256": "69c92ac515b372adeecba63f4cd49b12c9bc6f1a1c357f776c7d2985ea179445",
+      "secret_path": "val2017/000000165257.jpg",
+      "secret_sha256": "20e0722f9e1ea372a1f039722b2eafb053ff416f1c3f7e4d1de8ac88ed81dcea"
+    },
+    {
+      "pair_id": "dev-0028",
+      "cover_path": "val2017/000000573391.jpg",
+      "cover_sha256": "37d17c01486562f58831ba1e0357f3ac79d37ebb34ae93882ab99662f7793ca0",
+      "secret_path": "val2017/000000521509.jpg",
+      "secret_sha256": "32e087992c2613f404b90f768c5035999b53e19d26dec4e6018303b3dcb03672"
+    },
+    {
+      "pair_id": "dev-0029",
+      "cover_path": "val2017/000000350405.jpg",
+      "cover_sha256": "ea113f2a601d32d5032df428be396854d97bc3f0b35520280ba860a9d29d9c05",
+      "secret_path": "val2017/000000319721.jpg",
+      "secret_sha256": "2dda1cbe26cd36d3c701cc98d9df614f5a72cfd14b35124b08f461ccf42720e9"
+    },
+    {
+      "pair_id": "dev-0030",
+      "cover_path": "val2017/000000423798.jpg",
+      "cover_sha256": "b56d20c765424ac5d6a21f9896b796d30c97e747fee50ed4b01bcd105732f911",
+      "secret_path": "val2017/000000177213.jpg",
+      "secret_sha256": "cb11cc3ce7c8c7944cc8063a5ca110b7a68bd1702714bef24918d7ce80a89ff8"
+    },
+    {
+      "pair_id": "dev-0031",
+      "cover_path": "val2017/000000245102.jpg",
+      "cover_sha256": "0a80f5f2ab54c11477641ffa731a8afdcb5309d70bf2eb18c4c834b2bca90971",
+      "secret_path": "val2017/000000441586.jpg",
+      "secret_sha256": "c440bd5d515fd7029461c718796ba133bfbffd3bbf267b0d02ec499378ca3d76"
+    },
+    {
+      "pair_id": "dev-0032",
+      "cover_path": "val2017/000000355325.jpg",
+      "cover_sha256": "2a8356486557241592dd40f38db50394624b48ed6e0218b7138350ce0c44b1e3",
+      "secret_path": "val2017/000000272049.jpg",
+      "secret_sha256": "edcce591803494f25d75b861d799a3df9b664069773fcab5bbfbd7937058d417"
+    },
+    {
+      "pair_id": "dev-0033",
+      "cover_path": "val2017/000000123213.jpg",
+      "cover_sha256": "7fa7873fb045bb420548bc180bf7e3b723cc31869df7b7c9deb31f200b22b0f3",
+      "secret_path": "val2017/000000104119.jpg",
+      "secret_sha256": "28208fdbff62ff77747019db73994925143bd58eab804d710a90a2f4ccc049b1"
+    },
+    {
+      "pair_id": "dev-0034",
+      "cover_path": "val2017/000000292005.jpg",
+      "cover_sha256": "eb999ee83cd9d5a9bdc0f3ded8e37ddf18d4b00525cd70c7a471dd5c79a5c432",
+      "secret_path": "val2017/000000423104.jpg",
+      "secret_sha256": "53312199b647a90c1c649e1af408826f95e7742dd1d4b1947b3b975e8b4f082b"
+    },
+    {
+      "pair_id": "dev-0035",
+      "cover_path": "val2017/000000429598.jpg",
+      "cover_sha256": "cf692837b22f590cc75ed7eb9bcabd26772c71e924a35506df081b0956755bb2",
+      "secret_path": "val2017/000000409630.jpg",
+      "secret_sha256": "520fc714c72300233fbeef5ef510d533db8fcdcb4c092c51e4464a399c168520"
+    },
+    {
+      "pair_id": "dev-0036",
+      "cover_path": "val2017/000000468577.jpg",
+      "cover_sha256": "bab9b53906323b08abb82f92484fdbedc70fb08dc0dcb40d937a8284b0eb64f6",
+      "secret_path": "val2017/000000194832.jpg",
+      "secret_sha256": "339961edac5c4d86f7f97c12f18e2a43e7ac26c609a2bb870c61a2679adda2be"
+    },
+    {
+      "pair_id": "dev-0037",
+      "cover_path": "val2017/000000159684.jpg",
+      "cover_sha256": "f5f26f6704e4727abde068b5722899cb8e3753112664dfbbcbbe7a81337e06f4",
+      "secret_path": "val2017/000000397354.jpg",
+      "secret_sha256": "067fb73c369a8433d1f9d97c2c36f51f487cf3a6d37c1f2fe0368a39f3dc38db"
+    },
+    {
+      "pair_id": "dev-0038",
+      "cover_path": "val2017/000000499622.jpg",
+      "cover_sha256": "b863e07e2ae99859bd5d3713fa30cbd580a24fa6f01e8e6a65394e9967819ee8",
+      "secret_path": "val2017/000000029393.jpg",
+      "secret_sha256": "378763dec71a25c7cb44ff9e345c84ca0fe2d8bf993b88775c360549edf3b733"
+    },
+    {
+      "pair_id": "dev-0039",
+      "cover_path": "val2017/000000022935.jpg",
+      "cover_sha256": "90fad7bfc9fab88492d9722ea1aa14ee77514d8c10dbda86086bd37d8a05acf0",
+      "secret_path": "DIV2K_valid_HR/0806.png",
+      "secret_sha256": "36720ddd59f8b3eed28f8981e12e6e2d680bfa78b9d25f33ec4152013652c713"
+    },
+    {
+      "pair_id": "dev-0040",
+      "cover_path": "val2017/000000081394.jpg",
+      "cover_sha256": "0ece3434b584ed5deb58f902633b449bd79bf464ce5fd9859d74dbe908e78325",
+      "secret_path": "val2017/000000509260.jpg",
+      "secret_sha256": "5a983eb03202b7c437f2951809dc619b4bb400ae049445f8ae18b604cafba335"
+    },
+    {
+      "pair_id": "dev-0041",
+      "cover_path": "val2017/000000185409.jpg",
+      "cover_sha256": "9675e520965a741d41778599430395ad68c2446d597e80235961e042730639f8",
+      "secret_path": "val2017/000000545594.jpg",
+      "secret_sha256": "e1fb3683859a5026970906fbb490ee7476c00c385256cf12193f6e8ddda23578"
+    },
+    {
+      "pair_id": "dev-0042",
+      "cover_path": "val2017/000000205105.jpg",
+      "cover_sha256": "63126096550f5f9d35c81261d7f8ba341896a1ec8f958200c4fe20c6417462bc",
+      "secret_path": "val2017/000000420916.jpg",
+      "secret_sha256": "49a25255378293de63164929a056228e03feee7c68931c186c9b6ea913742003"
+    },
+    {
+      "pair_id": "dev-0043",
+      "cover_path": "val2017/000000554838.jpg",
+      "cover_sha256": "12f576eed10d3ee8885c075bbac45e654ab2511a2042898413f7928acf52b378",
+      "secret_path": "val2017/000000135604.jpg",
+      "secret_sha256": "57dbdf8200612aa0667176be3249ed7e4401f8871a3ce5f31a4f60328fc182c3"
+    },
+    {
+      "pair_id": "dev-0044",
+      "cover_path": "val2017/000000489091.jpg",
+      "cover_sha256": "74870ec1c2ba8124710e44b09c02149a7bbbc00ece9231c66d1c450dd427c79b",
+      "secret_path": "val2017/000000363666.jpg",
+      "secret_sha256": "a9fddd22efc52bc382cfb88adc507134ce80d1ba09bff7d24debbaa1b26e6d78"
+    },
+    {
+      "pair_id": "dev-0045",
+      "cover_path": "val2017/000000474170.jpg",
+      "cover_sha256": "e7966d109d600e9d4a30c54135aa5f92179e55d1a40bb395ea714bd9c675ff08",
+      "secret_path": "val2017/000000002587.jpg",
+      "secret_sha256": "bc37072a4f32bc99d6b02a684dd9bc69bd63567382315e5f497c9bb4a44c7208"
+    },
+    {
+      "pair_id": "dev-0046",
+      "cover_path": "val2017/000000212559.jpg",
+      "cover_sha256": "7f39a23bb285305c59adb1b03b913dfd69f6e86a95e518cbecc950c901332d7f",
+      "secret_path": "val2017/000000297396.jpg",
+      "secret_sha256": "f1809b639f23421ad6d40a3c16a2fb0a71184f8c4e1bda72bc1bf53eadeff387"
+    },
+    {
+      "pair_id": "dev-0047",
+      "cover_path": "val2017/000000230450.jpg",
+      "cover_sha256": "7249268a3bf15548057b51f1901762705017beddeceb909902f08c4f28c89074",
+      "secret_path": "val2017/000000442993.jpg",
+      "secret_sha256": "9b79ea8a810fc2cf09b0d60c9975de3fad09ff1325dc8a59abb167e5afd7b4fc"
+    },
+    {
+      "pair_id": "dev-0048",
+      "cover_path": "val2017/000000551215.jpg",
+      "cover_sha256": "e41b973323287a1781814b3a8356b7b971a89b031191932d26d74d6123696877",
+      "secret_path": "val2017/000000173830.jpg",
+      "secret_sha256": "46580410572c0e00f7810b350f1a6c7e75fe70203af2a4deef352b2ab3f441aa"
+    },
+    {
+      "pair_id": "dev-0049",
+      "cover_path": "val2017/000000089648.jpg",
+      "cover_sha256": "4fca67aaad67e1d0edbe7ccf837c019c774c7bf43204d7fe54abc1c28af4b953",
+      "secret_path": "val2017/000000407960.jpg",
+      "secret_sha256": "51f7127dae6728b6f2ea96b02c8cdefc21fb03cff7a4f459af32debf6215790c"
+    },
+    {
+      "pair_id": "dev-0050",
+      "cover_path": "val2017/000000046252.jpg",
+      "cover_sha256": "2ee9e8fa409776fed080bb30f32f51d7d459b2edb606d88dbe86b98a69a4d5ed",
+      "secret_path": "val2017/000000061333.jpg",
+      "secret_sha256": "d3c51525ef4df7b192081a4f71725a7e2b9bc09ade3eae9d1978b7768e2932a8"
+    },
+    {
+      "pair_id": "dev-0051",
+      "cover_path": "val2017/000000394206.jpg",
+      "cover_sha256": "cb60fc19f46338204ec9fdbf45bf9b0da41bb6b406e77a29a42d46cbc92c8fae",
+      "secret_path": "val2017/000000379842.jpg",
+      "secret_sha256": "86e4469de096bf1e6860f7ad17bc7c25570b4c97161cb0112621b96fdbfbf468"
+    },
+    {
+      "pair_id": "dev-0052",
+      "cover_path": "val2017/000000500478.jpg",
+      "cover_sha256": "1025c8bbb6466db353361663ab8af7d0328a32996cc96549deb53773349923de",
+      "secret_path": "val2017/000000032735.jpg",
+      "secret_sha256": "309105454f28c30038cce8c44d48300b626548477957b3d056bfacf9da3127e4"
+    },
+    {
+      "pair_id": "dev-0053",
+      "cover_path": "val2017/000000210230.jpg",
+      "cover_sha256": "33e35d38f41dd9c94ee87616903b722a0148860613ea02572ce7e481542e8935",
+      "secret_path": "val2017/000000248631.jpg",
+      "secret_sha256": "45ea37728704ce7d5a62ff39c68ab4a1d149cdd743414c0a5455524ea337150a"
+    },
+    {
+      "pair_id": "dev-0054",
+      "cover_path": "val2017/000000436551.jpg",
+      "cover_sha256": "0cd062d9f782ade95dd02090099b38938bd78471f0abfcb7927adc62197aa97a",
+      "secret_path": "val2017/000000063047.jpg",
+      "secret_sha256": "a22d4aa86990d164396b37a5e95eba6e82ff36cddcfca557fc8501136591133e"
+    },
+    {
+      "pair_id": "dev-0055",
+      "cover_path": "val2017/000000289417.jpg",
+      "cover_sha256": "a098e0cfd6702bf227c3b5d9e98d4321bc803c3cf8ffab4d867e86c9b5d7e13d",
+      "secret_path": "val2017/000000261318.jpg",
+      "secret_sha256": "ffd34ec019d2fc9f168d03da88c9fd48230d266afaa79cce9222b33e55aa7116"
+    },
+    {
+      "pair_id": "dev-0056",
+      "cover_path": "val2017/000000435299.jpg",
+      "cover_sha256": "a6e060e6e23667a937f1130eed8616b97166e546e148cc62c1f82037b4c3738d",
+      "secret_path": "val2017/000000570688.jpg",
+      "secret_sha256": "baa5a96ec8a613dd8571a1e2bc6dcc1d8841418f8a19a6e521ca0d60ca3dd09d"
+    },
+    {
+      "pair_id": "dev-0057",
+      "cover_path": "val2017/000000169356.jpg",
+      "cover_sha256": "acd7784c7a33da47014e5c55118789be664617e8028a8d89ada6b59b9212db25",
+      "secret_path": "val2017/000000302536.jpg",
+      "secret_sha256": "8bc7c92a03a7cb6a77a3ebde15ada830637e4b2b05d468b267e7fa4417aefa31"
+    },
+    {
+      "pair_id": "dev-0058",
+      "cover_path": "val2017/000000455872.jpg",
+      "cover_sha256": "60efd3a4e06cb59a020b266620cd68c78b20a3196062efb21072e05bbbfd9629",
+      "secret_path": "val2017/000000229111.jpg",
+      "secret_sha256": "6cf7af80f210bcf25ff57bad62f814f4cd6d4e419a564fc1659ef2a479d5e7d3"
+    },
+    {
+      "pair_id": "dev-0059",
+      "cover_path": "val2017/000000045090.jpg",
+      "cover_sha256": "131ff9a0a419179b934091c97a57ea257b02b8ed80762bc59d639d980a9707e5",
+      "secret_path": "val2017/000000196843.jpg",
+      "secret_sha256": "7bafbbaa286e2fcb78d30b5192d09a82a05d231778a5d1b84929c1de64b566ae"
+    },
+    {
+      "pair_id": "dev-0060",
+      "cover_path": "val2017/000000296224.jpg",
+      "cover_sha256": "bfdfaa35d64439d19781ad60ff92fa5b3d7b90a7293f1603574951871d2238b9",
+      "secret_path": "val2017/000000398742.jpg",
+      "secret_sha256": "6af6678e8c5b9454647a9c1d206acf82b146bebc56463db796efd18037d30c3e"
+    },
+    {
+      "pair_id": "dev-0061",
+      "cover_path": "val2017/000000001425.jpg",
+      "cover_sha256": "71a37c25cdf944cf0a88b66d00a66cf899a88bd55c7ac80fcf1c76329d617e6c",
+      "secret_path": "val2017/000000084362.jpg",
+      "secret_sha256": "078d217235bc234a17e34325cd551fa0944ea693a7e51c5647d0df7702bc840e"
+    },
+    {
+      "pair_id": "dev-0062",
+      "cover_path": "val2017/000000535156.jpg",
+      "cover_sha256": "24ff901415cee970585ccd0da5c13bbe2646d3a675dcbfe9e22daa281f439ee0",
+      "secret_path": "val2017/000000033104.jpg",
+      "secret_sha256": "24d3088e3db4b4a04c83f0c1cf3dddbc33c02389eb2591d9d03c4a3cf73796ed"
+    },
+    {
+      "pair_id": "dev-0063",
+      "cover_path": "val2017/000000206135.jpg",
+      "cover_sha256": "57dc88c8bde40cba9d18d27c4beaa5654023e48e42d3d0d946faabc259db8238",
+      "secret_path": "val2017/000000248980.jpg",
+      "secret_sha256": "f0021606b0a2bdee66f892c4c5c72746c8dffc5855bf04f2ce18061d8f001b87"
+    },
+    {
+      "pair_id": "dev-0064",
+      "cover_path": "val2017/000000114770.jpg",
+      "cover_sha256": "6c03190b20a3245cf365ba0ebf5703da632fe95a91dc8fbeed157cd59a74ee67",
+      "secret_path": "val2017/000000580410.jpg",
+      "secret_sha256": "4ffc41086afb69af8014c73fc564aa8e8145f13aaa98d20ed10501f765724d20"
+    },
+    {
+      "pair_id": "dev-0065",
+      "cover_path": "val2017/000000442161.jpg",
+      "cover_sha256": "11f1288b87273244cbaad21c72e190dbf14484541a89556b9d0b616080aefef8",
+      "secret_path": "val2017/000000093154.jpg",
+      "secret_sha256": "2b3a21fc80e5544c4d2206b84e9dfcbd5dbd3605e7937ebfbbade72c3f116351"
+    },
+    {
+      "pair_id": "dev-0066",
+      "cover_path": "val2017/000000259097.jpg",
+      "cover_sha256": "23acc13dba72469607a7e61b6c2fd6e0e2c73dfa33fff340424bd6c805ac8cfc",
+      "secret_path": "DIV2K_valid_HR/0834.png",
+      "secret_sha256": "4d2621a246e4a771754aa0052b91d79dbebfe866d9dbd8200e3c68e038a3de88"
+    },
+    {
+      "pair_id": "dev-0067",
+      "cover_path": "val2017/000000474095.jpg",
+      "cover_sha256": "6e216fd96173658eb945140933ef0c9ae23217a733f02765fe59f57f9db0ae6e",
+      "secret_path": "val2017/000000359677.jpg",
+      "secret_sha256": "b9767ebb38fe98ed310fc064966b07d8530ea471f3057026f1b319a4c46292a9"
+    },
+    {
+      "pair_id": "dev-0068",
+      "cover_path": "val2017/000000091406.jpg",
+      "cover_sha256": "a6019381432c4b2517a5d1fecb8c9b2bf59a50c431d69fd3078ff82fe26ca1e9",
+      "secret_path": "val2017/000000236784.jpg",
+      "secret_sha256": "cdd94432188f912462ec36a51f6e17efe537e472ef427654d37f26cf76bea4e7"
+    },
+    {
+      "pair_id": "dev-0069",
+      "cover_path": "val2017/000000222825.jpg",
+      "cover_sha256": "d1ed4e1103c8f8fe1f2a90cb1deb4ff73c2aabc14ca73a035cfb8b130e0cdd74",
+      "secret_path": "val2017/000000511076.jpg",
+      "secret_sha256": "9a159bde5fa9b68ab5f5ed7818091f0bbfc1402d328cf49ee845911cb85ad247"
+    },
+    {
+      "pair_id": "dev-0070",
+      "cover_path": "val2017/000000194216.jpg",
+      "cover_sha256": "d86034f9e0f48b0eca16f00dbba82263e37d81231a94cc3fea5310c3f45add95",
+      "secret_path": "val2017/000000416991.jpg",
+      "secret_sha256": "939f11f245c93ee8d06b8f09c5d5029b076b81147e03e062f9982ac6ed57dc44"
+    },
+    {
+      "pair_id": "dev-0071",
+      "cover_path": "val2017/000000158548.jpg",
+      "cover_sha256": "8b8662687f8a639949f622da9ccec56bff0e0569b4eb498aa77f0520a19605b1",
+      "secret_path": "val2017/000000107226.jpg",
+      "secret_sha256": "285a3dfd666d35fb60eb63b9dd46b7b49aae4fcafe194f51d7e4b446abdab725"
+    },
+    {
+      "pair_id": "dev-0072",
+      "cover_path": "val2017/000000524280.jpg",
+      "cover_sha256": "3b83ffd2d2ce4c28a05b1dcd486edf8a06542584a05c9a66cf208df9ed6e2c7d",
+      "secret_path": "val2017/000000302990.jpg",
+      "secret_sha256": "e3e8e66877afbc25b616626b58f0824ec984fe79a0ffedaec7843d063bbb49dd"
+    },
+    {
+      "pair_id": "dev-0073",
+      "cover_path": "val2017/000000208208.jpg",
+      "cover_sha256": "1df85ecd80d70c0e82089f2b9badcf4d8cfde414c5d005bcc6d3ef05d5fc44cc",
+      "secret_path": "val2017/000000367569.jpg",
+      "secret_sha256": "0bf18d631eee0bb297484c5ced6deeeced2d886461e37334cf297fe238202497"
+    },
+    {
+      "pair_id": "dev-0074",
+      "cover_path": "val2017/000000382088.jpg",
+      "cover_sha256": "2e496756dde5e2eb6f589ae423903bbef08e9f9a60d5b739daeabf452645cf47",
+      "secret_path": "val2017/000000010583.jpg",
+      "secret_sha256": "f163a37f278b6edd09952332066e01a00cf80e3137b427dd49732b91edc3fa9b"
+    },
+    {
+      "pair_id": "dev-0075",
+      "cover_path": "val2017/000000196009.jpg",
+      "cover_sha256": "1ce40717e790580b664ceb944b9739502d1f6b36173f2ca7372df35d1030104a",
+      "secret_path": "val2017/000000256407.jpg",
+      "secret_sha256": "e9b63060910cbd8ff9d9f420204ec691d7e46d2034ea24857f6e4dbf1966f535"
+    },
+    {
+      "pair_id": "dev-0076",
+      "cover_path": "val2017/000000331280.jpg",
+      "cover_sha256": "5bbb9c83942e1af35dc3a56483c226885fb93571acebae6d7428ff42c6c9473e",
+      "secret_path": "val2017/000000025424.jpg",
+      "secret_sha256": "89e8025ecb6f48125ac826dd5fe51409deae64e98133472adbe6ae62b6a61705"
+    },
+    {
+      "pair_id": "dev-0077",
+      "cover_path": "val2017/000000088040.jpg",
+      "cover_sha256": "8b46197eff2bc39805e73ee3dadd8c48b81e42e645e2f733acb94c814fe9199e",
+      "secret_path": "val2017/000000369751.jpg",
+      "secret_sha256": "57d5d8701f72bcd01989b9252ed1f2d92a54bda330be182e838071c70f7f06ba"
+    },
+    {
+      "pair_id": "dev-0078",
+      "cover_path": "val2017/000000358923.jpg",
+      "cover_sha256": "b39cab93ed8551306cb0aafc455d289ca5360cd5346ae37bb915fe650390f6ee",
+      "secret_path": "val2017/000000299887.jpg",
+      "secret_sha256": "7e6ec14aa7087b90379cb009ea2d203d523b5ca70ab567b6196e6d26a76c1945"
+    },
+    {
+      "pair_id": "dev-0079",
+      "cover_path": "val2017/000000001584.jpg",
+      "cover_sha256": "77131e2f74aa7e374f951a69157cf7f51e00201f81bacfa8a9ab7309b245553f",
+      "secret_path": "val2017/000000431140.jpg",
+      "secret_sha256": "8d4e1693223bb312e0404e9f28caf74cdf08e4a993540eb25348d7f999c1def3"
+    },
+    {
+      "pair_id": "dev-0080",
+      "cover_path": "val2017/000000054967.jpg",
+      "cover_sha256": "d40210c4e2241a0ac4de79f4cdc7a6c859dafb1b2b18469146f992c714fe9b2d",
+      "secret_path": "val2017/000000415748.jpg",
+      "secret_sha256": "6774fb650081bd03fedb03b1c26b85de477afa0086cbbf157b2fde2dc03d6628"
+    },
+    {
+      "pair_id": "dev-0081",
+      "cover_path": "val2017/000000504074.jpg",
+      "cover_sha256": "20b41a4613f4764272f97bd4522ffeefd52cd0e9a7cb604578e2644a7dce4c83",
+      "secret_path": "val2017/000000042178.jpg",
+      "secret_sha256": "a93b3e69c542397170396ea0a1805ff740924aedee8deb336b82fa9277b82b48"
+    },
+    {
+      "pair_id": "dev-0082",
+      "cover_path": "val2017/000000283268.jpg",
+      "cover_sha256": "3c768b369099245029d32363adfdb3f7c9f7ad4790d1d691a2d69ce494062a1e",
+      "secret_path": "val2017/000000446117.jpg",
+      "secret_sha256": "5b16b401560afe3a56ed9cfd321290282fd27ddcfb2f97d65b675a0b83307b32"
+    },
+    {
+      "pair_id": "dev-0083",
+      "cover_path": "val2017/000000179285.jpg",
+      "cover_sha256": "8a073b6b3ff9aed193eb22d87c9bcb92faa6ab92c202136c0350db803ff3b2d9",
+      "secret_path": "val2017/000000521282.jpg",
+      "secret_sha256": "fe479634b34b4c28fa13a52ba300e05e0ff22a4129edfb3b846d4226dd1f0ebb"
+    },
+    {
+      "pair_id": "dev-0084",
+      "cover_path": "val2017/000000100723.jpg",
+      "cover_sha256": "2d62e673b3735d226468d7d6b166acbc3da5e8d2a3bcdaebfad3cceb5e6ef92c",
+      "secret_path": "val2017/000000157138.jpg",
+      "secret_sha256": "486a8680a7925dc622165b9b5769ba64a42450e5d54445911a0b6bdc8f7f6e26"
+    },
+    {
+      "pair_id": "dev-0085",
+      "cover_path": "val2017/000000304365.jpg",
+      "cover_sha256": "4724eb96f5dc146879b69156b3d70ff7b1e0c656ecb4939652b0fea0462532b7",
+      "secret_path": "val2017/000000064359.jpg",
+      "secret_sha256": "c28e9336f674dacb5d8412874153342ee66f8a5863bf1952ee476083147949c4"
+    },
+    {
+      "pair_id": "dev-0086",
+      "cover_path": "val2017/000000194716.jpg",
+      "cover_sha256": "ae46cdf8b90226a30b562bd2064cedfb429d33382432fb7ec70891ede720cb50",
+      "secret_path": "val2017/000000467176.jpg",
+      "secret_sha256": "533fd5d3b52305fee0f1e96b258b41de137ec1de465ee5c0c3afaa599c6c8567"
+    },
+    {
+      "pair_id": "dev-0087",
+      "cover_path": "val2017/000000383386.jpg",
+      "cover_sha256": "71947182fcc14f49b6bbd46b1b40c69f9240479de53c02a0633d27ee4de4609d",
+      "secret_path": "DIV2K_valid_HR/0838.png",
+      "secret_sha256": "01e42bb5efb35d97a9931fc421f793e3c12d0922a3df288bbfd148b6a82a145b"
+    },
+    {
+      "pair_id": "dev-0088",
+      "cover_path": "val2017/000000560011.jpg",
+      "cover_sha256": "811b554184a3e1b1d2515f912c3dc972f81bdbcceb607629bef3a21fc5e8db38",
+      "secret_path": "val2017/000000203294.jpg",
+      "secret_sha256": "c5d43fb94e11fae1e3bf97b08bebb4a96d7735bb92a6bab8bf8618000208ef9c"
+    },
+    {
+      "pair_id": "dev-0089",
+      "cover_path": "val2017/000000482970.jpg",
+      "cover_sha256": "eda4bf21322341bf5baf6a603085deafd1f32d8aea4d844223cdaaaad18eb416",
+      "secret_path": "val2017/000000148739.jpg",
+      "secret_sha256": "70adfe4defc746c3309c9ea076c65207924fc295b8cf4772b445d2ec96486a85"
+    },
+    {
+      "pair_id": "dev-0090",
+      "cover_path": "val2017/000000484296.jpg",
+      "cover_sha256": "e721612148abd0e23e645f818c987e020fa5c9be3ec4b07974d366eea463d9bd",
+      "secret_path": "val2017/000000423617.jpg",
+      "secret_sha256": "ce5546bb400da57646e0de544763fc44c925fc5495e764083f2bcfebba5c76f0"
+    },
+    {
+      "pair_id": "dev-0091",
+      "cover_path": "val2017/000000310072.jpg",
+      "cover_sha256": "0404d2aa95236840dcc75a43f8cad1f4b03d382c72e86aaff751cb142f18a8e7",
+      "secret_path": "val2017/000000568147.jpg",
+      "secret_sha256": "a43a30c8c1fa592eb76b7205a2764642240f2b29c76d06543a9197bdc8b95a8a"
+    },
+    {
+      "pair_id": "dev-0092",
+      "cover_path": "val2017/000000019742.jpg",
+      "cover_sha256": "6ccc37eeba5118114222f8de61228e95cf6c28fb631c9e759fcdcd450061337a",
+      "secret_path": "val2017/000000402519.jpg",
+      "secret_sha256": "67a26f7ec2001238cb1819aff95422ba7b57c6973cef05f60faab97d7c308e2e"
+    },
+    {
+      "pair_id": "dev-0093",
+      "cover_path": "val2017/000000170670.jpg",
+      "cover_sha256": "e4dd8fbb9f4387c124505a280afc9d67595185e527a8d55d2b7431ae0265888a",
+      "secret_path": "val2017/000000340272.jpg",
+      "secret_sha256": "b651614593c6fc2e20d37d8854ff9f1ca58345de7be7189d1ce3bc359da9c18d"
+    },
+    {
+      "pair_id": "dev-0094",
+      "cover_path": "val2017/000000026926.jpg",
+      "cover_sha256": "7126855b6fe8548a6b9da18d8424f803c0eeb37deb3f5764f95f4d60d1915b37",
+      "secret_path": "val2017/000000058350.jpg",
+      "secret_sha256": "60cc4d293f157edef6ea4d229cabdfe76785c0c1a54b063cbf0a633a1deda52d"
+    },
+    {
+      "pair_id": "dev-0095",
+      "cover_path": "val2017/000000325838.jpg",
+      "cover_sha256": "2753bdbf9c6240d1b6a640aa79276132fb3e52a20df86091813377df38cb788b",
+      "secret_path": "val2017/000000363207.jpg",
+      "secret_sha256": "b07a2456f7eea2f05eb2276a00b174a4fe5863936774f501b2e76308b10bb16e"
+    },
+    {
+      "pair_id": "dev-0096",
+      "cover_path": "val2017/000000013177.jpg",
+      "cover_sha256": "f93626195530f46ed849091160f8cccce1a255ca886fd5945f5719adc12dc789",
+      "secret_path": "val2017/000000187236.jpg",
+      "secret_sha256": "543862a94b3b567ad38d1ee56271634e07849bb42609d7d5adfd4b3d23c9acb2"
+    },
+    {
+      "pair_id": "dev-0097",
+      "cover_path": "val2017/000000253742.jpg",
+      "cover_sha256": "71a335763bb3a4b2af2cd038897470ec08ebdba38745e725b5a4f3eeca009bd3",
+      "secret_path": "val2017/000000008021.jpg",
+      "secret_sha256": "235537407867a7b894e78b3aecb55b33b14b64cbb23ca376a00d34c62a1a63a6"
+    },
+    {
+      "pair_id": "dev-0098",
+      "cover_path": "val2017/000000509656.jpg",
+      "cover_sha256": "35999246ea14f79b4f19825a38b428955f3456a389c3a0aa2301067cc9141d40",
+      "secret_path": "val2017/000000281032.jpg",
+      "secret_sha256": "591e9a591856627d34bea359dc5f937dfbc572a803d90ff94ab383d8d0a59bb8"
+    },
+    {
+      "pair_id": "dev-0099",
+      "cover_path": "val2017/000000005529.jpg",
+      "cover_sha256": "e06b55bf935e76ac31cd8b8a56a3978e2f552d7c967ff8a0b8d0ae3b3445db0e",
+      "secret_path": "val2017/000000176847.jpg",
+      "secret_sha256": "513f5d2862f8ca1bfcf268a523e139d2bb1fb9ae6a4817671534f0666c464358"
+    }
+  ],
+  "manifest_sha256": "1a8b76627d5859a2ccb7ccabd3b12320eca7c1820a187103e05529315e4b3131"
+}

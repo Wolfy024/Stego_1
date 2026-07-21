@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "purpose": "Frozen-development-cohort selection record for the optional orthogonal Haar-band router",
+  "selection_rule": "Promote only a statistically supported clean-quality Pareto improvement; final cohort remains untouched for rejected candidates",
+  "manifest": {
+    "path": "results/eval_manifests/dev.json",
+    "declared_sha256": "1a8b76627d5859a2ccb7ccabd3b12320eca7c1820a187103e05529315e4b3131",
+    "file_sha256": "4052f44932a39b6ed624a0caa66ac3217fac4728ce9782bade07732c2e4952e8",
+    "pairs": 100
+  },
+  "protocol": {
+    "precision": "float32 (autocast disabled, TF32 disabled)",
+    "batch_size": 1,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 2026
+  },
+  "baseline": {
+    "checkpoint": "runs/invertible_gates_only/latest.pt",
+    "sha256": "3fe383ecbfda9e27998222028369bec21e05832ab2df1d0b6295c7d6e5010328"
+  },
+  "candidates": [
+    {
+      "name": "router-v1",
+      "checkpoint_sha256": "112b6b23801dd936ba05068ecec41fb6eebc716b5f99ae08b909649324d19cff",
+      "training": {
+        "steps": 100,
+        "trainable_parameters": 4512,
+        "cover_weight": 20.0,
+        "secret_weight": 5.0,
+        "low_frequency_weight": 10.0,
+        "learning_rate": 0.00001
+      },
+      "candidate_minus_baseline": {
+        "cover_psnr_db": {
+          "mean": 0.00736907958984375,
+          "bootstrap_95_ci": [0.002085107803344729, 0.012441430091857907]
+        },
+        "secret_psnr_db": {
+          "mean": 0.015410709381103515,
+          "bootstrap_95_ci": [-0.0300675311088562, 0.06465564107894897],
+          "pairs_improved_pct": 38.0
+        },
+        "secret_ssim": {
+          "mean": -0.000013161897659301757,
+          "bootstrap_95_ci": [-0.00036688198149204253, 0.00039121361076831815]
+        }
+      },
+      "decision": "rejected: recovery deltas are inconclusive and secret SSIM mean regressed",
+      "evaluated_on_final_cohort": false
+    },
+    {
+      "name": "router-v2-secret-weighted",
+      "checkpoint_sha256": "2261ca3d85b5f329d414140fef4aa9bd44cf7b4fb9495357ced20aa27c1c3585",
+      "training": {
+        "steps": 200,
+        "trainable_parameters": 4512,
+        "cover_weight": 20.0,
+        "secret_weight": 10.0,
+        "low_frequency_weight": 10.0,
+        "learning_rate": 0.00001
+      },
+      "candidate_minus_baseline": {
+        "cover_psnr_db": {
+          "mean": -0.048038673400878903,
+          "bootstrap_95_ci": [-0.05850800800323486, -0.03862137699127197]
+        },
+        "secret_psnr_db": {
+          "mean": 0.06517797470092773,
+          "bootstrap_95_ci": [-0.0111825542449951, 0.1435508484840393],
+          "pairs_improved_pct": 52.0
+        },
+        "secret_ssim": {
+          "mean": 0.00026094019412994387,
+          "bootstrap_95_ci": [-0.0002594381868839263, 0.0008601147085428235]
+        }
+      },
+      "decision": "rejected: cover quality regressed significantly and recovery CI crosses zero",
+      "evaluated_on_final_cohort": false
+    }
+  ],
+  "selected_checkpoint": "runs/invertible_gates_only/latest.pt"
+}

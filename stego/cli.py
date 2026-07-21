@@ -25,6 +25,7 @@ def _loader(
     *,
     shuffle: bool,
     device: torch.device,
+    seed: int,
 ) -> DataLoader[tuple[torch.Tensor, torch.Tensor]]:
     return DataLoader(
         dataset,
@@ -34,6 +35,7 @@ def _loader(
         pin_memory=device.type == "cuda",
         persistent_workers=workers > 0,
         drop_last=shuffle and len(dataset) >= batch_size,
+        generator=torch.Generator().manual_seed(seed),
     )
 
 
@@ -101,6 +103,7 @@ def _apply_train_overrides(config: ExperimentConfig, args: argparse.Namespace) -
         "cover_weight": (config.loss, "cover"),
         "secret_weight": (config.loss, "secret"),
         "low_frequency_weight": (config.loss, "low_frequency"),
+        "learning_rate": (config.train, "learning_rate"),
     }
     for argument, (target, attribute) in mappings.items():
         value = getattr(args, argument, None)
@@ -108,6 +111,12 @@ def _apply_train_overrides(config: ExperimentConfig, args: argparse.Namespace) -
             setattr(target, attribute, value)
     if getattr(args, "gates_only", False):
         config.train.gates_only = True
+        config.train.router_only = False
+    if getattr(args, "router_only", False):
+        config.train.router_only = True
+        config.train.gates_only = False
+    if getattr(args, "orthogonal_router", False):
+        config.model.orthogonal_router = True
     config.validate()
 
 
@@ -125,6 +134,7 @@ def run_smoke(args: argparse.Namespace) -> int:
         coupling_channels=args.coupling_channels,
         coupling_clamp=args.coupling_clamp,
         latent_noise_std=args.latent_noise_std,
+        orthogonal_router=args.orthogonal_router,
     )
     model = StegoGAN(config).to(device).train()
     cover = torch.rand(args.batch_size, 3, args.image_size, args.image_size, device=device) * 2 - 1
@@ -189,8 +199,9 @@ def run_smoke(args: argparse.Namespace) -> int:
 
 def run_train(args: argparse.Namespace) -> int:
     device = select_device(args.device)
-    if args.resume:
-        _, config = load_model_from_checkpoint(args.resume, torch.device("cpu"))
+    initialization_checkpoint = args.resume or args.warm_start
+    if initialization_checkpoint:
+        _, config = load_model_from_checkpoint(initialization_checkpoint, torch.device("cpu"))
     else:
         config = ExperimentConfig.load(args.config)
     _apply_train_overrides(config, args)
@@ -207,6 +218,7 @@ def run_train(args: argparse.Namespace) -> int:
         config.data.workers,
         shuffle=True,
         device=device,
+        seed=config.data.seed,
     )
     validation_loader = _loader(
         validation_dataset,
@@ -214,11 +226,19 @@ def run_train(args: argparse.Namespace) -> int:
         config.data.workers,
         shuffle=False,
         device=device,
+        seed=config.data.seed + 1,
     )
     model = StegoGAN(config.model)
     trainer = Trainer(model, config, args.output_dir, device)
     if args.resume:
-        trainer.load_checkpoint(args.resume, resume_optimizers=not config.train.gates_only)
+        trainer.load_checkpoint(args.resume)
+    elif args.warm_start:
+        trainer.load_checkpoint(
+            args.warm_start,
+            resume_optimizers=False,
+            resume_state=False,
+            allow_new_adapters=True,
+        )
     print(
         json.dumps(
             {
@@ -244,6 +264,12 @@ def run_train(args: argparse.Namespace) -> int:
 
 def run_evaluate(args: argparse.Namespace) -> int:
     device = select_device(args.device)
+    torch.set_float32_matmul_precision("highest")
+    if device.type == "cuda":
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+        torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = True
     model, config = load_model_from_checkpoint(args.checkpoint, device)
     config.data.workers = args.workers
     train_dataset, validation_dataset, sampled_images, discovered_images = _datasets(
@@ -255,17 +281,18 @@ def run_evaluate(args: argparse.Namespace) -> int:
         args.workers,
         shuffle=False,
         device=device,
+        seed=config.data.seed + 1,
     )
     output_path = Path(args.output)
     trainer = Trainer(model, config, output_path.parent / ".evaluation", device)
     results = trainer.evaluate(
         loader,
-        jpeg_qualities=tuple(args.jpeg_qualities),
+        jpeg_qualities=() if args.clean_only else tuple(args.jpeg_qualities),
         max_batches=args.max_batches,
         real_codec=True,
     )
     payload = {
-        "schema_version": 2,
+        "schema_version": 3,
         "checkpoint": Path(args.checkpoint).as_posix(),
         "data_roots": [Path(root).as_posix() for root in args.data_dir],
         "payload_type": "bit watermark" if config.model.payload_bits else "RGB secret image",
@@ -283,7 +310,18 @@ def run_evaluate(args: argparse.Namespace) -> int:
         "validation_source_counts": _source_counts(validation_dataset, args.data_dir),
         "split_seed": config.data.seed,
         "train_fraction": config.data.train_fraction,
-        "jpeg_codec": "Pillow/libjpeg, 4:2:0 subsampling",
+        "evaluation_mode": "clean_only" if args.clean_only else "clean_and_jpeg",
+        "evaluation_protocol": {
+            "precision": "float32 (autocast disabled, TF32 disabled)",
+            "batch_size": args.batch_size or config.train.batch_size,
+            "deterministic_cudnn": device.type == "cuda",
+        },
+        "jpeg_qualities_evaluated": [] if args.clean_only else args.jpeg_qualities,
+        "jpeg_codec": (
+            "not evaluated"
+            if args.clean_only
+            else "Pillow/libjpeg, 4:2:0 subsampling"
+        ),
         "metrics": results,
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -312,13 +350,19 @@ def build_parser() -> argparse.ArgumentParser:
     smoke.add_argument("--coupling-channels", type=int, default=8)
     smoke.add_argument("--coupling-clamp", type=float, default=2.0)
     smoke.add_argument("--latent-noise-std", type=float, default=1.0)
+    smoke.add_argument("--orthogonal-router", action="store_true")
     smoke.set_defaults(function=run_smoke)
 
     train = subparsers.add_parser("train", help="train on one or more image directories")
     train.add_argument("--data-dir", nargs="+", required=True)
     train.add_argument("--config", default="configs/image_h100.json")
     train.add_argument("--output-dir", default="runs/experiment")
-    train.add_argument("--resume")
+    checkpoint_mode = train.add_mutually_exclusive_group()
+    checkpoint_mode.add_argument("--resume", help="strictly continue model, optimizer, and steps")
+    checkpoint_mode.add_argument(
+        "--warm-start",
+        help="load compatible model weights but start a fresh optimizer and step counter",
+    )
     train.add_argument("--device", default="auto")
     train.add_argument("--epochs", type=int)
     train.add_argument("--batch-size", type=int)
@@ -339,7 +383,11 @@ def build_parser() -> argparse.ArgumentParser:
     train.add_argument("--cover-weight", type=float)
     train.add_argument("--secret-weight", type=float)
     train.add_argument("--low-frequency-weight", type=float)
-    train.add_argument("--gates-only", action="store_true")
+    train.add_argument("--learning-rate", type=float)
+    train.add_argument("--orthogonal-router", action="store_true")
+    adaptation_mode = train.add_mutually_exclusive_group()
+    adaptation_mode.add_argument("--gates-only", action="store_true")
+    adaptation_mode.add_argument("--router-only", action="store_true")
     train.set_defaults(function=run_train)
 
     evaluate = subparsers.add_parser("evaluate", help="evaluate a checkpoint with real JPEG")
@@ -351,6 +399,7 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--workers", type=int, default=2)
     evaluate.add_argument("--max-batches", type=int)
     evaluate.add_argument("--jpeg-qualities", type=int, nargs="+", default=[50, 70, 90])
+    evaluate.add_argument("--clean-only", action="store_true")
     evaluate.set_defaults(function=run_evaluate)
     return parser
 

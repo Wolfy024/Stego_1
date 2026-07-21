@@ -10,7 +10,7 @@ from urllib.request import Request, urlopen
 
 DATASETS = {
     "coco-val2017": (
-        "http://images.cocodataset.org/zips/val2017.zip",
+        "https://images.cocodataset.org/zips/val2017.zip",
         "coco/val2017.zip",
     ),
     "div2k-valid": (

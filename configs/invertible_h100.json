@@ -11,7 +11,8 @@
     "coupling_channels": 32,
     "coupling_clamp": 2.0,
     "latent_noise_std": 1.0,
-    "latent_seed": 2026
+    "latent_seed": 2026,
+    "orthogonal_router": false
   },
   "data": {
     "image_size": 256,
@@ -42,6 +43,8 @@
     "real_jpeg_probability": 0.0,
     "validate_every": 100,
     "max_train_steps": 2000,
-    "amp": true
+    "amp": true,
+    "gates_only": false,
+    "router_only": false
   }
 }
