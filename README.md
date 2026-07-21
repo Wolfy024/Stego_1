@@ -37,6 +37,25 @@ records are committed in
 defined in
 [`results/eval_manifests/final.json`](results/eval_manifests/final.json).
 
+### Pair-level recovery
+
+![Distribution of secret-recovery PSNR changes across 200 final pairs](assets/paired_secret_psnr_delta.png)
+
+Each point is one fixed final-manifest pair. Positive values indicate that the
+current wavelet-gated checkpoint recovered the secret at higher PSNR than the
+frozen backbone initialization. The mean improvement is **+0.390 dB**, with a
+paired 95% bootstrap interval of **[+0.291, +0.498] dB**; **153 of 200 pairs**
+improved.
+
+### Compression stress test
+
+![Secret-image recovery across JPEG quality factors](assets/jpeg_robustness.png)
+
+This separate 200-pair stress test applies real Pillow/libjpeg compression to
+the stego image before recovery. It shows that the current model is a
+clean-channel system: JPEG recompression reduces recovery to roughly 11.2 dB
+across the tested quality factors.
+
 ## Architecture
 
 ~~~text
@@ -53,7 +72,7 @@ The inference network has **4.17M parameters** and combines:
 
 - invertible affine coupling blocks for joint hiding and recovery;
 - Haar-wavelet processing across LL, HL, LH, and HH frequency bands;
-- CBAM-style attention inside the coupling subnets;
+- channel-spatial attention inside the coupling subnets;
 - sample-adaptive wavelet gates that modulate each frequency band;
 - a fixed seeded latent for deterministic, keyless reveal.
 
