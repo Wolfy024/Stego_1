@@ -1,103 +1,141 @@
-"""Render deterministic qualitative examples from a trained checkpoint."""
+"""Render auditable cover/stego and secret/recovery examples from a checkpoint."""
 
 from __future__ import annotations
 
 import argparse
-import random
+import json
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
+from compare_checkpoints import load_manifest, load_rgb_image
 
-from stego.data import ImagePairDataset, discover_images, split_images
-from stego.metrics import psnr, real_jpeg_roundtrip, ssim
+from stego.metrics import psnr, ssim
 from stego.training import load_model_from_checkpoint, select_device
 
 
-def _validation_dataset(roots: list[str], config) -> ImagePairDataset:
-    images = discover_images(roots)
-    if config.data.max_images is not None and len(images) > config.data.max_images:
-        generator = torch.Generator().manual_seed(config.data.seed)
-        order = torch.randperm(len(images), generator=generator).tolist()
-        images = [images[index] for index in order[: config.data.max_images]]
-    _, validation = split_images(images, config.data.train_fraction, config.data.seed)
-    return ImagePairDataset(
-        validation,
-        config.data.image_size,
-        augment=False,
-        seed=config.data.seed + 1,
-        payload_bits=None,
-        secret_image_size=config.model.secret_size,
-    )
-
-
 def _rgb(tensor: torch.Tensor) -> np.ndarray:
-    return ((tensor.detach().cpu().clamp(-1, 1).permute(1, 2, 0).numpy() + 1) / 2)
+    """Convert a normalized CHW tensor to a display-ready RGB array."""
+
+    return (
+        tensor.detach().float().cpu().clamp(-1, 1).permute(1, 2, 0).numpy() + 1
+    ) / 2
+
+
+def _configure_determinism(device: torch.device) -> None:
+    torch.manual_seed(2026)
+    torch.set_float32_matmul_precision("highest")
+    if device.type == "cuda":
+        torch.cuda.manual_seed_all(2026)
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+        torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = True
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--checkpoint", required=True)
-    parser.add_argument("--data-dir", nargs="+", required=True)
-    parser.add_argument("--output", type=Path, default=Path("assets/qualitative_examples.png"))
+    parser.add_argument(
+        "--manifest",
+        default="results/eval_manifests/final.json",
+        help="content-addressed cover/secret manifest",
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("assets/qualitative_examples.png"),
+    )
     parser.add_argument("--device", default="auto")
     parser.add_argument("--examples", type=int, default=3)
     args = parser.parse_args()
 
-    random.seed(2026)
-    torch.manual_seed(2026)
+    if args.examples < 1:
+        parser.error("--examples must be at least 1")
+
     device = select_device(args.device)
+    _configure_determinism(device)
     model, config = load_model_from_checkpoint(args.checkpoint, device)
-    dataset = _validation_dataset(args.data_dir, config)
-    indices = list(range(min(args.examples, len(dataset))))
-    pairs = [dataset[index] for index in indices]
-    cover = torch.stack([pair[0] for pair in pairs]).to(device)
-    secret = torch.stack([pair[1] for pair in pairs]).to(device)
+    if config.model.payload_bits is not None:
+        raise ValueError("the qualitative showcase requires an RGB-image checkpoint")
+
+    pairs = load_manifest(args.manifest)[: args.examples]
+    image_size = config.data.image_size
+    cover = torch.stack(
+        [load_rgb_image(pair.cover_path, image_size) for pair in pairs]
+    ).to(device)
+    secret = torch.stack(
+        [load_rgb_image(pair.secret_path, image_size) for pair in pairs]
+    ).to(device)
+
     with torch.inference_mode():
         outputs = model(cover, secret)
-        jpeg = real_jpeg_roundtrip(outputs["stego"].float(), quality=50)
-        recovered_q50 = model.reveal(jpeg)
+    stego = outputs["stego"].float()
+    recovered = outputs["revealed_secret"].float()
 
-    columns = ["Cover", "Secret", "Stego", "Residual energy", "Recovered", "QF-50 recovered"]
-    figure, axes = plt.subplots(len(indices), len(columns), figsize=(15, 2.75 * len(indices)))
-    if len(indices) == 1:
-        axes = np.expand_dims(axes, axis=0)
-    for row in range(len(indices)):
-        clean_psnr = psnr(secret[row : row + 1], outputs["revealed_secret"][row : row + 1]).item()
-        clean_ssim = ssim(secret[row : row + 1], outputs["revealed_secret"][row : row + 1]).item()
-        q50_psnr = psnr(secret[row : row + 1], recovered_q50[row : row + 1]).item()
-        cover_psnr = psnr(cover[row : row + 1], outputs["stego"][row : row + 1]).item()
-        images = [
-            _rgb(cover[row]),
-            _rgb(secret[row]),
-            _rgb(outputs["stego"][row]),
-            outputs["residual"][row].detach().float().abs().mean(0).cpu().numpy(),
-            _rgb(outputs["revealed_secret"][row]),
-            _rgb(recovered_q50[row]),
-        ]
-        subtitles = [
-            f"pair #{indices[row]}",
-            "ground truth",
-            f"cover PSNR {cover_psnr:.1f} dB",
-            "mean |Δ| (auto-scaled)",
-            f"{clean_psnr:.1f} dB · SSIM {clean_ssim:.2f}",
-            f"{q50_psnr:.1f} dB",
-        ]
+    figure, axes = plt.subplots(
+        len(pairs),
+        4,
+        figsize=(13.2, 3.35 * len(pairs)),
+        squeeze=False,
+    )
+    column_titles = ("Cover", "Stego", "Secret", "Recovered secret")
+    records: list[dict[str, float | str]] = []
+
+    for row, pair in enumerate(pairs):
+        cover_psnr = psnr(cover[row : row + 1], stego[row : row + 1]).item()
+        cover_ssim = ssim(cover[row : row + 1], stego[row : row + 1]).item()
+        secret_psnr = psnr(secret[row : row + 1], recovered[row : row + 1]).item()
+        secret_ssim = ssim(secret[row : row + 1], recovered[row : row + 1]).item()
+        records.append(
+            {
+                "pair_id": pair.identifier,
+                "cover_psnr_db": cover_psnr,
+                "cover_ssim": cover_ssim,
+                "secret_psnr_db": secret_psnr,
+                "secret_ssim": secret_ssim,
+            }
+        )
+
+        images = (cover[row], stego[row], secret[row], recovered[row])
+        subtitles = (
+            pair.identifier,
+            f"PSNR {cover_psnr:.2f} dB · SSIM {cover_ssim:.4f}",
+            "hidden payload",
+            f"PSNR {secret_psnr:.2f} dB · SSIM {secret_ssim:.4f}",
+        )
         for column, (image, subtitle) in enumerate(zip(images, subtitles, strict=True)):
             axis = axes[row, column]
-            axis.imshow(image, cmap="magma" if column == 3 else None)
-            axis.set_title(f"{columns[column]}\n{subtitle}", fontsize=9)
-            axis.axis("off")
+            axis.imshow(_rgb(image))
+            if row == 0:
+                axis.set_title(column_titles[column], fontsize=13, fontweight="bold", pad=10)
+            axis.set_xlabel(subtitle, fontsize=9, labelpad=7)
+            axis.set_xticks([])
+            axis.set_yticks([])
+            for spine in axis.spines.values():
+                spine.set_color("#d1d5db")
+                spine.set_linewidth(1.0)
+
     figure.suptitle(
-        "Deterministic held-out 256×256 examples (first three validation pairs)",
-        fontsize=16,
+        "Actual 256×256 image hiding and recovery",
+        fontsize=17,
         fontweight="bold",
+        y=0.995,
     )
-    figure.tight_layout(rect=(0, 0.01, 1, 0.96))
+    figure.text(
+        0.5,
+        0.006,
+        "First three pairs in results/eval_manifests/final.json · no cherry-picking",
+        ha="center",
+        fontsize=9,
+        color="#4b5563",
+    )
+    figure.tight_layout(rect=(0.01, 0.025, 0.99, 0.965), h_pad=1.4, w_pad=0.8)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(args.output, dpi=180, bbox_inches="tight", facecolor="white")
     plt.close(figure)
+    print(json.dumps(records, indent=2))
     return 0
 
 
