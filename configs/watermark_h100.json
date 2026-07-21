@@ -1,0 +1,39 @@
+{
+  "model": {
+    "base_channels": 64,
+    "max_residual": 0.024,
+    "spectral_norm": false,
+    "payload_bits": 32,
+    "secret_size": null
+  },
+  "data": {
+    "image_size": 128,
+    "train_fraction": 0.9,
+    "max_images": 2000,
+    "workers": 4,
+    "seed": 2026
+  },
+  "loss": {
+    "cover": 1.0,
+    "secret": 2.0,
+    "robust_secret": 2.0,
+    "adversarial": 0.01,
+    "residual_tv": 0.02
+  },
+  "train": {
+    "epochs": 20,
+    "batch_size": 8,
+    "learning_rate": 0.0002,
+    "discriminator_learning_rate": 0.0001,
+    "beta1": 0.5,
+    "beta2": 0.999,
+    "grad_clip": 5.0,
+    "jpeg_quality_min": 50,
+    "jpeg_quality_max": 50,
+    "jpeg_warmup_steps": 300,
+    "real_jpeg_probability": 1.0,
+    "validate_every": 20,
+    "max_train_steps": 3000,
+    "amp": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "description": "Same-split 256x256 full-image steganography comparison",
+  "evaluation_images": 200,
+  "jpeg_codec": "Pillow/libjpeg, 4:2:0 subsampling",
+  "models": [
+    {
+      "name": "CBAM U-Net",
+      "checkpoint_stage": "3,900 steps with real-QF-50 fine-tuning",
+      "cover_psnr_db": 38.60335205078125,
+      "cover_ssim": 0.9737041771411896,
+      "secret_clean_psnr_db": 16.15456195831299,
+      "secret_clean_ssim": 0.379201383292675,
+      "secret_q50_psnr_db": 15.11096477508545,
+      "secret_q50_ssim": 0.2668129652738571
+    },
+    {
+      "name": "Wavelet-gated INN",
+      "checkpoint_stage": "HiNet warm start plus 100 gates-only steps",
+      "cover_psnr_db": 38.55343322753906,
+      "cover_ssim": 0.9631423836946488,
+      "secret_clean_psnr_db": 36.34711683273316,
+      "secret_clean_ssim": 0.960159285068512,
+      "secret_q50_psnr_db": 11.226514530181884,
+      "secret_q50_ssim": 0.009285782638471574
+    }
+  ]
+}

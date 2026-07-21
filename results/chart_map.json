@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "charts": [
+    {
+      "artifact": "assets/jpeg_robustness.png",
+      "source": "results/benchmark_256.json",
+      "fields": [
+        "metrics.secret_psnr_db",
+        "metrics.secret_ssim",
+        "metrics.jpeg_q*"
+      ],
+      "transformation": "Direct ordered plot; clean is displayed as QF=100",
+      "grain": "Mean over 200 held-out cover/secret pairs"
+    },
+    {
+      "artifact": "assets/architecture_comparison.png",
+      "source": "results/comparison_256.json",
+      "fields": [
+        "cover_psnr_db",
+        "secret_clean_psnr_db",
+        "secret_q50_psnr_db"
+      ],
+      "transformation": "Grouped bars; no normalization",
+      "grain": "One bar per model and evaluation condition"
+    }
+  ]
+}

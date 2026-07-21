@@ -1,2 +1,41 @@
-/Data/Animals-10/
-.idea
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+
+# Editors and notebooks
+.idea/
+.vscode/
+.ipynb_checkpoints/
+
+# Credentials and local environment
+.env
+.env.*
+!.env.example
+kaggle.json
+Data/kaggle_api_key.json
+
+# Datasets, checkpoints, and local experiment output
+data/
+Data/Animals-10/
+runs/
+checkpoints/
+external/
+*.pt
+*.pth
+*.ckpt
+*.egg-info/
+results/.evaluation/
+results/*
+!results/benchmark_256.json
+!results/data_profile.json
+!results/chart_map.json
+!results/validation_report.md
+!results/comparison_256.json
+assets/training_ablation.png
+
+# OS
+.DS_Store
+Thumbs.db

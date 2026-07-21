@@ -1,0 +1,47 @@
+{
+  "model": {
+    "architecture": "invertible",
+    "base_channels": 32,
+    "max_residual": 0.1,
+    "target_cover_psnr": 38.5,
+    "spectral_norm": false,
+    "payload_bits": null,
+    "secret_size": 256,
+    "invertible_blocks": 16,
+    "coupling_channels": 32,
+    "coupling_clamp": 2.0,
+    "latent_noise_std": 1.0,
+    "latent_seed": 2026
+  },
+  "data": {
+    "image_size": 256,
+    "train_fraction": 0.9,
+    "max_images": 2000,
+    "workers": 4,
+    "seed": 2026
+  },
+  "loss": {
+    "cover": 1.0,
+    "secret": 5.0,
+    "robust_secret": 0.0,
+    "adversarial": 0.0,
+    "residual_tv": 0.0,
+    "low_frequency": 1.0
+  },
+  "train": {
+    "epochs": 100,
+    "batch_size": 2,
+    "learning_rate": 0.00001,
+    "discriminator_learning_rate": 0.0001,
+    "beta1": 0.5,
+    "beta2": 0.999,
+    "grad_clip": 5.0,
+    "jpeg_quality_min": 50,
+    "jpeg_quality_max": 95,
+    "jpeg_warmup_steps": 100000,
+    "real_jpeg_probability": 0.0,
+    "validate_every": 100,
+    "max_train_steps": 2000,
+    "amp": true
+  }
+}

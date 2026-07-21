@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "grain": "one decoded RGB image file",
+  "roots": [
+    "data/coco/val2017",
+    "data/div2k/DIV2K_valid_HR"
+  ],
+  "images_total": 5100,
+  "source_counts": {
+    "DIV2K_valid_HR": 100,
+    "val2017": 5000
+  },
+  "format_counts": {
+    "JPEG": 5000,
+    "PNG": 100
+  },
+  "unique_dimensions": 627,
+  "width_range_px": [
+    200,
+    2040
+  ],
+  "height_range_px": [
+    145,
+    2040
+  ],
+  "unreadable_count": 0,
+  "unreadable_examples": [],
+  "exact_duplicate_groups": 0,
+  "exact_duplicate_files": 0,
+  "train_images": 4590,
+  "validation_images": 510,
+  "split_overlap": 0,
+  "split_seed": 2026,
+  "train_fraction": 0.9,
+  "checks": {
+    "all_images_readable": true,
+    "no_exact_duplicates": true,
+    "split_is_disjoint": true
+  }
+}
